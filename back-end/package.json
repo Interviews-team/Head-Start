@@ -1,0 +1,15 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "head-start interviews website server and database",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "interviews-team",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5"
+  }
+}
