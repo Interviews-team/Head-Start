@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class Event extends Component {
+export default class Event extends Component {
   state = {};
   render() {
     return (
@@ -10,5 +10,3 @@ class Event extends Component {
     );
   }
 }
-
-export default Event;

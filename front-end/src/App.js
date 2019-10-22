@@ -2,19 +2,13 @@ import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
-//start importing components
-import AddField from "./components/AddField";
-import AddNewAdmin from "./components/AddNewAdmin";
-import Comment from "./components/Comment";
+//importing components
 import Event from "./components/Event";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-import PendingAdmin from "./components/PendingAdmin";
-import PendingQuestion from "./components/PendingQuestion";
 import Post from "./components/Post";
-//end importing components
 
-//start importing routes
+//importing routes
 import AddEventPage from "./routes/adding/AddEventPage";
 import AddQuestionPage from "./routes/adding/AddQuestionPage";
 
@@ -33,11 +27,10 @@ import HrQuestionsPage from "./routes/website/HrQuestionsPage";
 import JoinUsPage from "./routes/website/JoinUsPage";
 import PostPage from "./routes/website/PostPage";
 import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
-//end importing routes
 
-class App extends Component {
+export default class App extends Component {
   state = {
-    users: ["Ahmad"]
+    users: ["ahmad"]
   };
 
   componentDidMount() {
@@ -45,48 +38,75 @@ class App extends Component {
   }
 
   getUsers() {
-    axios
-      .get("http://localhost:9000/get-users")
-      .then(response => this.setState({ users: response.data }));
+    axios.get("http://localhost:9000/get-users").then(response => {
+      this.setState({ users: response.data });
+    });
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state.users);
     return (
       <div>
         <Router>
           <Header />
 
           <Link to="/">Home</Link>
-          <Route
-            exact
-            path="/"
-            render={props => (
-              <>
-                <br /> <Link to="/EventPage">Events</Link>
-                <Event />
-                <Post />
-              </>
-            )}
-          ></Route>{" "}
-          <Route exact path="/AddEventPage" component={AddEventPage} />
-          <Route path="/AddQuestionPage" component={AddQuestionPage} />
+          <Route exact path="/">
+            <>
+              <br /> <Link to="/EventPage">Events</Link>
+              <Event />
+              <Post />
+            </>
+          </Route>
 
-          <Route path="/AdminDashboardPage" component={AdminDashboardPage} />
+          <Route exact path="/AddEventPage">
+            <AddEventPage />
+          </Route>
+          <Route path="/AddQuestionPage">
+            <AddQuestionPage />
+          </Route>
 
-          <Route path="/AskQuestionPage" component={AskQuestionPage} />
-          <Route path="/LoginPage" component={LoginPage} />
-          <Route path="/RegisterPage" component={RegisterPage} />
-          <Route path="/UserDashboardPage" component={UserDashboardPage} />
-          <Route path="/UserProfilePage" component={UserProfilePage} />
+          <Route path="/AdminDashboardPage">
+            <AdminDashboardPage />
+          </Route>
 
-          <Route path="/AboutUsPage" component={AboutUsPage} />
-          <Route path="/EventPage" component={EventPage} />
-          <Route path="/EventsPage" component={EventsPage} />
-          <Route path="/HrQuestionsPage" component={HrQuestionsPage} />
-          <Route path="/JoinUsPage" component={JoinUsPage} />
-          <Route path="/PostPage" component={PostPage} />
-          <Route path="/TechnicalQuestionsPage" component={TechnicalQuestionsPage} />
+          <Route path="/AskQuestionPage">
+            <AskQuestionPage />
+          </Route>
+          <Route path="/LoginPage">
+            <LoginPage />
+          </Route>
+          <Route path="/RegisterPage">
+            <RegisterPage />
+          </Route>
+          <Route path="/UserDashboardPage">
+            <UserDashboardPage />
+          </Route>
+          <Route path="/UserProfilePage">
+            <UserProfilePage />
+          </Route>
+
+          <Route path="/AboutUsPage">
+            <AboutUsPage />
+          </Route>
+          <Route path="/EventPage">
+            <EventPage />
+          </Route>
+          <Route path="/EventsPage">
+            <EventsPage />
+          </Route>
+          <Route path="/HrQuestionsPage">
+            <HrQuestionsPage />
+          </Route>
+          <Route path="/JoinUsPage">
+            <JoinUsPage />
+          </Route>
+          <Route path="/PostPage">
+            <PostPage />
+          </Route>
+          <Route path="/TechnicalQuestionsPage">
+            <TechnicalQuestionsPage />
+          </Route>
 
           <Footer />
         </Router>
@@ -95,4 +115,3 @@ class App extends Component {
   }
 }
 
-export default App;
