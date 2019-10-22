@@ -22,5 +22,5 @@ This repository holds A Website dedicated to HR and Technical Interviews' questi
 | Create DB schema            | ✔️            |  |
 | Server Test                 | ✔️            |  |
 | Code Structure              | ✔️            |  |
-
+| Add All Get Functions       | ✔️            |  |
 
