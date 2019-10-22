@@ -53,7 +53,7 @@ export default class App extends Component {
           <Link to="/">Home</Link>
           <Route exact path="/">
             <>
-              <br /> <Link to="/EventPage">Events</Link>
+              <br /> <Link to="/EventsPage">Events</Link>
               <Event />
               <Post />
             </>
