@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-class EventPage extends Component {
+export default class EventPage extends Component {
   state = {};
   render() {
     return (
@@ -10,5 +10,3 @@ class EventPage extends Component {
     );
   }
 }
-
-export default EventPage;

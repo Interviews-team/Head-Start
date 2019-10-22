@@ -1,14 +1,14 @@
 import React, { Component } from "react";
+import Comment from "../../components/Comment";
 
-class PostPage extends Component {
+export default class PostPage extends Component {
   state = {};
   render() {
     return (
       <div>
         <h1> Post Page </h1>
+        <Comment />
       </div>
     );
   }
 }
-
-export default PostPage;
