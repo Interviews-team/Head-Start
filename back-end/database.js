@@ -56,8 +56,10 @@ const eventsSchema = new mongoose.Schema({
 
 //MODELS
 const Users = mongoose.model("users", usersSchema);
-const Fields = mongoose.model("posts", fieldsSchema);
-const Pending = mongoose.model("pending", pendingSchema);
+const Fields = mongoose.model("fields", fieldsSchema);
+const Posts = mongoose.model("posts", postsSchema);
+const Comments = mongoose.model("comments", commentsSchema);
+const Pendings = mongoose.model("pendings", pendingSchema);
 const Events = mongoose.model("events", eventsSchema);
 
 //QUERIES FUNCTIONS
@@ -72,16 +74,67 @@ const getUsers = sendUsers => {
   });
 };
 
-const addUser = (sendUsers, user) => {
-  let {name, email, password, mobileNumber, gender, field, role, isLoggedIn} = user
-  Users.create({name, email, password, mobileNumber, gender, field, role, isLoggedIn}, err => {
-    if(err){
-      console.log(err);
+// const addUser = (sendUsers, user) => {
+//   let {name, email, password, mobileNumber, gender, field, role, isLoggedIn} = user
+//   Users.create({name, email, password, mobileNumber, gender, field, role, isLoggedIn}, err => {
+//     if(err){
+//       console.log(err);
+//     } else {
+//       getUsers(sendUsers)
+//     }
+//   })
+// }
+
+const getPosts = sendPosts => {
+  Posts.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
     } else {
-      getUsers(sendUsers)
+      sendPosts(docs);
     }
-  })
-}
+  });
+};
+
+const getEvents = sendEvents => {
+  Events.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendEvents(docs);
+    }
+  });
+};
+
+const getComments = sendComments => {
+  Comments.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendComments(docs);
+    }
+  });
+};
+
+const getFields = sendFields => {
+  Fields.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendFields(docs);
+    }
+  });
+};
+
+const getPendings = sendPendings => {
+  Pendings.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      console.log(docs);
+      sendPendings(docs);
+    }
+  });
+};
 
 //AHMAD GHZAWI
 //Please write your code below and only below your name
@@ -106,5 +159,10 @@ const addUser = (sendUsers, user) => {
 //MODULE EXPORTS
 module.exports = {
   getUsers,
-  addUser
+  // addUser
+  getPosts,
+  getEvents,
+  getComments,
+  getPendings,
+  getFields
 };

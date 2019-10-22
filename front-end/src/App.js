@@ -30,7 +30,12 @@ import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
 
 export default class App extends Component {
   state = {
-    users: ["ahmad"]
+    users: ["users"],
+    posts: ['posts'],
+    comments: ['comments'],
+    fields: ['fields'],
+    pending: ['pending'],
+    events: ['events']
   };
 
   componentDidMount() {
@@ -40,6 +45,36 @@ export default class App extends Component {
   getUsers() {
     axios.get("http://localhost:9000/get-users").then(response => {
       this.setState({ users: response.data });
+    });
+  }
+
+  getPosts() {
+    axios.get("http://localhost:9000/get-posts").then(response => {
+      this.setState({ posts: response.data });
+    });
+  }
+
+  getComments() {
+    axios.get("http://localhost:9000/get-comments").then(response => {
+      this.setState({ comments: response.data });
+    });
+  }
+
+  getFields() {
+    axios.get("http://localhost:9000/get-fields").then(response => {
+      this.setState({ fields: response.data });
+    });
+  }
+
+  getPending() {
+    axios.get("http://localhost:9000/get-pending").then(response => {
+      this.setState({ pending: response.data });
+    });
+  }
+
+  getEvents() {
+    axios.get("http://localhost:9000/get-events").then(response => {
+      this.setState({ events: response.data });
     });
   }
 

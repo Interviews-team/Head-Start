@@ -22,9 +22,29 @@ app.get(`/get-users`, (req, res) => {
   db.getUsers( users => res.json( users ))
 });
 
-app.post(`/add-user`, (req, res) => {
-  db.addUser( users => res.json ( users ), req.body)
-})
+// app.post(`/add-user`, (req, res) => {
+//   db.addUser( users => res.json ( users ), req.body)
+// })
+
+app.get(`/get-posts`, (req, res) => {
+  db.getPosts( posts => res.json( posts ))
+});
+
+app.get(`/get-comments`, (req, res) => {
+  db.getComments( comments => res.json( comments ))
+});
+
+app.get(`/get-events`, (req, res) => {
+  db.getEvents( events => res.json( events ))
+});
+
+app.get(`/get-pendings`, (req, res) => {
+  db.getPendings( pendings => res.json( pendings ))
+});
+
+app.get(`/get-fields`, (req, res) => {
+  db.getFields( fields => res.json( fields ))
+});
 
 //AHMAD GHZAWI
 //Please write your code below and only below your name
