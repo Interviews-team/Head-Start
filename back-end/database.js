@@ -25,23 +25,30 @@ const usersSchema = new mongoose.Schema({
 });
 
 const fieldsSchema = new mongoose.Schema({
-  name: String,
-  posts: [{
+  name: String
+});
+
+const postsSchema = new mongoose.Schema({
     question: String,
     answer: String,
+    field: String,
     user_id: String
-  }]
-});
+})
+
+const commentsSchema = new mongoose.Schema({
+    comment: String,
+    post_id: String,
+    user_id: String
+})
 
 const pendingSchema = new mongoose.Schema({
   question: String,
-  answer:String,
   field: String,
   user_id: String
 });
 
 const eventsSchema = new mongoose.Schema({
-  title:String,  
+  title: String,  
   img_path: String,
   description: String,
   url: String
