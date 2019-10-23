@@ -27,73 +27,73 @@ import LandingPage from "./routes/website/LandingPage";
 import PostPage from "./routes/website/PostPage";
 import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
 
-
 export default class App extends Component {
   state = {
     users: ["users"],
-    posts: ['posts'],
-    comments: ['comments'],
-    fields: ['fields'],
-    pending: ['pending'],
-    events: ['events']
+    fields: ["fields"],
+    posts: [],
+    comments: ["comments"],
+    pendings: ["pendings"],
+    events: []
   };
 
   componentDidMount() {
     this.getUsers();
+    this.getEvents();
+    this.getPosts();
   }
 
-
-//USERS FUNCTIONS
-//Please write your code below and only below your name
+  //USERS FUNCTIONS
+  //Please write your code below and only below your name
   getUsers() {
     axios.get("http://localhost:9000/get-users").then(response => {
       this.setState({ users: response.data });
     });
   }
 
-//FIELDS FUNCTIONS
-//Please write your code below and only below your name
-getFields() {
-  axios.get("http://localhost:9000/get-fields").then(response => {
-    this.setState({ fields: response.data });
-  });
-}
+  //FIELDS FUNCTIONS
+  //Please write your code below and only below your name
+  getFields() {
+    axios.get("http://localhost:9000/get-fields").then(response => {
+      this.setState({ fields: response.data });
+    });
+  }
 
-//POSTS FUNCTIONS
-//Please write your code below and only below your name
+  //POSTS FUNCTIONS
+  //Please write your code below and only below your name
   getPosts() {
     axios.get("http://localhost:9000/get-posts").then(response => {
       this.setState({ posts: response.data });
     });
   }
 
-//COMMENTS FUNCTIONS
-//Please write your code below and only below your name
+  //COMMENTS FUNCTIONS
+  //Please write your code below and only below your name
   getComments() {
     axios.get("http://localhost:9000/get-comments").then(response => {
       this.setState({ comments: response.data });
     });
   }
 
-//PENDINGS FUNCTIONS
-//Please write your code below and only below your name
+  //PENDINGS FUNCTIONS
+  //Please write your code below and only below your name
   getPending() {
     axios.get("http://localhost:9000/get-pending").then(response => {
       this.setState({ pending: response.data });
     });
   }
 
-//EVENTS FUNCTIONS
-//Please write your code below and only below your name
+  //EVENTS FUNCTIONS
+  //Please write your code below and only below your name
   getEvents() {
     axios.get("http://localhost:9000/get-events").then(response => {
       this.setState({ events: response.data });
     });
   }
 
-
   render() {
-    console.log(this.state.users);
+    let { users, fields, posts, comments, pendings, events } = this.state;
+    console.log(this.state);
     return (
       <div>
         <Router>
@@ -101,57 +101,79 @@ getFields() {
 
           <Link to="/">Home</Link>
 
-          <Route exact path="/AddEventPage">
-            <AddEventPage />
-          </Route>
-          <Route path="/AddQuestionPage">
-            <AddQuestionPage />
-          </Route>
+          <Route
+            exact
+            path="/AddEventPage"
+            component={routerProps => <AddEventPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/AddQuestionPage"
+            component={routerProps => <AddQuestionPage {...routerProps} />}
+          ></Route>
 
-          <Route path="/AdminDashboardPage">
-            <AdminDashboardPage />
-          </Route>
+          <Route
+            path="/AdminDashboardPage"
+            component={routerProps => <AdminDashboardPage {...routerProps} />}
+          ></Route>
 
-          <Route path="/AskQuestionPage">
-            <AskQuestionPage />
-          </Route>
-          <Route path="/LoginPage">
-            <LoginPage />
-          </Route>
-          <Route path="/RegisterPage">
-            <RegisterPage />
-          </Route>
-          <Route path="/UserDashboardPage">
-            <UserDashboardPage />
-          </Route>
-          <Route path="/UserProfilePage">
-            <UserProfilePage />
-          </Route>
+          <Route
+            path="/AskQuestionPage"
+            component={routerProps => <AskQuestionPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/LoginPage"
+            component={routerProps => <LoginPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/RegisterPage"
+            component={routerProps => <RegisterPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/UserDashboardPage"
+            component={routerProps => <UserDashboardPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/UserProfilePage"
+            component={routerProps => <UserProfilePage {...routerProps} />}
+          ></Route>
 
-          <Route path="/AboutUsPage">
-            <AboutUsPage />
-          </Route>
-          <Route path="/EventPage">
-            <EventPage />
-          </Route>
-          <Route path="/EventsPage">
-            <EventsPage />
-          </Route>
-          <Route path="/HrQuestionsPage">
-            <HrQuestionsPage />
-          </Route>
-          <Route path="/JoinUsPage">
-            <JoinUsPage />
-          </Route>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-          <Route path="/PostPage">
-            <PostPage />
-          </Route>
-          <Route path="/TechnicalQuestionsPage">
-            <TechnicalQuestionsPage />
-          </Route>
+          <Route
+            path="/AboutUsPage"
+            component={routerProps => <AboutUsPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/EventPage"
+            component={routerProps => <EventPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/EventsPage"
+            component={routerProps => <EventsPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/HrQuestionsPage"
+            component={routerProps => <HrQuestionsPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/JoinUsPage"
+            component={routerProps => <JoinUsPage {...routerProps} />}
+          ></Route>
+          <Route
+            exact
+            path="/"
+            component={routerProps => (
+              <LandingPage {...routerProps} events={events} posts={posts} />
+            )}
+          ></Route>
+          <Route
+            path="/PostPage"
+            component={routerProps => <PostPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/TechnicalQuestionsPage"
+            component={routerProps => (
+              <TechnicalQuestionsPage {...routerProps} />
+            )}
+          ></Route>
 
           <Footer />
         </Router>
@@ -159,4 +181,3 @@ getFields() {
     );
   }
 }
-
