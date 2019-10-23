@@ -25,8 +25,10 @@ import EventPage from "./routes/website/EventPage";
 import EventsPage from "./routes/website/EventsPage";
 import HrQuestionsPage from "./routes/website/HrQuestionsPage";
 import JoinUsPage from "./routes/website/JoinUsPage";
+import LandingPage from "./routes/website/LandingPage";
 import PostPage from "./routes/website/PostPage";
 import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
+
 
 export default class App extends Component {
   state = {
@@ -87,11 +89,7 @@ export default class App extends Component {
 
           <Link to="/">Home</Link>
           <Route exact path="/">
-            <>
-              <br /> <Link to="/EventsPage">Events</Link>
-              <Event />
-              <Post />
-            </>
+            <LandingPage />
           </Route>
 
           <Route exact path="/AddEventPage">
