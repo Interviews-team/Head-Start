@@ -17,7 +17,9 @@ app.use(express.json());
 app.get("/", (req, res) => res.json("test working"));
 
 //SERVER AND DATABASE RESPONSE AND BEHAVIOR
-//TESTING
+
+//USERS FUNCTIONS
+//Please write your code below and only below your name
 app.get(`/get-users`, (req, res) => {
   db.getUsers( users => res.json( users ))
 });
@@ -26,45 +28,35 @@ app.get(`/get-users`, (req, res) => {
 //   db.addUser( users => res.json ( users ), req.body)
 // })
 
-app.get(`/get-posts`, (req, res) => {
-  db.getPosts( posts => res.json( posts ))
-});
-
-app.get(`/get-comments`, (req, res) => {
-  db.getComments( comments => res.json( comments ))
-});
-
-app.get(`/get-events`, (req, res) => {
-  db.getEvents( events => res.json( events ))
-});
-
-app.get(`/get-pendings`, (req, res) => {
-  db.getPendings( pendings => res.json( pendings ))
-});
-
+//FIELDS FUNCTIONS
+//Please write your code below and only below your name
 app.get(`/get-fields`, (req, res) => {
   db.getFields( fields => res.json( fields ))
 });
 
-//AHMAD GHZAWI
+//POSTS FUNCTIONS
 //Please write your code below and only below your name
+app.get(`/get-posts`, (req, res) => {
+  db.getPosts( posts => res.json( posts ))
+});
 
-
-
-//AHMAD NSOUR
+//COMMENTS FUNCTIONS
 //Please write your code below and only below your name
+app.get(`/get-comments`, (req, res) => {
+  db.getComments( comments => res.json( comments ))
+});
 
-
-
-//MOHAMMAD ALAA ALDEEN
+//PENDINGS FUNCTIONS
 //Please write your code below and only below your name
+app.get(`/get-pendings`, (req, res) => {
+  db.getPendings( pendings => res.json( pendings ))
+});
 
-
-
-//HANI ABU ALINAIN
+//EVENTS FUNCTIONS
 //Please write your code below and only below your name
-
-
+app.get(`/get-events`, (req, res) => {
+  db.getEvents( events => res.json( events ))
+});
 
 const PORT = process.env.PORT || 9000;
 app.listen(PORT, () => {
