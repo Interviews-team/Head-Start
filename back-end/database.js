@@ -67,7 +67,7 @@ const Events = mongoose.model("events", eventsSchema);
 //USERS FUNCTIONS
 //Please write your code below and only below your name
 const getUsers = sendUsers => {
-  Users.find({}, { name: 1, _id: 0 }, (err, docs) => {
+  Users.find({}, { password: 0 }, (err, docs) => {
     if (err) {
       console.log("ERR:", err);
     } else {
