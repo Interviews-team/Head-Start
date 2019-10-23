@@ -3,10 +3,8 @@ import axios from "axios";
 import { BrowserRouter as Router, Link, Route } from "react-router-dom";
 
 //importing components
-import Event from "./components/Event";
-import Footer from "./components/Footer";
 import Header from "./components/Header";
-import Post from "./components/Post";
+import Footer from "./components/Footer";
 
 //importing routes
 import AddEventPage from "./routes/adding/AddEventPage";
@@ -44,41 +42,55 @@ export default class App extends Component {
     this.getUsers();
   }
 
+
+//USERS FUNCTIONS
+//Please write your code below and only below your name
   getUsers() {
     axios.get("http://localhost:9000/get-users").then(response => {
       this.setState({ users: response.data });
     });
   }
 
+//FIELDS FUNCTIONS
+//Please write your code below and only below your name
+getFields() {
+  axios.get("http://localhost:9000/get-fields").then(response => {
+    this.setState({ fields: response.data });
+  });
+}
+
+//POSTS FUNCTIONS
+//Please write your code below and only below your name
   getPosts() {
     axios.get("http://localhost:9000/get-posts").then(response => {
       this.setState({ posts: response.data });
     });
   }
 
+//COMMENTS FUNCTIONS
+//Please write your code below and only below your name
   getComments() {
     axios.get("http://localhost:9000/get-comments").then(response => {
       this.setState({ comments: response.data });
     });
   }
 
-  getFields() {
-    axios.get("http://localhost:9000/get-fields").then(response => {
-      this.setState({ fields: response.data });
-    });
-  }
-
+//PENDINGS FUNCTIONS
+//Please write your code below and only below your name
   getPending() {
     axios.get("http://localhost:9000/get-pending").then(response => {
       this.setState({ pending: response.data });
     });
   }
 
+//EVENTS FUNCTIONS
+//Please write your code below and only below your name
   getEvents() {
     axios.get("http://localhost:9000/get-events").then(response => {
       this.setState({ events: response.data });
     });
   }
+
 
   render() {
     console.log(this.state.users);
@@ -88,9 +100,6 @@ export default class App extends Component {
           <Header />
 
           <Link to="/">Home</Link>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
 
           <Route exact path="/AddEventPage">
             <AddEventPage />
@@ -133,6 +142,9 @@ export default class App extends Component {
           </Route>
           <Route path="/JoinUsPage">
             <JoinUsPage />
+          </Route>
+          <Route exact path="/">
+            <LandingPage />
           </Route>
           <Route path="/PostPage">
             <PostPage />

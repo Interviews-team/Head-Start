@@ -63,7 +63,9 @@ const Pendings = mongoose.model("pendings", pendingSchema);
 const Events = mongoose.model("events", eventsSchema);
 
 //QUERIES FUNCTIONS
-//TESTING
+
+//USERS FUNCTIONS
+//Please write your code below and only below your name
 const getUsers = sendUsers => {
   Users.find({}, { name: 1, _id: 0 }, (err, docs) => {
     if (err) {
@@ -85,36 +87,8 @@ const getUsers = sendUsers => {
 //   })
 // }
 
-const getPosts = sendPosts => {
-  Posts.find({}, (err, docs) => {
-    if (err) {
-      console.log("ERR:", err);
-    } else {
-      sendPosts(docs);
-    }
-  });
-};
-
-const getEvents = sendEvents => {
-  Events.find({}, (err, docs) => {
-    if (err) {
-      console.log("ERR:", err);
-    } else {
-      sendEvents(docs);
-    }
-  });
-};
-
-const getComments = sendComments => {
-  Comments.find({}, (err, docs) => {
-    if (err) {
-      console.log("ERR:", err);
-    } else {
-      sendComments(docs);
-    }
-  });
-};
-
+//FIELDS FUNCTIONS
+//Please write your code below and only below your name
 const getFields = sendFields => {
   Fields.find({}, (err, docs) => {
     if (err) {
@@ -125,6 +99,32 @@ const getFields = sendFields => {
   });
 };
 
+//POSTS FUNCTIONS
+//Please write your code below and only below your name
+const getPosts = sendPosts => {
+  Posts.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendPosts(docs);
+    }
+  });
+};
+
+//COMMENTS FUNCTIONS
+//Please write your code below and only below your name
+const getComments = sendComments => {
+  Comments.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendComments(docs);
+    }
+  });
+};
+
+//PENDINGS FUNCTIONS
+//Please write your code below and only below your name
 const getPendings = sendPendings => {
   Pendings.find({}, (err, docs) => {
     if (err) {
@@ -136,30 +136,22 @@ const getPendings = sendPendings => {
   });
 };
 
-//AHMAD GHZAWI
+//EVENTS FUNCTIONS
 //Please write your code below and only below your name
-
-
-
-//AHMAD NSOUR
-//Please write your code below and only below your name
-
-
-
-//MOHAMMAD ALAA ALDEEN
-//Please write your code below and only below your name
-
-
-
-//HANI ABU ALINAIN
-//Please write your code below and only below your name
-
+const getEvents = sendEvents => {
+  Events.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendEvents(docs);
+    }
+  });
+};
 
 
 //MODULE EXPORTS
 module.exports = {
   getUsers,
-  // addUser
   getPosts,
   getEvents,
   getComments,
