@@ -3,10 +3,15 @@ import React, { Component } from "react";
 export default class Comment extends Component {
   state = {};
   render() {
-    return (
-      <div>
-        <h1>Comment</h1>
-      </div>
-    );
+    let { comments, user } = this.props;
+    if (user === "Admin") {
+      return (
+        <div>
+          <h1>{comments}</h1>
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }

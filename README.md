@@ -8,19 +8,22 @@ This repository holds A Website dedicated to HR and Technical Interviews' questi
 
 **Subjects :**
 
-| Subject                     | Provided      | Comments  |
-| :-------------              |:-------------:|:-----:|
-| Fork 	                      | ✔️            |  |
-| Clone	                      | ✔️            |  |
-| Install Node                | ✔️            |  |
-| Install Nodemon             | ✔️            |  |
-| Install Express             | ✔️            |  |
-| Install React               | ✔️            |  |
-| Install React-Route-dom     | ✔️            |  |
-| Create All Routes File      | ✔️            |  |
-| Create All Components File  | ✔️            |  |
-| Create DB schema            | ✔️            |  |
-| Server Test                 | ✔️            |  |
-| Code Structure              | ✔️            |  |
-| Add All Get Functions       | ✔️            |  |
+| Subject                     		| Provided      | Comments  |
+| :-------------             		|:-------------:|:-----:|
+| Fork 	                      		| ✔️            |  |
+| Clone	                      		| ✔️            |  |
+| Install Node                		| ✔️            |  |
+| Install Nodemon 			| ✔️            |  |
+| Install Express             		| ✔️            |  |
+| Install React               		| ✔️            |  |
+| Install React-Route-dom     		| ✔️            |  |
+| Create All Routes File      		| ✔️            |  |
+| Create All Components File  		| ✔️            |  |
+| Create DB schema            		| ✔️            |  |
+| Server Test               		| ✔️            |  |
+| Code Structure              		| ✔️            |  |
+| Add All Get Functions       		| ✔️            |  |
+| Specifiy Functions Space    		| ✔️            |  |
+| landing, about us, hr questions pages	| ✔️            |  |
+| technical questions, post pages     	| ✔️            |  |
 

@@ -41,6 +41,7 @@ export default class App extends Component {
     this.getUsers();
     this.getEvents();
     this.getPosts();
+    this.getComments();
   }
 
   //USERS FUNCTIONS
@@ -61,11 +62,11 @@ export default class App extends Component {
 
   //POSTS FUNCTIONS
   //Please write your code below and only below your name
-  getPosts() {
+  getPosts = () => {
     axios.get("http://localhost:9000/get-posts").then(response => {
       this.setState({ posts: response.data });
     });
-  }
+  };
 
   //COMMENTS FUNCTIONS
   //Please write your code below and only below your name
@@ -147,11 +148,15 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/EventsPage"
-            component={routerProps => <EventsPage {...routerProps} events={events}/>}
+            component={routerProps => (
+              <EventsPage {...routerProps} events={events} />
+            )}
           ></Route>
           <Route
             path="/HrQuestionsPage"
-            component={routerProps => <HrQuestionsPage {...routerProps} posts={posts}/>}
+            component={routerProps => (
+              <HrQuestionsPage {...routerProps} posts={posts} />
+            )}
           ></Route>
           <Route
             path="/JoinUsPage"
@@ -171,7 +176,12 @@ export default class App extends Component {
           <Route
             path="/TechnicalQuestionsPage"
             component={routerProps => (
-              <TechnicalQuestionsPage {...routerProps} />
+              <TechnicalQuestionsPage
+                {...routerProps}
+                posts={posts}
+                users={users}
+                comments={comments}
+              />
             )}
           ></Route>
 

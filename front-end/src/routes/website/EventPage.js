@@ -7,6 +7,7 @@ export default class EventPage extends Component {
     return (
       <div>
         <h1>EventPage</h1>
+        <p>ghz</p>
       </div>
     );
   }
