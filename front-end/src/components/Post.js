@@ -17,5 +17,21 @@ export default class Post extends Component {
         </Link>
       );
     }
+
+    if (page === "HrQuestionsPage") {
+      return (
+        <Link to={{pathname: '/PostPage', state:{post_id}} } style={{textDecoration: 'none'}}>
+          <div>
+            <h3>{question}</h3>
+            <h4>{answer}</h4>
+            <p>{field}</p>
+            <p>{post_id}</p>
+            <p>hr</p>
+          </div>
+        </Link>
+      );
+    }
+
+    return null
   }
 }
