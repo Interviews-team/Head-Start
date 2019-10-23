@@ -29,11 +29,11 @@ import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
 
 export default class App extends Component {
   state = {
-    users: ["users"],
-    fields: ["fields"],
+    users: [],
+    fields: [],
     posts: [],
-    comments: ["comments"],
-    pendings: ["pendings"],
+    comments: [],
+    pendings: [],
     events: []
   };
 
@@ -147,11 +147,11 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/EventsPage"
-            component={routerProps => <EventsPage {...routerProps} />}
+            component={routerProps => <EventsPage {...routerProps} events={events}/>}
           ></Route>
           <Route
             path="/HrQuestionsPage"
-            component={routerProps => <HrQuestionsPage {...routerProps} />}
+            component={routerProps => <HrQuestionsPage {...routerProps} posts={posts}/>}
           ></Route>
           <Route
             path="/JoinUsPage"

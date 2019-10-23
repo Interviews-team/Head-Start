@@ -19,5 +19,7 @@ export default class Event extends Component {
         </Link>
       );
     }
+
+    return null
   }
 }
