@@ -92,7 +92,22 @@ app.get(`/get-events`, (req, res) => {
   db.getEvents(events => res.json(events));
 });
 
-const PORT = process.env.PORT || 9000;
+app.post(`/addEvent`, (req, res) => {
+  let event = req.body;
+  db.addEvent(event => {
+    res.json(event);
+  }, event);
+});
+
+//for ask question
+//askQuestion={this.askQuestion}
+app.post(`/askQuestion`, (req, res) => {
+  db.askQuestion(question => {
+    res.json(question);
+  }, req.body);
+});
+
+const PORT = process.env.PORT || 9500;
 app.listen(PORT, () => {
   console.log(`Server is listening to ${PORT}`);
 });

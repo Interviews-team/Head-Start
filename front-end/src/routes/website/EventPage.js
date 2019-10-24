@@ -7,7 +7,10 @@ export default class EventPage extends Component {
     return (
       <div>
         <h1>EventPage</h1>
-        <p>ghz</p>
+        <p>{this.props.location.state.event_id}</p>
+        <p>{this.props.location.state.title}</p>
+        <p>{this.props.location.state.url}</p>
+        <p>{this.props.location.state.img}</p>
       </div>
     );
   }

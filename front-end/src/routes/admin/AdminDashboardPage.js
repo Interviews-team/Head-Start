@@ -9,6 +9,7 @@ import Post from "../../components/Post";
 export default class AdminDashboardPage extends Component {
   render() {
     return (
+      // ghzawi needs to make the if statement for showing and hiding add event/question
       <div style={{ color: "red" }}>
         <h1>Admin Dashboard</h1>
         {/* OWNER */}
