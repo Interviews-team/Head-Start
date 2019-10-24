@@ -175,7 +175,7 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/RegisterPage"
-            component={routerProps => <RegisterPage {...routerProps} />}
+            component={routerProps => <RegisterPage {...routerProps} getLoggedInUser={this.getLoggedInUser}/>}
           ></Route>
           <Route
             path="/LogoutPage"
@@ -189,7 +189,7 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/UserProfilePage"
-            component={routerProps => <UserProfilePage {...routerProps} />}
+            component={routerProps => <UserProfilePage {...routerProps} loggedInUser={loggedInUser}/>}
           ></Route>
 
           <Route
