@@ -45,7 +45,11 @@ export default class App extends Component {
     posts: [],
     comments: [],
     pendings: [],
-    events: []
+    events: [],
+
+    //USER DASHBOARD
+    userPosts:[],
+    userComments:[]
   };
 
   componentDidMount() {
@@ -108,7 +112,7 @@ export default class App extends Component {
 
   //COMMENTS FUNCTIONS
   //Please write your code below and only below your name
-  getComments() {
+  getComments = () => {
     axios.get("http://localhost:9000/get-comments").then(response => {
       this.setState({ comments: response.data });
     });
@@ -128,6 +132,32 @@ export default class App extends Component {
     axios.get("http://localhost:9000/get-events").then(response => {
       this.setState({ events: response.data });
     });
+  }
+
+  //USER DASHBOARD
+  getUserPosts = () => {
+    axios.post("http://localhost:9000/getPosts", this.state.loggedInUser)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ userPosts: res.data })
+      })
+  }
+  deleteUserPost = (id) => {
+    axios.post("http://localhost:9000/deletePost", { id })
+  }
+
+  getUserComments = () => {
+    axios.post("http://localhost:9000/getComments", this.state.loggedInUser)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ userComments: res.data })
+      })
+  }
+
+
+  deleteUserComment = (id) => {
+    console.log(id)
+    axios.post("http://localhost:9000/deleteComment", { id })
   }
 
   render() {
@@ -185,7 +215,7 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/UserDashboardPage"
-            component={routerProps => <UserDashboardPage {...routerProps} />}
+            component={routerProps => <UserDashboardPage {...routerProps} getUserPosts={this.getUserPosts} getUserComments={this.getUserComments} posts={this.state.userPosts} comments={this.state.userComments} deleteUserPost={this.deleteUserPost} deleteUserComment={this.deleteUserComment}/>}
           ></Route>
           <Route
             path="/UserProfilePage"
