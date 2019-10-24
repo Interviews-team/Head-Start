@@ -71,10 +71,10 @@ export default class App extends Component {
   getLoggedInUser = () => {
     axios.get("http://localhost:9000/get-logged-in").then(response => {
       if (response.data !== null) {
-        let loggedInUser = response.data
+        let loggedInUser = response.data;
         this.setState({ loggedInUser });
       } else {
-        let loggedInUser= {
+        let loggedInUser = {
           _id: null,
           name: null,
           email: null,
@@ -83,8 +83,7 @@ export default class App extends Component {
           field: null,
           role: null,
           isLoggedIn: null
-        }
-        console.log('AAAAAAAAAAAAAAAA');
+        };
         this.setState({ loggedInUser });
       }
     });
@@ -112,6 +111,7 @@ export default class App extends Component {
 
   //COMMENTS FUNCTIONS
   //Please write your code below and only below your name
+
   getComments = () => {
     axios.get("http://localhost:9000/get-comments").then(response => {
       this.setState({ comments: response.data });
@@ -120,11 +120,11 @@ export default class App extends Component {
 
   //PENDINGS FUNCTIONS
   //Please write your code below and only below your name
-  getPending() {
-    axios.get("http://localhost:9000/get-pending").then(response => {
-      this.setState({ pending: response.data });
-    });
-  }
+  // getPending() {
+  //   axios.get("http://localhost:9000/get-pending").then(response => {
+  //     this.setState({ pending: response.data });
+  //   });
+  // }
 
   //EVENTS FUNCTIONS
   //Please write your code below and only below your name
@@ -133,6 +133,34 @@ export default class App extends Component {
       this.setState({ events: response.data });
     });
   }
+  addEvent = event => {
+    axios
+      .post("http://localhost:9000/addEvent", event)
+      .then(r => {
+        // handle success
+        console.log(r.data);
+      })
+      .catch(error => {
+        // handle error
+        console.log(error);
+      });
+  };
+  //ask question functions askQuestion
+  askQuestion = question => {
+    console.log("NEW Q", question);
+
+
+    axios
+      .post("http://localhost:9000/askQuestion", question)
+      .then(r => {
+        // handle success
+        console.log(r.data);
+      })
+      .catch(error => {
+        // handle error
+        console.log("This eroooooor!!!!", error);
+      });
+  };
 
   //USER DASHBOARD
   getUserPosts = () => {
@@ -160,6 +188,7 @@ export default class App extends Component {
     axios.post("http://localhost:9000/deleteComment", { id })
   }
 
+
   render() {
     let {
       users,
@@ -181,7 +210,9 @@ export default class App extends Component {
           <Route
             exact
             path="/AddEventPage"
-            component={routerProps => <AddEventPage {...routerProps} />}
+            component={routerProps => (
+              <AddEventPage {...routerProps} addEvent={this.addEvent} />
+            )}
           ></Route>
           <Route
             path="/AddQuestionPage"
@@ -195,7 +226,13 @@ export default class App extends Component {
 
           <Route
             path="/AskQuestionPage"
-            component={routerProps => <AskQuestionPage {...routerProps} />}
+            component={routerProps => (
+              <AskQuestionPage
+                {...routerProps}
+                getLoggedInUser={this.getLoggedInUser}
+                askQuestion={this.askQuestion}
+              />
+            )}
           ></Route>
           <Route
             path="/LoginPage"
@@ -210,7 +247,11 @@ export default class App extends Component {
           <Route
             path="/LogoutPage"
             component={routerProps => (
-              <LogoutPage {...routerProps} loggedInUser={loggedInUser} getLoggedInUser={this.getLoggedInUser}/>
+              <LogoutPage
+                {...routerProps}
+                loggedInUser={loggedInUser}
+                getLoggedInUser={this.getLoggedInUser}
+              />
             )}
           ></Route>
           <Route
@@ -233,7 +274,10 @@ export default class App extends Component {
           <Route
             path="/EventsPage"
             component={routerProps => (
-              <EventsPage {...routerProps} events={events} />
+              <EventsPage
+                {...routerProps}
+                loggedInUser={loggedInUser}
+              />
             )}
           ></Route>
           <Route

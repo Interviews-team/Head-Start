@@ -118,7 +118,7 @@ const userCheckLogin = (sendUser, { email, password }) => {
 const userLogout = (sendUser, _id) => {
   Users.updateOne({ _id }, { $set: { isLoggedIn: false } }, (err, doc) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
       sendUser(doc)
     };
@@ -246,6 +246,35 @@ const getEvents = sendEvents => {
     }
   });
 };
+const addEvent = (sendEvent, event) => {
+  let { title, img_path, url, description } = event;
+  Events.create({ title, img_path, url, description }, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getEvent(sendEvent);
+    }
+  });
+};
+// ask question function
+const getQuestion = sendQuestion => {
+  Pendings.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendQuestion(docs);
+    }
+  });
+};
+const askQuestion = (sendQuestion, question) => {
+  Pendings.insertMany(question, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getQuestion(sendQuestion);
+    }
+  });
+};
 
 //USER DASHBOARD
 // GET POSTS
@@ -333,10 +362,14 @@ module.exports = {
   getPendings,
 
   getFields,
+  addEvent,
+  getQuestion,
+  askQuestion
 
   //USER DASHBOARD
   getUserPosts,
   deleteUserPost,
   getUserComments,
   deleteUserComment
+
 };

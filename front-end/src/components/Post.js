@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Post extends Component {
-
   render() {
-    console.log("POST PROPS: ", this.props);
-
     let {
       question,
       answer,
@@ -16,10 +13,23 @@ export default class Post extends Component {
       loggedInUser
     } = this.props;
 
-    console.log(loggedInUser.role === null);
     return (
       <Link
-        to={loggedInUser.role === null ? { pathname: "/LoginPage"} : { pathname: "/PostPage", state: { question, answer, field, user_id, post_id, loggedInUser} }}
+        to={
+          loggedInUser.role === null
+            ? { pathname: "/LoginPage" }
+            : {
+                pathname: "/PostPage",
+                state: {
+                  question,
+                  answer,
+                  field,
+                  user_id,
+                  post_id,
+                  loggedInUser
+                }
+              }
+        }
         style={{ textDecoration: "none" }}
       >
         <div>

@@ -92,6 +92,24 @@ app.get(`/get-events`, (req, res) => {
   db.getEvents(events => res.json(events));
 });
 
+
+app.post(`/addEvent`, (req, res) => {
+  let event = req.body;
+  db.addEvent(event => {
+    res.json(event);
+  }, event);
+});
+
+//for ask question
+//askQuestion={this.askQuestion}
+app.post(`/askQuestion`, (req, res) => {
+  db.askQuestion(question => {
+    res.json(question);
+  }, req.body);
+});
+
+
+
 //USER DASHBOARD
 // GET POSTS
 app.post('/getPosts', (req, res) => {
@@ -121,6 +139,7 @@ app.post('/getPosts', (req, res) => {
  });
 
 const PORT = process.env.PORT || 9000;
+
 app.listen(PORT, () => {
   console.log(`Server is listening to ${PORT}`);
 });
