@@ -276,6 +276,71 @@ const askQuestion = (sendQuestion, question) => {
   });
 };
 
+//USER DASHBOARD
+// GET POSTS
+let getUserPosts = (cb, obj) => {
+  console.log(obj)
+  Posts.find({ user_id: obj._id },
+    function (err, posts) {
+      if (err) {
+        console.log('err')
+        cb('err')
+      }
+      else {
+        console.log(posts)
+        cb(posts)
+      }
+    })
+ }
+ // DELETE POST
+ let deleteUserPost = (cb, obj) => {
+  console.log("OBJ: ", obj.id)
+  Posts.remove({ _id: obj.id },
+    // Posts.find({ user_id: obj._id },
+    function (err, posts) {
+      if (err) {
+        console.log('err')
+        cb('err')
+      }
+      else {
+        console.log(posts)
+        cb(posts)
+      }
+    }
+    )}
+ // GET COMMENT
+ let getUserComments = (cb, obj) => {
+  console.log(obj)
+  Comments.find({ user_id: obj._id },
+    function (err, comments) {
+      if (err) {
+        console.log('err')
+        cb('err')
+      }
+      else {
+        console.log(comments)
+        cb(comments)
+      }
+    })
+ }
+ // DELETE COMMENT
+ let deleteUserComment = (cb, obj) => {
+  console.log("OBJ: ", obj.id)
+  Comments.remove({ _id: obj.id },
+    // Comment.find({ user_id: obj._id },
+    function (err, comments) {
+      if (err) {
+        console.log('err')
+        cb('err')
+      }
+      else {
+        console.log(comments)
+        cb(comments)
+      }
+    }
+    )}
+ 
+
 //MODULE EXPORTS
 module.exports = {
   getUsers,
@@ -295,8 +360,16 @@ module.exports = {
   getPostComments,
 
   getPendings,
+
   getFields,
   addEvent,
   getQuestion,
   askQuestion
+
+  //USER DASHBOARD
+  getUserPosts,
+  deleteUserPost,
+  getUserComments,
+  deleteUserComment
+
 };

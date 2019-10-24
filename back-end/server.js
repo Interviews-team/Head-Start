@@ -92,6 +92,7 @@ app.get(`/get-events`, (req, res) => {
   db.getEvents(events => res.json(events));
 });
 
+
 app.post(`/addEvent`, (req, res) => {
   let event = req.body;
   db.addEvent(event => {
@@ -107,7 +108,38 @@ app.post(`/askQuestion`, (req, res) => {
   }, req.body);
 });
 
-const PORT = process.env.PORT || 9500;
+
+
+//USER DASHBOARD
+// GET POSTS
+app.post('/getPosts', (req, res) => {
+  db.getUserPosts(post => {
+    res.json(post)
+  }, req.body)
+ });
+ // DELETE PSOT
+ app.post("/deletePost", (req, res) => {
+  console.log("REQ.BODY", req.body)
+  db.deleteUserPost(post => {
+    res.json(post)
+  }, req.body)
+ });
+ // GET COMMENTS
+ app.post('/getComments', (req, res) => {
+  db.getUserComments(comment => {
+    res.json(comment)
+  }, req.body)
+ });
+ // DELETE COMMENT
+ app.post("/deleteComment", (req, res) => {
+  console.log("REQ.BODY", req.body)
+  db.deleteUserComment(comment => {
+    res.json(comment)
+  }, req.body)
+ });
+
+const PORT = process.env.PORT || 9000;
+
 app.listen(PORT, () => {
   console.log(`Server is listening to ${PORT}`);
 });

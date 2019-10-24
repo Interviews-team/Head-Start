@@ -45,7 +45,11 @@ export default class App extends Component {
     posts: [],
     comments: [],
     pendings: [],
-    events: []
+    events: [],
+
+    //USER DASHBOARD
+    userPosts:[],
+    userComments:[]
   };
 
   componentDidMount() {
@@ -59,13 +63,13 @@ export default class App extends Component {
   //USERS FUNCTIONS
   //Please write your code below and only below your name
   getUsers() {
-    axios.get("http://localhost:9500/get-users").then(response => {
+    axios.get("http://localhost:9000/get-users").then(response => {
       this.setState({ users: response.data });
     });
   }
 
   getLoggedInUser = () => {
-    axios.get("http://localhost:9500/get-logged-in").then(response => {
+    axios.get("http://localhost:9000/get-logged-in").then(response => {
       if (response.data !== null) {
         let loggedInUser = response.data;
         this.setState({ loggedInUser });
@@ -92,7 +96,7 @@ export default class App extends Component {
   //FIELDS FUNCTIONS
   //Please write your code below and only below your name
   getFields() {
-    axios.get("http://localhost:9500/get-fields").then(response => {
+    axios.get("http://localhost:9000/get-fields").then(response => {
       this.setState({ fields: response.data });
     });
   }
@@ -100,15 +104,16 @@ export default class App extends Component {
   //POSTS FUNCTIONS
   //Please write your code below and only below your name
   getPosts = () => {
-    axios.get("http://localhost:9500/get-posts").then(response => {
+    axios.get("http://localhost:9000/get-posts").then(response => {
       this.setState({ posts: response.data });
     });
   };
 
   //COMMENTS FUNCTIONS
   //Please write your code below and only below your name
-  getComments() {
-    axios.get("http://localhost:9500/get-comments").then(response => {
+
+  getComments = () => {
+    axios.get("http://localhost:9000/get-comments").then(response => {
       this.setState({ comments: response.data });
     });
   }
@@ -116,7 +121,7 @@ export default class App extends Component {
   //PENDINGS FUNCTIONS
   //Please write your code below and only below your name
   // getPending() {
-  //   axios.get("http://localhost:9500/get-pending").then(response => {
+  //   axios.get("http://localhost:9000/get-pending").then(response => {
   //     this.setState({ pending: response.data });
   //   });
   // }
@@ -124,13 +129,13 @@ export default class App extends Component {
   //EVENTS FUNCTIONS
   //Please write your code below and only below your name
   getEvents() {
-    axios.get("http://localhost:9500/get-events").then(response => {
+    axios.get("http://localhost:9000/get-events").then(response => {
       this.setState({ events: response.data });
     });
   }
   addEvent = event => {
     axios
-      .post("http://localhost:9500/addEvent", event)
+      .post("http://localhost:9000/addEvent", event)
       .then(r => {
         // handle success
         console.log(r.data);
@@ -144,8 +149,9 @@ export default class App extends Component {
   askQuestion = question => {
     console.log("NEW Q", question);
 
+
     axios
-      .post("http://localhost:9500/askQuestion", question)
+      .post("http://localhost:9000/askQuestion", question)
       .then(r => {
         // handle success
         console.log(r.data);
@@ -155,6 +161,34 @@ export default class App extends Component {
         console.log("This eroooooor!!!!", error);
       });
   };
+
+  //USER DASHBOARD
+  getUserPosts = () => {
+    axios.post("http://localhost:9000/getPosts", this.state.loggedInUser)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ userPosts: res.data })
+      })
+  }
+  deleteUserPost = (id) => {
+    axios.post("http://localhost:9000/deletePost", { id })
+  }
+
+  getUserComments = () => {
+    axios.post("http://localhost:9000/getComments", this.state.loggedInUser)
+      .then(res => {
+        console.log(res.data)
+        this.setState({ userComments: res.data })
+      })
+  }
+
+
+  deleteUserComment = (id) => {
+    console.log(id)
+    axios.post("http://localhost:9000/deleteComment", { id })
+  }
+
+
   render() {
     let {
       users,
@@ -222,7 +256,7 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/UserDashboardPage"
-            component={routerProps => <UserDashboardPage {...routerProps} />}
+            component={routerProps => <UserDashboardPage {...routerProps} getUserPosts={this.getUserPosts} getUserComments={this.getUserComments} posts={this.state.userPosts} comments={this.state.userComments} deleteUserPost={this.deleteUserPost} deleteUserComment={this.deleteUserComment}/>}
           ></Route>
           <Route
             path="/UserProfilePage"
