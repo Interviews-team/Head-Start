@@ -1,34 +1,44 @@
 import React, { Component } from "react";
 import Comment from "../../components/Comment";
+import axios from "axios";
 
 export default class PostPage extends Component {
-  state = {};
+  state = {
+    comments: []
+  };
+
+  componentDidMount() {
+    this.getPostComments();
+  }
+
+  getPostComments = () => {
+    let id = this.props.location.state.post_id
+    axios
+      .get(`http://localhost:9000/get-post-comments/${id}`)
+      .then(res => this.setState({ comments: res.data }))
+      .catch(err => console.log(err));
+  };
 
   render() {
-    if (this.props.location.state.user === "Admin") {
+    let {question, answer, field, user_id, post_id, loggedInUser} = this.props.location.state
+
       return (
         <div>
           <h1>Post Page </h1>
-          <h3>Post Id :</h3> {this.props.location.state.id}
-          <h3>PostQuestion :</h3>
-          {this.props.location.state.question}
+          <h3>Post Id :</h3> {post_id}
+          <h3>Post Question :</h3>
+          {question}
+          <h3>Post Answer :</h3>
+          {answer}
           <h3>Post field :</h3>
-          {this.props.location.state.field}
+          {field}
           <h3>Post User Id :</h3>
-          {this.props.location.state.user_id}
+          {user_id}
           <h3>Post Comments :</h3>
-          {this.props.location.state.comments.map(comment => {
-            return <Comment comments={comment.comment} user={this.props.location.state.user} />;
+          {this.state.comments.map(comment => {
+            return <Comment key={comment._id} comment={comment.comment} user={user_id} user_id={loggedInUser._id} />;
           })}
         </div>
       );
-    } else {
-      return (
-        <div>
-          <h3>PostQuestion :</h3>
-          {this.props.location.state.question}
-        </div>
-      );
-    }
   }
 }

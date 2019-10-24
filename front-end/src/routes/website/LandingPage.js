@@ -6,7 +6,7 @@ import Post from "../../components/Post";
 export default class LandingPage extends Component {
   render() {
     console.log(this.props);
-    let { events, posts } = this.props;
+    let { events, posts, loggedInUser } = this.props;
     let randomEvents = events.slice(0, 5);
     let eventsToShow = randomEvents.map(event => (
       <Event
@@ -40,6 +40,7 @@ export default class LandingPage extends Component {
         answer={post.answer}
         field={post.field}
         user_id={post.user_id}
+        loggedInUser={loggedInUser}
         page="LandingPage"
       />
     ));

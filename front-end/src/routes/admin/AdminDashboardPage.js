@@ -16,17 +16,17 @@ export default class AdminDashboardPage extends Component {
         <Link style={{ color: "red" }} to="/AddEventPage">
           Add Event
         </Link>
-        <Event />
+        {/* <Event />
         <User />
-        <PendingAdmin />
+        <PendingAdmin /> */}
         <br />
 
         {/* HRADMIN and TECHADMIN*/}
         <Link style={{ color: "red" }} to="/AddQuestionPage">
           Add Question
         </Link>
-        <PendingQuestion />
-        <Post />
+        {/* <PendingQuestion />
+        <Post /> */}
       </div>
     );
   }

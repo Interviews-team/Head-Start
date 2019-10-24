@@ -1,17 +1,15 @@
 import React, { Component } from "react";
 
 export default class Comment extends Component {
-  state = {};
+  
   render() {
-    let { comments, user } = this.props;
-    if (user === "Admin") {
+    let { comment, user,  user_id } = this.props;
       return (
         <div>
-          <h1>{comments}</h1>
+          <h1>{comment}</h1>
+          {user === user_id ? <p>edit</p> : null}
         </div>
       );
-    } else {
-      return null;
-    }
+
   }
 }
