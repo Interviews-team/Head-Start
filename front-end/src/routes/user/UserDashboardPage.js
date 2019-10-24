@@ -8,9 +8,9 @@ export default class UserDashboardPage extends Component {
     return (
       <div>
         <h1>User Dashboard</h1>
-        <PendingQuestion />
+        {/* <PendingQuestion />
         <Post />
-        <Comment />
+        <Comment /> */}
       </div>
     );
   }

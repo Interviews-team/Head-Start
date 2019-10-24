@@ -14,6 +14,7 @@ import AdminDashboardPage from "./routes/admin/AdminDashboardPage";
 
 import AskQuestionPage from "./routes/user/AskQuestionPage";
 import LoginPage from "./routes/user/LoginPage";
+import LogoutPage from "./routes/user/LogoutPage";
 import RegisterPage from "./routes/user/RegisterPage";
 import UserDashboardPage from "./routes/user/UserDashboardPage";
 import UserProfilePage from "./routes/user/UserProfilePage";
@@ -29,6 +30,16 @@ import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
 
 export default class App extends Component {
   state = {
+    loggedInUser: {
+      _id: null,
+      name: null,
+      email: null,
+      mobileNumber: null,
+      gender: null,
+      field: null,
+      role: null,
+      isLoggedIn: null
+    },
     users: [],
     fields: [],
     posts: [],
@@ -39,6 +50,7 @@ export default class App extends Component {
 
   componentDidMount() {
     this.getUsers();
+    this.getLoggedInUser();
     this.getEvents();
     this.getPosts();
     this.getComments();
@@ -51,6 +63,32 @@ export default class App extends Component {
       this.setState({ users: response.data });
     });
   }
+
+  getLoggedInUser = () => {
+    axios.get("http://localhost:9000/get-logged-in").then(response => {
+      if (response.data !== null) {
+        let loggedInUser = response.data
+        this.setState({ loggedInUser });
+      } else {
+        let loggedInUser= {
+          _id: null,
+          name: null,
+          email: null,
+          mobileNumber: null,
+          gender: null,
+          field: null,
+          role: null,
+          isLoggedIn: null
+        }
+        console.log('AAAAAAAAAAAAAAAA');
+        this.setState({ loggedInUser });
+      }
+    });
+  };
+
+  checkLogin = loggedInUser => {
+    this.setState({ loggedInUser });
+  };
 
   //FIELDS FUNCTIONS
   //Please write your code below and only below your name
@@ -93,7 +131,15 @@ export default class App extends Component {
   }
 
   render() {
-    let { users, fields, posts, comments, pendings, events } = this.state;
+    let {
+      users,
+      fields,
+      posts,
+      comments,
+      pendings,
+      events,
+      loggedInUser
+    } = this.state;
     console.log(this.state);
     return (
       <div>
@@ -123,11 +169,19 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/LoginPage"
-            component={routerProps => <LoginPage {...routerProps} />}
+            component={routerProps => (
+              <LoginPage {...routerProps} checkLogin={this.checkLogin} />
+            )}
           ></Route>
           <Route
             path="/RegisterPage"
             component={routerProps => <RegisterPage {...routerProps} />}
+          ></Route>
+          <Route
+            path="/LogoutPage"
+            component={routerProps => (
+              <LogoutPage {...routerProps} loggedInUser={loggedInUser} getLoggedInUser={this.getLoggedInUser}/>
+            )}
           ></Route>
           <Route
             path="/UserDashboardPage"
@@ -155,7 +209,7 @@ export default class App extends Component {
           <Route
             path="/HrQuestionsPage"
             component={routerProps => (
-              <HrQuestionsPage {...routerProps} posts={posts} />
+              <HrQuestionsPage {...routerProps} loggedInUser={loggedInUser} />
             )}
           ></Route>
           <Route
@@ -166,7 +220,12 @@ export default class App extends Component {
             exact
             path="/"
             component={routerProps => (
-              <LandingPage {...routerProps} events={events} posts={posts} />
+              <LandingPage
+                {...routerProps}
+                events={events}
+                posts={posts}
+                loggedInUser={loggedInUser}
+              />
             )}
           ></Route>
           <Route
@@ -178,9 +237,7 @@ export default class App extends Component {
             component={routerProps => (
               <TechnicalQuestionsPage
                 {...routerProps}
-                posts={posts}
-                users={users}
-                comments={comments}
+                loggedInUser={loggedInUser}
               />
             )}
           ></Route>

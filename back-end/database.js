@@ -29,17 +29,17 @@ const fieldsSchema = new mongoose.Schema({
 });
 
 const postsSchema = new mongoose.Schema({
-    question: String,
-    answer: String,
-    field: String,
-    user_id: String
-})
+  question: String,
+  answer: String,
+  field: String,
+  user_id: String
+});
 
 const commentsSchema = new mongoose.Schema({
-    comment: String,
-    post_id: String,
-    user_id: String
-})
+  comment: String,
+  post_id: String,
+  user_id: String
+});
 
 const pendingSchema = new mongoose.Schema({
   question: String,
@@ -48,7 +48,7 @@ const pendingSchema = new mongoose.Schema({
 });
 
 const eventsSchema = new mongoose.Schema({
-  title: String,  
+  title: String,
   img_path: String,
   description: String,
   url: String
@@ -73,6 +73,56 @@ const getUsers = sendUsers => {
     } else {
       sendUsers(docs);
     }
+  });
+};
+
+const getLoggedInUser = sendUser => {
+  Users.findOne({ isLoggedIn: true }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("DOCCC: ", doc);
+      sendUser(doc);
+    }
+  });
+};
+
+const userCheckLogin = (sendUser, { email, password }) => {
+  Users.findOne(
+    { $and: [{ email }, { password }] },
+    { password: 0 },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        if (doc !== null) {
+          Users.updateOne(
+            { _id: doc._id },
+            { $set: { isLoggedIn: true } },
+            err => {
+              if (err) {
+                console.log(err);
+              } else {
+                sendUser(doc);
+              }
+            }
+          );
+        } else {
+          sendUser(doc);
+        }
+      }
+    }
+  );
+};
+
+const userLogout = (sendUser, _id) => {
+  Users.updateOne({ _id }, { $set: { isLoggedIn: false } }, (err, doc) => {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log('UPDATED: ', doc);
+      sendUser(doc)
+    };
   });
 };
 
@@ -111,10 +161,40 @@ const getPosts = sendPosts => {
   });
 };
 
+const getHrPosts = sendPosts => {
+  Posts.find({ field: "HR" }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      sendPosts(docs);
+    }
+  });
+};
+
+const getTechnicalPosts = sendPosts => {
+  Posts.find({ field: { $ne: "HR" } }, (err, docs) => {
+    if (err) {
+      console.log(err);
+    } else {
+      sendPosts(docs);
+    }
+  });
+};
+
 //COMMENTS FUNCTIONS
 //Please write your code below and only below your name
 const getComments = sendComments => {
   Comments.find({}, (err, docs) => {
+    if (err) {
+      console.log("ERR:", err);
+    } else {
+      sendComments(docs);
+    }
+  });
+};
+
+const getPostComments = (sendComments, post_id) => {
+  Comments.find({ post_id }, (err, docs) => {
     if (err) {
       console.log("ERR:", err);
     } else {
@@ -148,13 +228,18 @@ const getEvents = sendEvents => {
   });
 };
 
-
 //MODULE EXPORTS
 module.exports = {
   getUsers,
+  userCheckLogin,
+  userLogout,
+  getLoggedInUser,
   getPosts,
+  getHrPosts,
+  getTechnicalPosts,
   getEvents,
   getComments,
+  getPostComments,
   getPendings,
   getFields
 };

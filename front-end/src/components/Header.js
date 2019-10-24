@@ -10,9 +10,11 @@ export default class Header extends Component {
         <Link to="/HrQuestionsPage">Hr Questions</Link> |{" "}
         <Link to="/LoginPage">Login</Link> |{" "}
         <Link to="/RegisterPage">Register</Link>|{" "}
+        <Link to="/LogoutPage">Logout</Link> |{" "}
         <Link to="/UserProfilePage">User Profile</Link> |{" "}
         <Link to="/UserDashboardPage">User Dashboard</Link> |{" "}
         <Link to="/AdminDashboardPage">Admin Dashboard</Link> |{" "}
+      
       </div>
     );
   }
