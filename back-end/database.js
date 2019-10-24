@@ -364,7 +364,7 @@ module.exports = {
   getFields,
   addEvent,
   getQuestion,
-  askQuestion
+  askQuestion,
 
   //USER DASHBOARD
   getUserPosts,
