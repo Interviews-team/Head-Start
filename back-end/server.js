@@ -34,12 +34,23 @@ app.post(`/login-user`, (req, res) => {
   }, req.body);
 });
 
-app.put('/logout/:id', (req,res) => {
-  db.userLogout(updated => {res.json(updated)},req.params.id)
-})
-// app.post(`/add-user`, (req, res) => {
-//   db.addUser( users => res.json ( users ), req.body)
-// })
+app.put("/logout/:id", (req, res) => {
+  db.userLogout(updated => {
+    res.json(updated);
+  }, req.params.id);
+});
+
+app.post("/register-user", (req, res) => {
+  db.userRegister(registered => {
+    res.json(registered);
+  }, req.body);
+});
+
+app.post("/update-user", (req, res) => {
+  db.userUpdate(updated => {
+    res.json(updated);
+  }, req.body);
+});
 
 //FIELDS FUNCTIONS
 //Please write your code below and only below your name

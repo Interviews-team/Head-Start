@@ -120,6 +120,26 @@ const userLogout = (sendUser, _id) => {
     if (err) {
       console.log(err)
     } else {
+      sendUser(doc)
+    };
+  });
+};
+
+const userRegister = (sendUser, newUser) => {
+  Users.create(newUser, (err, doc) => {
+    if(err){
+      console.log(err)
+    } else {
+      sendUser(doc)
+    }
+  })
+}
+
+const userUpdate = (sendUser, {_id, name, email, mobileNumber, field}) => {
+  Users.updateOne({ _id }, { $set: { name, email, mobileNumber, field } }, (err, doc) => {
+    if (err) {
+      console.log(err)
+    } else {
       console.log('UPDATED: ', doc);
       sendUser(doc)
     };
@@ -210,7 +230,6 @@ const getPendings = sendPendings => {
     if (err) {
       console.log("ERR:", err);
     } else {
-      console.log(docs);
       sendPendings(docs);
     }
   });
@@ -234,12 +253,19 @@ module.exports = {
   userCheckLogin,
   userLogout,
   getLoggedInUser,
+  userRegister,
+  userUpdate,
+
   getPosts,
   getHrPosts,
   getTechnicalPosts,
+
   getEvents,
+
   getComments,
   getPostComments,
+
   getPendings,
+
   getFields
 };
