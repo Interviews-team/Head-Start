@@ -5,6 +5,7 @@ export default class PendingQuestion extends Component {
     return (
       <div>
         <h1>Pending Question</h1>
+        <p>{this.props.question}</p>
       </div>
     );
   }

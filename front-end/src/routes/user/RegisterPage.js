@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { link } from "fs";
-// import { useHistory } from "react-router-dom";
+
 export default class RegisterPage extends Component {
   state = {
     user: {
@@ -16,7 +15,6 @@ export default class RegisterPage extends Component {
     }
   };
 
-  // VALIDATE REGISTER USER FUNCTIONS - MOHAMMAD ALAA ALDEIN & HANI
   isFormValid = async event => {
     event.preventDefault();
     let name = event.target["name"].value;
@@ -39,10 +37,19 @@ export default class RegisterPage extends Component {
       password &&
       gender &&
       field
-    ){
+    ) {
       console.log("USER REG: ", this.state.user);
-      let user = {name, email, mobileNumber, password, gender, field, role: 'user', isLoggedIn: true}
-      await this.setState({user})
+      let user = {
+        name,
+        email,
+        mobileNumber,
+        password,
+        gender,
+        field,
+        role: "user",
+        isLoggedIn: true
+      };
+      await this.setState({ user });
       this.registerUser(this.state.user);
     }
   };

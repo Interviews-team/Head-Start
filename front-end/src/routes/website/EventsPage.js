@@ -16,6 +16,7 @@ export default class EventsPage extends Component {
       this.setState({ events: response.data });
     });
   }
+
   render() {
     return (
       <div>

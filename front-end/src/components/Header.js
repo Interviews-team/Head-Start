@@ -2,19 +2,28 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Header extends Component {
-  state = {};
   render() {
+    let role = this.props.loggedInUser.role;
     return (
       <div>
         <Link to="/TechnicalQuestionsPage">Technical Questions</Link> |{" "}
         <Link to="/HrQuestionsPage">Hr Questions</Link> |{" "}
-        <Link to="/LoginPage">Login</Link> |{" "}
-        <Link to="/RegisterPage">Register</Link>|{" "}
-        <Link to="/LogoutPage">Logout</Link> |{" "}
-        <Link to="/UserProfilePage">User Profile</Link> |{" "}
-        <Link to="/UserDashboardPage">User Dashboard</Link> |{" "}
-        <Link to="/AdminDashboardPage">Admin Dashboard</Link> |{" "}
-      
+        {role === null ? (
+          <>
+            <Link to="/LoginPage">Login</Link> |{" "}
+            <Link to="/RegisterPage">Register</Link> |{" "}
+          </>
+        ) : role === "user" ? (
+          <>
+            <Link to="/UserProfilePage">User Profile</Link> |{" "}
+            <Link to="/UserDashboardPage">User Dashboard</Link> |{" "}
+          </>
+        ) : (
+          <>
+            <Link to="/AdminDashboardPage">Admin Dashboard</Link> |{" "}
+          </>
+        )}
+        {role === null ? null : <Link to="/LogoutPage">Logout</Link>}
       </div>
     );
   }

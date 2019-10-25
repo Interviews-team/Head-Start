@@ -20,13 +20,12 @@ export default class TechnicalQuestionsPage extends Component {
   };
 
   render() {
-    // console.log("PROPS", this.props);
-    let { role, _id } = this.props.loggedInUser;
+    let { role } = this.props.loggedInUser;
     return (
       <div>
         <h1>Technical Question</h1>
         {role === "techAdmin" ? (
-          <Link to={{ pathname: "/AddQuestionPage", state: { user_id: _id } }}>
+          <Link to="/AddPostPage" >
             add post
           </Link>
         ) : null}

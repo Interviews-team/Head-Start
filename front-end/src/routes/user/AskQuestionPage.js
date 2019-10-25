@@ -1,23 +1,26 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
+import axios from 'axios'
 
 export default class AskQuestionPage extends Component {
-  state = {
-    newQuestion: {},
-    user_name: ""
-  };
-  askQuestion = e => {
-    e.preventDefault();
-    let newQuestion = {
-      question: e.target["question"].value,
-      field: e.target["feild"].value
+  
+  askQuestion = event => {
+    event.preventDefault();
+    let question = {
+      question: event.target["question"].value,
+      field: event.target["field"].value,
+      user_id: this.props.loggedInUser._id
     };
-    this.props.askQuestion(newQuestion);
-    this.setState({ newQuestion: newQuestion });
-    //take user id with you
+
+    axios
+      .post("http://localhost:9000/ask-question", question)
+      .catch(err => console.log(err));
+
     this.props.history.push("/");
   };
 
   render() {
+    if(this.props.loggedInUser.role === null) {return <Redirect to='/LoginPage' /> }
     return (
       <div className="container">
         <div className="row">
@@ -32,11 +35,8 @@ export default class AskQuestionPage extends Component {
 
               <label>Choose your field</label>
               <br />
-              <select name="feild" defaultValue="Defualt">
-                <option value="Defualt" disabled>
-                  Choose your field
-                </option>
-                <option value="software">Software</option>
+              <select name="field" >
+                <option value="software" defaultValue>Software</option>
                 <option value="multi-Media"> Multi Media </option>
                 <option value="computer-engineer"> Computer Engineer</option>
               </select>

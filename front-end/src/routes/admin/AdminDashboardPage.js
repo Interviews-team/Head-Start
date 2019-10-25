@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Event from "../../components/Event";
-import PendingAdmin from "../../components/PendingAdmin";
-import PendingQuestion from "../../components/PendingQuestion";
-import User from "../../components/User";
-import Post from "../../components/Post";
+// import Event from "../../components/Event";
+// import PendingAdmin from "../../components/PendingAdmin";
+// import PendingQuestion from "../../components/PendingQuestion";
+// import User from "../../components/User";
+// import Post from "../../components/Post";
 
 export default class AdminDashboardPage extends Component {
   render() {

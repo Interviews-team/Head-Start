@@ -5,7 +5,6 @@ import Post from "../../components/Post";
 
 export default class LandingPage extends Component {
   render() {
-    console.log(this.props);
     let { events, posts, loggedInUser } = this.props;
     let randomEvents = events.slice(0, 5);
     let eventsToShow = randomEvents.map(event => (
@@ -31,7 +30,6 @@ export default class LandingPage extends Component {
         }
       }
     }
-    console.log("RANDOM POSTS: ", randomPosts);
     let postsToShow = randomPosts.map(post => (
       <Post
         key={post._id}

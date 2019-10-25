@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios"
 
 export default class LoginPage extends Component {
@@ -16,7 +17,6 @@ export default class LoginPage extends Component {
      .then(res => {
        if (res.data !== null) {
          this.props.checkLogin(res.data)
-         console.log("REDIRECT");
          this.props.history.push('/')
        }
      })
@@ -35,6 +35,7 @@ export default class LoginPage extends Component {
          </div>
          <button type="submit" className="btn btn-primary">Login</button>
        </form>
+        <Link to='/registerPage'>if you do not have an account, create one...</Link>
      </div>
    );
  }
