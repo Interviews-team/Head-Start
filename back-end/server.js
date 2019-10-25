@@ -80,6 +80,10 @@ app.get(`/get-post-comments/:id`, (req, res) => {
   db.getPostComments(comments => res.json(comments), req.params.id);
 });
 
+app.post("/add-comment", (req, res) => {
+  db.addComment(status => res.json(status), req.body);
+});
+
 //PENDINGS FUNCTIONS
 //Please write your code below and only below your name
 app.get(`/get-pendings`, (req, res) => {
@@ -92,51 +96,46 @@ app.get(`/get-events`, (req, res) => {
   db.getEvents(events => res.json(events));
 });
 
-
-app.post(`/addEvent`, (req, res) => {
-  let event = req.body;
-  db.addEvent(event => {
-    res.json(event);
-  }, event);
+app.post(`/add-event`, req => {
+  db.addEvent(req.body);
 });
 
 //for ask question
 //askQuestion={this.askQuestion}
-app.post(`/askQuestion`, (req, res) => {
-  db.askQuestion(question => {
-    res.json(question);
-  }, req.body);
-});
-
-
+app.post(`/ask-question`, req => db.askQuestion(req.body));
 
 //USER DASHBOARD
 // GET POSTS
-app.post('/getPosts', (req, res) => {
+app.post("/get-user-posts", (req, res) => {
   db.getUserPosts(post => {
-    res.json(post)
-  }, req.body)
- });
- // DELETE PSOT
- app.post("/deletePost", (req, res) => {
-  console.log("REQ.BODY", req.body)
-  db.deleteUserPost(post => {
-    res.json(post)
-  }, req.body)
- });
- // GET COMMENTS
- app.post('/getComments', (req, res) => {
+    res.json(post);
+  }, req.body);
+});
+
+// GET COMMENTS
+app.post("/get-user-comments", (req, res) => {
   db.getUserComments(comment => {
-    res.json(comment)
-  }, req.body)
- });
- // DELETE COMMENT
- app.post("/deleteComment", (req, res) => {
-  console.log("REQ.BODY", req.body)
-  db.deleteUserComment(comment => {
-    res.json(comment)
-  }, req.body)
- });
+    res.json(comment);
+  }, req.body);
+});
+//GET PENDINGS
+app.post("/get-user-pending-questions", (req, res) => {
+  db.getUserPendings(pending => {
+    res.json(pending);
+  }, req.body);
+});
+// DELETE COMMENT
+app.post("/delete-user-comment", (req, res) => {
+  db.deleteUserComment(comments => {
+    res.json(comments);
+  }, req.body);
+});
+
+app.post("/add-post", req => {
+  db.addPost(req.body);
+});
+
+app.post("/application", req => db.application(req.body));
 
 const PORT = process.env.PORT || 9000;
 

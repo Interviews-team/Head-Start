@@ -65,7 +65,7 @@ const Events = mongoose.model("events", eventsSchema);
 //QUERIES FUNCTIONS
 
 //USERS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL USERS
 const getUsers = sendUsers => {
   Users.find({}, { password: 0 }, (err, docs) => {
     if (err) {
@@ -76,17 +76,18 @@ const getUsers = sendUsers => {
   });
 };
 
+//GET LOGGED IN USER'S DATA
 const getLoggedInUser = sendUser => {
   Users.findOne({ isLoggedIn: true }, (err, doc) => {
     if (err) {
       console.log(err);
     } else {
-      console.log("DOCCC: ", doc);
       sendUser(doc);
     }
   });
 };
 
+//CHECK FOR THE LOGGED IN USER
 const userCheckLogin = (sendUser, { email, password }) => {
   Users.findOne(
     { $and: [{ email }, { password }] },
@@ -115,50 +116,46 @@ const userCheckLogin = (sendUser, { email, password }) => {
   );
 };
 
+//LOGOUT THE LOGGED IN USER
 const userLogout = (sendUser, _id) => {
   Users.updateOne({ _id }, { $set: { isLoggedIn: false } }, (err, doc) => {
     if (err) {
       console.log(err);
     } else {
-      sendUser(doc)
-    };
+      sendUser(doc);
+    }
   });
 };
 
+//REGISTER NEW USER
 const userRegister = (sendUser, newUser) => {
   Users.create(newUser, (err, doc) => {
-    if(err){
-      console.log(err)
-    } else {
-      sendUser(doc)
-    }
-  })
-}
-
-const userUpdate = (sendUser, {_id, name, email, mobileNumber, field}) => {
-  Users.updateOne({ _id }, { $set: { name, email, mobileNumber, field } }, (err, doc) => {
     if (err) {
-      console.log(err)
+      console.log(err);
     } else {
-      console.log('UPDATED: ', doc);
-      sendUser(doc)
-    };
+      sendUser(doc);
+    }
   });
 };
 
-// const addUser = (sendUsers, user) => {
-//   let {name, email, password, mobileNumber, gender, field, role, isLoggedIn} = user
-//   Users.create({name, email, password, mobileNumber, gender, field, role, isLoggedIn}, err => {
-//     if(err){
-//       console.log(err);
-//     } else {
-//       getUsers(sendUsers)
-//     }
-//   })
-// }
+//UPDATE USER DATA
+const userUpdate = (sendUser, { _id, name, email, mobileNumber, field }) => {
+  Users.updateOne(
+    { _id },
+    { $set: { name, email, mobileNumber, field } },
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log("UPDATED: ", doc);
+        sendUser(doc);
+      }
+    }
+  );
+};
 
 //FIELDS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL FIELDS
 const getFields = sendFields => {
   Fields.find({}, (err, docs) => {
     if (err) {
@@ -170,7 +167,7 @@ const getFields = sendFields => {
 };
 
 //POSTS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL POSTS
 const getPosts = sendPosts => {
   Posts.find({}, (err, docs) => {
     if (err) {
@@ -181,6 +178,7 @@ const getPosts = sendPosts => {
   });
 };
 
+//GET ALL HR POSTS
 const getHrPosts = sendPosts => {
   Posts.find({ field: "HR" }, (err, docs) => {
     if (err) {
@@ -191,6 +189,7 @@ const getHrPosts = sendPosts => {
   });
 };
 
+//GET ALL TECHNICAL QUESTIONS
 const getTechnicalPosts = sendPosts => {
   Posts.find({ field: { $ne: "HR" } }, (err, docs) => {
     if (err) {
@@ -201,8 +200,25 @@ const getTechnicalPosts = sendPosts => {
   });
 };
 
+//GET POSTS RELATED FOR A SPECIFIC USER
+const getUserPosts = (sendPosts, { _id }) => {
+  Posts.find({ user_id: _id }, (err, docs) => {
+    if (err) {
+      console.log("err");
+    } else {
+      sendPosts(docs);
+    }
+  });
+};
+
+const addPost = post => {
+  Posts.create(post, err => {
+    if (err) console.log(err);
+  });
+};
+
 //COMMENTS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL COMMENTS
 const getComments = sendComments => {
   Comments.find({}, (err, docs) => {
     if (err) {
@@ -213,6 +229,7 @@ const getComments = sendComments => {
   });
 };
 
+//GET ALL COMMENTS RELATED TO SPECIFIC POST
 const getPostComments = (sendComments, post_id) => {
   Comments.find({ post_id }, (err, docs) => {
     if (err) {
@@ -223,8 +240,40 @@ const getPostComments = (sendComments, post_id) => {
   });
 };
 
+//GET ALL COMMENTS BY SPECIFIC USER
+const getUserComments = (sendComments, { _id }) => {
+  Comments.find({ user_id: _id }, (err, docs) => {
+    if (err) {
+      console.log("err");
+    } else {
+      sendComments(docs);
+    }
+  });
+};
+
+//DELETE SPECIFIC COMMENT COMMENTED BY THIS USER
+const deleteUserComment = (sendComments, { _id, user_id }) => {
+  Comments.deleteOne({ _id }, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getUserComments(sendComments, { _id: user_id });
+    }
+  });
+};
+
+const addComment = (sendStatus, comment) => {
+  Comments.create(comment, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      sendStatus(doc);
+    }
+  });
+};
+
 //PENDINGS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL PENDINGS
 const getPendings = sendPendings => {
   Pendings.find({}, (err, docs) => {
     if (err) {
@@ -235,8 +284,29 @@ const getPendings = sendPendings => {
   });
 };
 
+//GET ALL QUESTIONS PENDING FOR SPECIFIC USER
+const getUserPendings = (sendPendings, { _id }) => {
+  Pendings.find(
+    { $and: [{ question: { $ne: null } }, { user_id: _id }] },
+    (err, docs) => {
+      if (err) {
+        console.log("err");
+      } else {
+        sendPendings(docs);
+      }
+    }
+  );
+};
+
+//SUBMITTED APPLICATION
+const application = ({ _id }) => {
+  Pendings.create({ user_id: _id }, err => {
+    if (err) console.log(err);
+  });
+};
+
 //EVENTS FUNCTIONS
-//Please write your code below and only below your name
+//GET ALL EVENTS
 const getEvents = sendEvents => {
   Events.find({}, (err, docs) => {
     if (err) {
@@ -246,17 +316,15 @@ const getEvents = sendEvents => {
     }
   });
 };
-const addEvent = (sendEvent, event) => {
-  let { title, img_path, url, description } = event;
-  Events.create({ title, img_path, url, description }, err => {
-    if (err) {
-      console.log(err);
-    } else {
-      getEvent(sendEvent);
-    }
+
+//ADD NEW EVENT
+const addEvent = event => {
+  Events.create(event, err => {
+    if (err) console.log(err);
   });
 };
-// ask question function
+
+//QUESTION FUNCTIONS
 const getQuestion = sendQuestion => {
   Pendings.find({}, (err, docs) => {
     if (err) {
@@ -266,80 +334,12 @@ const getQuestion = sendQuestion => {
     }
   });
 };
-const askQuestion = (sendQuestion, question) => {
-  Pendings.insertMany(question, err => {
-    if (err) {
-      console.log(err);
-    } else {
-      getQuestion(sendQuestion);
-    }
+const askQuestion = question => {
+  console.log('QUESTION: ', question);
+  Pendings.create(question, err => {
+    if (err) console.log(err);
   });
 };
-
-//USER DASHBOARD
-// GET POSTS
-let getUserPosts = (cb, obj) => {
-  console.log(obj)
-  Posts.find({ user_id: obj._id },
-    function (err, posts) {
-      if (err) {
-        console.log('err')
-        cb('err')
-      }
-      else {
-        console.log(posts)
-        cb(posts)
-      }
-    })
- }
- // DELETE POST
- let deleteUserPost = (cb, obj) => {
-  console.log("OBJ: ", obj.id)
-  Posts.remove({ _id: obj.id },
-    // Posts.find({ user_id: obj._id },
-    function (err, posts) {
-      if (err) {
-        console.log('err')
-        cb('err')
-      }
-      else {
-        console.log(posts)
-        cb(posts)
-      }
-    }
-    )}
- // GET COMMENT
- let getUserComments = (cb, obj) => {
-  console.log(obj)
-  Comments.find({ user_id: obj._id },
-    function (err, comments) {
-      if (err) {
-        console.log('err')
-        cb('err')
-      }
-      else {
-        console.log(comments)
-        cb(comments)
-      }
-    })
- }
- // DELETE COMMENT
- let deleteUserComment = (cb, obj) => {
-  console.log("OBJ: ", obj.id)
-  Comments.remove({ _id: obj.id },
-    // Comment.find({ user_id: obj._id },
-    function (err, comments) {
-      if (err) {
-        console.log('err')
-        cb('err')
-      }
-      else {
-        console.log(comments)
-        cb(comments)
-      }
-    }
-    )}
- 
 
 //MODULE EXPORTS
 module.exports = {
@@ -353,23 +353,25 @@ module.exports = {
   getPosts,
   getHrPosts,
   getTechnicalPosts,
+  addPost,
 
   getEvents,
 
   getComments,
   getPostComments,
+  addComment,
 
   getPendings,
+  application,
 
   getFields,
   addEvent,
   getQuestion,
-  askQuestion
+  askQuestion,
 
   //USER DASHBOARD
   getUserPosts,
-  deleteUserPost,
   getUserComments,
-  deleteUserComment
-
+  deleteUserComment,
+  getUserPendings
 };

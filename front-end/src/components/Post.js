@@ -8,7 +8,6 @@ export default class Post extends Component {
       answer,
       field,
       user_id,
-      page,
       post_id,
       loggedInUser
     } = this.props;

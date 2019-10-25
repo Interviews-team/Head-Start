@@ -20,7 +20,7 @@ export default class HrQuestionsPage extends Component {
   };
 
   render() {
-    let { role, _id } = this.props.loggedInUser;
+    let { role } = this.props.loggedInUser;
     let hrPosts = this.state.posts.map(post => (
       <Post
         key={post._id}
@@ -36,9 +36,7 @@ export default class HrQuestionsPage extends Component {
     return (
       <div>
         {role === "hrAdmin" ? (
-          <Link to={{ pathname: "/AddQuestionPage", state: { user_id: _id } }}>
-            add post
-          </Link>
+          <Link to="/AddPostPage">add post</Link>
         ) : null}
         <h1>HrQuestion</h1>
         <br />

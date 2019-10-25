@@ -22,7 +22,7 @@ export default class UserProfilePage extends Component {
   updateProfile = event => {
     event.preventDefault();
 
-    let _id = this.props.loggedInUser._id
+    let _id = this.props.loggedInUser._id;
     let name = event.target["name"].value;
     let email = event.target["email"].value;
     let mobileNumber = event.target["mobileNumber"].value;
@@ -33,22 +33,22 @@ export default class UserProfilePage extends Component {
       email !== this.state.user.email ||
       mobileNumber !== this.state.user.mobileNumber ||
       field !== this.state.user.field
-    ){
-      let user = {_id, name, email, mobileNumber, field}
-      axios.post(`http://localhost:9000/update-user`, user)
+    ) {
+      let user = { _id, name, email, mobileNumber, field };
+      axios.post(`http://localhost:9000/update-user`, user);
     }
   };
 
   render() {
     let {
-      _id,
+      // _id,
       name,
       email,
       mobileNumber,
-      gender,
-      field,
-      role,
-      isLoggedIn
+      // gender,
+      field
+      // role,
+      // isLoggedIn
     } = this.state.user;
     return (
       <div>
@@ -62,27 +62,17 @@ export default class UserProfilePage extends Component {
               <th>Field</th>
             </tr>
           </thead>
-          </table>
-          
-              <form onSubmit={this.updateProfile}>
-                
-                  <input defaultValue={name} name="name" />
-                
-                
-                  <input defaultValue={email} name="email" />
-                
-                
-                  <input defaultValue={mobileNumber} name="mobileNumber" />
-                
-                
-                  <input defaultValue={field} name="field" />
-                
-                <button type="submit" className="btn btn-primary">
-                  Update
-                </button>
-              </form>
-           
-        
+        </table>
+
+        <form onSubmit={this.updateProfile}>
+          <input defaultValue={name} name="name" />
+          <input defaultValue={email} name="email" />
+          <input defaultValue={mobileNumber} name="mobileNumber" />
+          <input defaultValue={field} name="field" />
+          <button type="submit" className="btn btn-primary">
+            Update
+          </button>
+        </form>
       </div>
     );
   }

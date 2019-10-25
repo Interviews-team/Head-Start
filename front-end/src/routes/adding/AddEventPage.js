@@ -1,31 +1,34 @@
 import React, { Component } from "react";
-// import image from "../../Images/event.jpg"
+import axios from "axios";
 
 export default class AddEventPage extends Component {
-  state = {
-    title: "",
-    img_path: "nullForTest",
-    url: "",
-    description: ""
-  };
-  addNewEvent = event => {
-    let newEvent = {
-      title: event.target["title"].value,
-      img_path: event.target["img_path"].value,
-      url: event.target["url"].value,
-      description: event.target["description"].value
+  addEvent = e => {
+    e.preventDefault();
+
+    let event = {
+      title: e.target["title"].value,
+      img_path: e.target["img_path"].files[0].name,
+      url: e.target["url"].value,
+      description: e.target["description"].value
     };
-    this.props.addEvent(newEvent);
-    this.setState({ newEvent });
-    this.props.history.push("/EventsPage");
+
+    axios
+      .post("http://localhost:9000/add-event", event)
+      .catch(err => console.log(err));
+
+    this.props.history.push("/AdminDashboardPage");
   };
+
+  // consoleLOg = event => {
+  //   console.log(event.target.files[0].name);
+  // };
 
   render() {
     return (
       <div className="container">
         <h1>Add Event</h1>
         <img alt=""></img>
-        <form onSubmit={this.addNewEvent}>
+        <form onSubmit={this.addEvent}>
           <div className="custom-file">
             <input
               type="file"
@@ -34,6 +37,7 @@ export default class AddEventPage extends Component {
               name="img_path"
               accept="image/*"
               required
+              // onChange={this.consoleLOg}
             />
             <label className="custom-file-label" htmlFor="validatedCustomFile">
               Choose file...
