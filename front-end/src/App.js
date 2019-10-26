@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //importing components
 import Header from "./components/Header";
@@ -49,7 +49,9 @@ export default class App extends Component {
     this.getLoggedInUser();
     this.getEvents();
     this.getPosts();
-    console.log('Done By:\n Ahmad Nsour\n Ahmad Ghzawi\n Hani Abu Alinain\n Mohammad Alaa Aldein');
+    console.log(
+      "Done By:\n Ahmad Nsour\n Ahmad Ghzawi\n Hani Abu Alinain\n Mohammad Alaa Aldein"
+    );
   }
 
   //USERS FUNCTIONS
@@ -101,9 +103,7 @@ export default class App extends Component {
     return (
       <div>
         <Router>
-          <Header loggedInUser={loggedInUser}/>
-
-          <Link to="/">Home</Link>
+          <Header loggedInUser={loggedInUser} />
           <Route
             exact
             path="/AddEventPage"

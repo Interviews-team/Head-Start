@@ -14,7 +14,7 @@ export default class RegisterPage extends Component {
       isLoggedIn: null
     }
   };
-
+// check if the email is already exist 
   isFormValid = async event => {
     event.preventDefault();
     let name = event.target["name"].value;
@@ -63,12 +63,11 @@ export default class RegisterPage extends Component {
       .catch(error => console.log(error));
     this.props.history.push("/");
   };
-
   // END VALIDATE REGISTER FUNCTIONS
   render() {
     return (
-      <div>
-        <h1>Register</h1>
+      <div className="container w-25 mt-5">
+        <h1>Register Form</h1>
         <form onSubmit={this.isFormValid}>
           <div className="form-group">
             <input
@@ -91,7 +90,7 @@ export default class RegisterPage extends Component {
           <div className="form-group">
             <input
               name="mobileNumber"
-              type="number"
+              type="text"
               className="form-control"
               id="mobileNumber"
               placeholder="Mobile Number"
@@ -136,3 +135,4 @@ export default class RegisterPage extends Component {
     );
   }
 }
+//need to edit option based on DB
