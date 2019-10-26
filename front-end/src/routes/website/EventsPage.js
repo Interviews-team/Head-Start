@@ -20,19 +20,22 @@ export default class EventsPage extends Component {
   render() {
     return (
       <div>
-        <h1> Events Page </h1>
-        {this.state.events.map(event => {
-          return (
-            <Event
-              key={event._id}
-              title={event.title}
-              img={event.img_path}
-              description={event.description}
-              url={event.url}
-              page="EventsPage"
-            />
-          );
-        })}
+        <div className="container">
+          <div className="row">
+            {this.state.events.map(event => {
+              return (
+                <Event
+                  key={event._id}
+                  title={event.title}
+                  img={event.img_path}
+                  description={event.description}
+                  url={event.url}
+                  page="EventsPage"
+                />
+              );
+            })}
+          </div>
+        </div>
       </div>
     );
   }

@@ -42,10 +42,7 @@ export default class HrQuestionsPage extends Component {
     ));
     return (
       <div>
-        {role === "hrAdmin" ? (
-          <Link to="/AddPostPage">add post</Link>
-        ) : null}
-        <h1>HrQuestion</h1>
+        {role === "hrAdmin" ? <Link to="/AddPostPage">add post</Link> : null}
         <br />
         <br />
         {hrPosts}
