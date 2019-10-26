@@ -44,6 +44,13 @@ const commentsSchema = new mongoose.Schema({
 const pendingSchema = new mongoose.Schema({
   question: String,
   field: String,
+
+  name: String,
+  email: String,
+  mobileNumber: String,
+  gender: String,
+  field: String,
+  role: String,
   user_id: String
 });
 
@@ -147,12 +154,21 @@ const userUpdate = (sendUser, { _id, name, email, mobileNumber, field }) => {
       if (err) {
         console.log(err);
       } else {
-        console.log("UPDATED: ", doc);
         sendUser(doc);
       }
     }
   );
 };
+
+const addAdmin = (sendUsers, admin) => {
+  Users.create( admin, err => {
+    if(err){
+      console.log(err);
+    } else {
+      getUsers(sendUsers)
+    }
+  })
+}
 
 //FIELDS FUNCTIONS
 //GET ALL FIELDS
@@ -165,6 +181,16 @@ const getFields = sendFields => {
     }
   });
 };
+
+const addField = (sendFields, {field}) => {
+  Fields.create({name: field}, err => {
+    if(err){
+      console.log(err);
+    } else {
+      getFields(sendFields)
+    }
+  })
+}
 
 //POSTS FUNCTIONS
 //GET ALL POSTS
@@ -214,6 +240,36 @@ const getUserPosts = (sendPosts, { _id }) => {
 const addPost = post => {
   Posts.create(post, err => {
     if (err) console.log(err);
+  });
+};
+
+const deleteUserPost = (sendPosts, { _id, user_id }) => {
+  Posts.deleteOne({ _id }, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getUserPosts(sendPosts, { _id: user_id });
+    }
+  });
+};
+
+const deleteHrPost = (sendPosts, { _id }) => {
+  Posts.deleteOne({ _id }, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getHrPosts(sendPosts);
+    }
+  });
+};
+
+const deleteTechPost = (sendPosts, { _id }) => {
+  Posts.deleteOne({ _id }, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getTechnicalPosts(sendPosts);
+    }
   });
 };
 
@@ -277,7 +333,7 @@ const addComment = (sendStatus, comment) => {
 const getPendings = sendPendings => {
   Pendings.find({}, (err, docs) => {
     if (err) {
-      console.log("ERR:", err);
+      console.log(err);
     } else {
       sendPendings(docs);
     }
@@ -290,7 +346,7 @@ const getUserPendings = (sendPendings, { _id }) => {
     { $and: [{ question: { $ne: null } }, { user_id: _id }] },
     (err, docs) => {
       if (err) {
-        console.log("err");
+        console.log(err);
       } else {
         sendPendings(docs);
       }
@@ -298,9 +354,19 @@ const getUserPendings = (sendPendings, { _id }) => {
   );
 };
 
+const getPendingAdmins = sendPendings => {
+  Pendings.find({question: null}, (err, docs)=>{
+    if(err){
+      console.log(err);
+    } else {
+      sendPendings(docs)
+    }
+  })
+}
+
 //SUBMITTED APPLICATION
-const application = ({ _id }) => {
-  Pendings.create({ user_id: _id }, err => {
+const application = ({_id, name, email, mobileNumber, field, role}) => {
+  Pendings.create({name, email, mobileNumber, field, role, user_id: _id}, err => {
     if (err) console.log(err);
   });
 };
@@ -349,11 +415,15 @@ module.exports = {
   getLoggedInUser,
   userRegister,
   userUpdate,
+  addAdmin,
 
   getPosts,
   getHrPosts,
   getTechnicalPosts,
   addPost,
+  deleteUserPost,
+  deleteHrPost,
+  deleteTechPost,
 
   getEvents,
 
@@ -362,6 +432,7 @@ module.exports = {
   addComment,
 
   getPendings,
+  getPendingAdmins,
   application,
 
   getFields,
@@ -369,7 +440,8 @@ module.exports = {
   getQuestion,
   askQuestion,
 
-  //USER DASHBOARD
+  addField,
+
   getUserPosts,
   getUserComments,
   deleteUserComment,

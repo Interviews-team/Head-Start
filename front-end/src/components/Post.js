@@ -9,39 +9,71 @@ export default class Post extends Component {
       field,
       user_id,
       post_id,
-      loggedInUser
+      loggedInUser,
+      page
     } = this.props;
 
     return (
-      <Link
-        to={
-          loggedInUser.role === null
-            ? { pathname: "/LoginPage" }
-            : {
-                pathname: "/PostPage",
-                state: {
-                  question,
-                  answer,
-                  field,
-                  user_id,
-                  post_id,
-                  loggedInUser
+      <div>
+        <Link
+          to={
+            loggedInUser.role === null
+              ? { pathname: "/LoginPage" }
+              : {
+                  pathname: "/PostPage",
+                  state: {
+                    question,
+                    answer,
+                    field,
+                    user_id,
+                    post_id,
+                    loggedInUser
+                  }
                 }
-              }
-        }
-        style={{ textDecoration: "none" }}
-      >
-        <div>
+          }
+          style={{ textDecoration: "none" }}
+        >
           <h3>{question}</h3>
-          {loggedInUser.role === null ? null : (
-            <div>
-              <h4>{answer}</h4>
-              <p>{field}</p>
-              <p>{post_id}</p>
-            </div>
-          )}
-        </div>
-      </Link>
+        </Link>
+        {loggedInUser.role === null ? null : (
+          <div>
+            <h4>{answer}</h4>
+            <p>{field}</p>
+            <p>{post_id}</p>
+
+            {loggedInUser.role === "hrAdmin" &&
+            field === "HR" &&
+            page !== "LandingPage" ? (
+              <button
+                className="btn btn-danger"
+                onClick={() => this.props.deletePost(post_id)}
+              >
+                X
+              </button>
+            ) : null}
+            {loggedInUser.role === "techAdmin" &&
+            field !== "HR" &&
+            page !== "LandingPage" ? (
+              <button
+                className="btn btn-danger"
+                onClick={() => this.props.deletePost(post_id)}
+              >
+                X
+              </button>
+            ) : null}
+            {loggedInUser.role === "owner" &&
+            field !== "HR" &&
+            page !== "LandingPage" ? (
+              <button
+                className="btn btn-danger"
+                onClick={() => this.props.deletePost(post_id)}
+              >
+                X
+              </button>
+            ) : null}
+          </div>
+        )}
+      </div>
     );
   }
 }

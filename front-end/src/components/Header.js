@@ -13,16 +13,17 @@ export default class Header extends Component {
             <Link to="/LoginPage">Login</Link> |{" "}
             <Link to="/RegisterPage">Register</Link> |{" "}
           </>
-        ) : role === "user" ? (
+        ) : (
           <>
             <Link to="/UserProfilePage">User Profile</Link> |{" "}
             <Link to="/UserDashboardPage">User Dashboard</Link> |{" "}
           </>
-        ) : (
+        )} 
+        { role !== 'user' && role !== null ? (
           <>
             <Link to="/AdminDashboardPage">Admin Dashboard</Link> |{" "}
           </>
-        )}
+        ) : null}
         {role === null ? null : <Link to="/LogoutPage">Logout</Link>}
       </div>
     );

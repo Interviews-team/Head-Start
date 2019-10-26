@@ -19,6 +19,12 @@ export default class HrQuestionsPage extends Component {
       .catch(err => console.log(err));
   };
 
+  deletePost = _id => {
+    axios.post('http://localhost:9000/delete-hr-post', {_id})
+    .then (res => this.setState({posts: res.data}))
+  };
+
+
   render() {
     let { role } = this.props.loggedInUser;
     let hrPosts = this.state.posts.map(post => (
@@ -30,6 +36,7 @@ export default class HrQuestionsPage extends Component {
         field={post.field}
         post_id={post._id}
         loggedInUser={this.props.loggedInUser}
+        deletePost={this.deletePost}
         page="HrQuestionsPage"
       />
     ));

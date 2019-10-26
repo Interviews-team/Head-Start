@@ -53,6 +53,12 @@ export default class UserDashboardPage extends Component {
       });
   }
 
+  deletePost = _id => {
+    let user_id = this.props.loggedInUser._id;
+    axios.post('http://localhost:9000/delete-user-post', {_id, user_id})
+    .then (res => this.setState({posts: res.data}))
+  };
+
   render() {
     console.log(this.state.comments);
     let { posts, comments, pendings } = this.state;
@@ -66,6 +72,7 @@ export default class UserDashboardPage extends Component {
         field={post.field}
         post_id={post._id}
         loggedInUser={this.props.loggedInUser}
+        deletePost={this.deletePost}
         page="HrQuestionsPage"
       />
     ));
