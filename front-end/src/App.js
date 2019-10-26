@@ -120,7 +120,7 @@ export default class App extends Component {
 
           <Route
             path="/AdminDashboardPage"
-            component={routerProps => <AdminDashboardPage {...routerProps} />}
+            component={routerProps => <AdminDashboardPage {...routerProps} loggedInUser={loggedInUser} />}
           ></Route>
           <Route
             path="/AskQuestionPage"
@@ -162,7 +162,7 @@ export default class App extends Component {
           <Route
             path="/UserProfilePage"
             component={routerProps => (
-              <UserProfilePage {...routerProps} loggedInUser={loggedInUser} />
+              <UserProfilePage {...routerProps} loggedInUser={loggedInUser} getLoggedInUser={this.getLoggedInUser}/>
             )}
           ></Route>
 

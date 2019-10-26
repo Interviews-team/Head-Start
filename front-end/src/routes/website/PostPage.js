@@ -32,6 +32,10 @@ export default class PostPage extends Component {
 
   }
 
+  deletePost(){
+    this.props.history.push()
+  }
+
   render() {
     let {
       question,
@@ -63,6 +67,7 @@ export default class PostPage extends Component {
         {field}
         <h3>Post User Id :</h3>
         {user_id}
+        {/* <button onClick={()=>this.deletePost()} className='btn btn-danger'>X</button> */}
         <h3>Post Comments :</h3>
         {comments}
         <form onSubmit={this.addComment}>

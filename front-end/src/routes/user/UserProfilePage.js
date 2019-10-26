@@ -4,21 +4,25 @@ import axios from "axios";
 export default class UserProfilePage extends Component {
   state = {
     user: {
-      _id: null,
       name: null,
       email: null,
       mobileNumber: null,
-      gender: null,
-      field: null,
-      role: null,
-      isLoggedIn: null
+      field: null
     }
   };
 
   componentDidMount() {
-    let user = this.props.loggedInUser;
-    this.setState({ user });
+    let { name, email, mobileNumber, field } = this.props.loggedInUser;
+    this.setState({
+      user: {
+        name,
+        email,
+        mobileNumber,
+        field
+      }
+    });
   }
+
   updateProfile = event => {
     event.preventDefault();
 
@@ -35,21 +39,16 @@ export default class UserProfilePage extends Component {
       field !== this.state.user.field
     ) {
       let user = { _id, name, email, mobileNumber, field };
-      axios.post(`http://localhost:9000/update-user`, user);
+      axios.post(`http://localhost:9000/update-user`, user).then(res => {
+        this.props.getLoggedInUser()
+      });
     }
   };
 
   render() {
-    let {
-      // _id,
-      name,
-      email,
-      mobileNumber,
-      // gender,
-      field
-      // role,
-      // isLoggedIn
-    } = this.state.user;
+    let { name, email, mobileNumber, field } = this.state.user;
+    console.log(this.state.user);
+
     return (
       <div>
         <h1>User Profile</h1>

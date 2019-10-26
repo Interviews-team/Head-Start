@@ -19,16 +19,17 @@ export default class TechnicalQuestionsPage extends Component {
       .catch(err => console.log(err));
   };
 
+  deletePost = _id => {
+    axios.post('http://localhost:9000/delete-tech-post', {_id})
+    .then (res => this.setState({posts: res.data}))
+  };
+
   render() {
     let { role } = this.props.loggedInUser;
     return (
       <div>
         <h1>Technical Question</h1>
-        {role === "techAdmin" ? (
-          <Link to="/AddPostPage" >
-            add post
-          </Link>
-        ) : null}
+        {role === "techAdmin" ? <Link to="/AddPostPage">add post</Link> : null}
         <br />
         {this.state.posts.map(post => {
           return (
@@ -40,6 +41,7 @@ export default class TechnicalQuestionsPage extends Component {
               field={post.field}
               post_id={post._id}
               loggedInUser={this.props.loggedInUser}
+              deletePost={this.deletePost}
               page="TechnicalQuestionsPage"
             />
           );

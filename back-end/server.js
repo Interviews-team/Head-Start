@@ -52,10 +52,18 @@ app.post("/update-user", (req, res) => {
   }, req.body);
 });
 
+app.post("/add-admin", (req, res) => {
+  db.addAdmin(users => res.json(users), req.body);
+});
+
 //FIELDS FUNCTIONS
 //Please write your code below and only below your name
 app.get(`/get-fields`, (req, res) => {
   db.getFields(fields => res.json(fields));
+});
+
+app.post("/add-field", (req, res) => {
+  db.addField(fields => res.json(fields), req.body);
 });
 
 //POSTS FUNCTIONS
@@ -68,6 +76,18 @@ app.get(`/get-hr-posts`, (req, res) => db.getHrPosts(posts => res.json(posts)));
 
 app.get(`/get-technical-posts`, (req, res) =>
   db.getTechnicalPosts(posts => res.json(posts))
+);
+
+app.post("/delete-user-post", (req, res) =>
+  db.deleteUserPost(posts => res.json(posts), req.body)
+);
+
+app.post("/delete-hr-post", (req, res) =>
+  db.deleteHrPost(posts => res.json(posts), req.body)
+);
+
+app.post("/delete-tech-post", (req, res) =>
+  db.deleteTechPost(posts => res.json(posts), req.body)
 );
 
 //COMMENTS FUNCTIONS
@@ -89,6 +109,10 @@ app.post("/add-comment", (req, res) => {
 app.get(`/get-pendings`, (req, res) => {
   db.getPendings(pendings => res.json(pendings));
 });
+
+app.get("/get-pending-admins", (req, res) =>
+  db.getPendingAdmins(pendings => res.json(pendings))
+);
 
 //EVENTS FUNCTIONS
 //Please write your code below and only below your name
