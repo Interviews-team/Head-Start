@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.js";
 
 export default class Footer extends Component {
   state = {};
@@ -10,11 +8,15 @@ export default class Footer extends Component {
       <div>
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around ">
           <a className="navbar-brand" href="/">
-            LOGO
+            Head Start
           </a>
           <Link to="/AboutUsPage">AboutUs</Link>
-          <Link to="/JoinUsPage">Join Us</Link>
-          <Link to="/AskQuestionPage">Ask Question</Link>
+          {this.props.loggedInUser.role === "user" ? (
+            <Link to="/JoinUsPage">Join Us</Link>
+          ) : null}
+          {this.props.loggedInUser.role === "user" ? (
+            <Link to="/AskQuestionPage">Ask a Question</Link>
+          ) : null}
         </nav>
       </div>
     );

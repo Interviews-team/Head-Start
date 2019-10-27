@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.js";
+import "@firebase/storage";
 
 //importing components
 import Header from "./components/Header";
@@ -218,7 +221,7 @@ export default class App extends Component {
             )}
           ></Route>
 
-          <Footer />
+          <Footer loggedInUser={loggedInUser}/>
         </Router>
       </div>
     );

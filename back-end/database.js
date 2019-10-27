@@ -51,7 +51,9 @@ const pendingSchema = new mongoose.Schema({
   gender: String,
   field: String,
   role: String,
-  user_id: String
+  user_id: String,
+
+  status: String
 });
 
 const eventsSchema = new mongoose.Schema({
@@ -161,14 +163,14 @@ const userUpdate = (sendUser, { _id, name, email, mobileNumber, field }) => {
 };
 
 const addAdmin = (sendUsers, admin) => {
-  Users.create( admin, err => {
-    if(err){
+  Users.create(admin, err => {
+    if (err) {
       console.log(err);
     } else {
-      getUsers(sendUsers)
+      getUsers(sendUsers);
     }
-  })
-}
+  });
+};
 
 //FIELDS FUNCTIONS
 //GET ALL FIELDS
@@ -182,15 +184,15 @@ const getFields = sendFields => {
   });
 };
 
-const addField = (sendFields, {field}) => {
-  Fields.create({name: field}, err => {
-    if(err){
+const addField = (sendFields, { field }) => {
+  Fields.create({ name: field }, err => {
+    if (err) {
       console.log(err);
     } else {
-      getFields(sendFields)
+      getFields(sendFields);
     }
-  })
-}
+  });
+};
 
 //POSTS FUNCTIONS
 //GET ALL POSTS
@@ -273,6 +275,16 @@ const deleteTechPost = (sendPosts, { _id }) => {
   });
 };
 
+const deletePost = (sendPost, { _id }) => {
+  Posts.deleteOne({ _id }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      sendPost(doc);
+    }
+  });
+};
+
 //COMMENTS FUNCTIONS
 //GET ALL COMMENTS
 const getComments = sendComments => {
@@ -340,6 +352,51 @@ const getPendings = sendPendings => {
   });
 };
 
+const answerPending = (
+  sendPending,
+  { _id, question, answer, field, user_id }
+) => {
+  Pendings.updateOne({ _id }, { $set: { status: "answered" } }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      Posts.create({ question, answer, field, user_id }, err => {
+        if (err) {
+          console.log(err);
+        } else {
+          sendPending(doc);
+        }
+      });
+    }
+  });
+};
+
+const acceptPending = (sendPending, { _id, user_id, role }) => {
+  Pendings.updateOne({ _id }, { $set: { status: "accepted" } }, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      Users.updateOne({ _id: user_id }, { $set: {role} }, err => {
+        if (err) {
+          console.log(err);
+        } else {
+          sendPending(doc);
+        }
+      });
+    }
+  });
+};
+
+const deletePending = (sendDeleted, {_id}) => {
+  Pendings.deleteOne({_id}, (err, doc) => {
+    if(err){
+      console.log(err);
+    }else{
+      sendDeleted(doc)
+    }
+  })
+}
+
 //GET ALL QUESTIONS PENDING FOR SPECIFIC USER
 const getUserPendings = (sendPendings, { _id }) => {
   Pendings.find(
@@ -354,21 +411,75 @@ const getUserPendings = (sendPendings, { _id }) => {
   );
 };
 
-const getPendingAdmins = sendPendings => {
-  Pendings.find({question: null}, (err, docs)=>{
-    if(err){
-      console.log(err);
-    } else {
-      sendPendings(docs)
+const getHrPendings = sendPendings => {
+  Pendings.find(
+    {
+      $and: [
+        { question: { $ne: null } },
+        { field: "HR" },
+        { status: { $ne: "answered" } }
+      ]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        sendPendings(docs);
+      }
     }
-  })
-}
+  );
+};
+
+const getTechPendings = sendPendings => {
+  Pendings.find(
+    {
+      $and: [
+        { question: { $ne: null } },
+        { field: { $ne: "HR" } },
+        { status: { $ne: "answered" } }
+      ]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        sendPendings(docs);
+      }
+    }
+  );
+};
+
+const getPendingAdmins = sendPendings => {
+  Pendings.find(
+    {
+      $and: [{ question: null }, { status: { $ne: "accepted" } }]
+    },
+    (err, docs) => {
+      if (err) {
+        console.log(err);
+      } else {
+        sendPendings(docs);
+      }
+    }
+  );
+};
 
 //SUBMITTED APPLICATION
-const application = ({_id, name, email, mobileNumber, field, role}) => {
-  Pendings.create({name, email, mobileNumber, field, role, user_id: _id}, err => {
-    if (err) console.log(err);
-  });
+const application = ({ _id, name, email, mobileNumber, field, role }) => {
+  Pendings.create(
+    {
+      name,
+      email,
+      mobileNumber,
+      field,
+      role,
+      user_id: _id,
+      status: "Pending..."
+    },
+    err => {
+      if (err) console.log(err);
+    }
+  );
 };
 
 //EVENTS FUNCTIONS
@@ -401,7 +512,7 @@ const getQuestion = sendQuestion => {
   });
 };
 const askQuestion = question => {
-  console.log('QUESTION: ', question);
+  console.log("QUESTION: ", question);
   Pendings.create(question, err => {
     if (err) console.log(err);
   });
@@ -424,6 +535,7 @@ module.exports = {
   deleteUserPost,
   deleteHrPost,
   deleteTechPost,
+  deletePost,
 
   getEvents,
 
@@ -434,6 +546,11 @@ module.exports = {
   getPendings,
   getPendingAdmins,
   application,
+  getHrPendings,
+  getTechPendings,
+  answerPending,
+  acceptPending,
+  deletePending,
 
   getFields,
   addEvent,

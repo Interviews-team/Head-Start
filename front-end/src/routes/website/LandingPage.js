@@ -1,9 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Event from "../../components/Event";
 import Post from "../../components/Post";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.js";
 import LandingPageImage from "../../images/new.png";
 import AboutUsPage from "./AboutUsPage";
 
@@ -46,7 +43,6 @@ export default class LandingPage extends Component {
         page="LandingPage"
       />
     ));
-    console.log(LandingPageImage);
 
     //how to change image while scrolling
     return (

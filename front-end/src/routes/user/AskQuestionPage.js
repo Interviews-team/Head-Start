@@ -9,14 +9,15 @@ export default class AskQuestionPage extends Component {
     let question = {
       question: event.target["question"].value,
       field: event.target["field"].value,
-      user_id: this.props.loggedInUser._id
+      user_id: this.props.loggedInUser._id,
+      status: 'Pending...'
     };
 
     axios
       .post("http://localhost:9000/ask-question", question)
       .catch(err => console.log(err));
 
-    this.props.history.push("/");
+    this.props.history.goBack();
   };
 
   render() {

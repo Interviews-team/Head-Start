@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import axios from "axios";
+import {storage} from '../../firebase'
 
 export default class AddEventPage extends Component {
+  state = {
+    image: null,
+    url: "",
+    progress: 0
+  };
+  
   addEvent = e => {
     e.preventDefault();
-
+    console.log(this.state.url);
     let event = {
       title: e.target["title"].value,
-      img_path: e.target["img_path"].files[0].name,
+      img_path: this.state.url,
       url: e.target["url"].value,
       description: e.target["description"].value
     };
@@ -19,34 +26,54 @@ export default class AddEventPage extends Component {
     this.props.history.push("/AdminDashboardPage");
   };
 
-  // consoleLOg = event => {
-  //   console.log(event.target.files[0].name);
-  // };
+  getImage = event => {
+      const image = event.target.files[0];
+      this.setState(() => ({ image }));
+    };
+
+  fileUpload = () => {
+    const { image } = this.state;
+    const uploadTask = storage.ref(`images/${image.name}`).put(image);
+    uploadTask.on(
+      "state_changed",
+      snapshot => {
+        const progress = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        this.setState({ progress });
+      },
+      error => {
+        console.log(error);
+      },
+      () => {
+        storage
+          .ref("images")
+          .child(image.name)
+          .getDownloadURL()
+          .then(url => {
+            this.setState({ url });
+          });
+      }
+    );
+  };
 
   render() {
     return (
       <div className="container">
         <h1>Add Event</h1>
-        <img alt=""></img>
+        <div>
+          <progress className="mt-2" value={this.state.progress} max="100" />
+          <br />
+          <input className="mt-2" type="file" name="img_path" onChange={this.getImage}/>
+          <br />
+          <button className="btn btn-danger mt-2" onClick={this.fileUpload}>
+            Upload
+          </button>
+          <br />
+          <br />
+          <img src={this.state.url} alt="Img"></img>
+        </div>
         <form onSubmit={this.addEvent}>
-          <div className="custom-file">
-            <input
-              type="file"
-              className="custom-file-input"
-              id="validatedCustomFile"
-              name="img_path"
-              accept="image/*"
-              required
-              // onChange={this.consoleLOg}
-            />
-            <label className="custom-file-label" htmlFor="validatedCustomFile">
-              Choose file...
-            </label>
-            <div className="invalid-feedback">
-              Example invalid custom file feedback
-            </div>
-          </div>
-
           <div className="form-group">
             <label htmlFor="exampleInputEmail1">Title</label>
             <input
@@ -81,3 +108,61 @@ export default class AddEventPage extends Component {
     );
   }
 }
+
+// state = {
+//   image: null,
+//   url: "",
+//   progress: 0
+// };
+// consoleFun = event => {
+//   const image = event.target.files[0];
+//   this.setState(() => ({ image }));
+// };
+// fileUpload = () => {
+//   const { image } = this.state;
+//   // console.log(storage.ref(images/${image.name}).put(image));
+//   const uploadTask = storage.ref(images/${image.name}).put(image);
+//   // console.log(uploadTask.on());
+//   uploadTask.on(
+//     "state_changed",
+//     snapshot => {
+//       const progress = Math.round(
+//         (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+//       );
+//       // console.log(progress)
+//       this.setState({ progress });
+//     },
+//     error => {
+//       console.log(error);
+//     },
+//     () => {
+//       storage
+//         .ref("images")
+//         .child(image.name)
+//         .getDownloadURL()
+//         // .getDownloadURL()
+//         .then(url => {
+//           console.log(url);
+//           this.setState({ url });
+//         });
+//       // console.log(storage);
+//     }
+//   );
+// };
+// render() {
+//   return (
+//     <div>
+//       <progress className="mt-2" value={this.state.progress} max="100" />
+//       <br />
+//       <input className="mt-2" type="file" onChange={this.consoleFun} />
+//       <br />
+//       <button className="btn btn-danger mt-2" onClick={this.fileUpload}>
+//         Upload
+//       </button>
+//       <br />
+//       <br />
+//       <img src={this.state.url} alt="Img"></img>
+//     </div>
+//   );
+// }
+// }

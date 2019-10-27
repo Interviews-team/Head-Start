@@ -90,6 +90,10 @@ app.post("/delete-tech-post", (req, res) =>
   db.deleteTechPost(posts => res.json(posts), req.body)
 );
 
+app.post("/delete-post", (req, res) =>
+  db.deletePost(deleted => res.json(deleted), req.body)
+);
+
 //COMMENTS FUNCTIONS
 //Please write your code below and only below your name
 app.get(`/get-comments`, (req, res) => {
@@ -113,6 +117,26 @@ app.get(`/get-pendings`, (req, res) => {
 app.get("/get-pending-admins", (req, res) =>
   db.getPendingAdmins(pendings => res.json(pendings))
 );
+
+app.get("/get-hr-pendings", (req, res) =>
+  db.getHrPosts(questions => res.json(questions))
+);
+
+app.get("/get-tech-pendings", (req, res) =>
+  db.getTechPendings(questions => res.json(questions))
+);
+
+app.post("/answer-pending", (req, res) => {
+  db.answerPending(answered => res.json(answered), req.body);
+});
+
+app.post("/accept-pending", (req, res) => {
+  db.acceptPending(accepted => res.json(accepted), req.body);
+});
+
+app.post('/delete-pending', (req, res) => {
+  db.deletePending(deleted => res.json(deleted), req.body)
+})
 
 //EVENTS FUNCTIONS
 //Please write your code below and only below your name
