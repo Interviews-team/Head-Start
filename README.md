@@ -31,5 +31,11 @@ This repository holds A Website dedicated to HR and Technical Interviews' questi
 | register, login, user Dashboard pages	| ✔️            |		|
 | user profile, add question pages	| ✔️            |		|
 | functionality check			| ✔️            |		|
-| Design Header and Footer pages	| ✔️            |		|
+| UserDashBoard page functions		| ✔️            |		|
+| Finish all functions			| ✔️            |		|
+| header, footer & register pages design| ✔️            |		|
+| landing , events & posts pages design	| ✔️            |		|
+| techincal , Hr questions pages design	| ✔️            |		|
+
+
 
