@@ -1,12 +1,18 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.js";
+// import "bootstrap/dist/js/bootstrap.js";
 import AboutUsImage from "../../images/new.png";
 
 export default class AboutUsPage extends Component {
   render() {
     const AboutUsPage = {
-      backgroundImage: `url(${AboutUsImage})`
+      backgroundImage: `url(${AboutUsImage})`,
+      WebkitBackgroundSize: "cover",
+      MozBackgroundSize: "cover",
+      OBackgroundSize: "cover",
+      backgroundSize: 'cover',
+      height: "88vh",
+      backgroundRepeat: "no-repeat"
     };
 
     return (

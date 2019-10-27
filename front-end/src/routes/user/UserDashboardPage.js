@@ -89,7 +89,7 @@ export default class UserDashboardPage extends Component {
     ));
 
     let pendingsToShow = pendings.map(pending => (
-      <PendingQuestion key={pending._id} question={pending.question} />
+      <PendingQuestion key={pending._id} {...pending} page='UserDashboardPage'/>
     ));
 
     return (

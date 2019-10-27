@@ -20,23 +20,25 @@ export default class PostPage extends Component {
   };
 
   addComment = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    let user_id = this.props.location.state.loggedInUser._id
-    let post_id = this.props.location.state.post_id
-    let comment = event.target['comment'].value
-    event.target['comment'].value = ''
+    let user_id = this.props.location.state.loggedInUser._id;
+    let post_id = this.props.location.state.post_id;
+    let comment = event.target["comment"].value;
+    event.target["comment"].value = "";
 
-    axios.post('http://localhost:9000/add-comment', {comment, user_id, post_id})
-      .then(res => this.getPostComments())
+    axios
+      .post("http://localhost:9000/add-comment", { comment, user_id, post_id })
+      .then(res => this.getPostComments());
+  };
 
-  }
-
-  deletePost(){
-    this.props.history.push()
-  }
+  deletePost = _id => {
+    axios.post('http://localhost:9000/delete-post', {_id})
+    .then (res => this.props.history.goBack())
+  };
 
   render() {
+
     let {
       question,
       answer,
@@ -50,7 +52,7 @@ export default class PostPage extends Component {
       <Comment
         key={comment._id}
         comment={comment.comment}
-        id = {comment._id}
+        id={comment._id}
         user={user_id}
         user_id={loggedInUser._id}
       />
@@ -67,12 +69,28 @@ export default class PostPage extends Component {
         {field}
         <h3>Post User Id :</h3>
         {user_id}
-        {/* <button onClick={()=>this.deletePost()} className='btn btn-danger'>X</button> */}
+
+        {(loggedInUser.role === "hrAdmin" && field === "HR") ||
+        (loggedInUser.role === "techAdmin" && field !== "HR") ||
+        loggedInUser.role === "owner" ? (
+          <button
+            className="btn btn-danger"
+            onClick={() => this.deletePost(post_id)}
+          >
+            X
+          </button>
+        ) : null}
         <h3>Post Comments :</h3>
         {comments}
         <form onSubmit={this.addComment}>
-          <input type='text' name='comment' placeholder='write your comment...'/>
-          <button type='submit' className='btn btn-primary' >comment</button>
+          <input
+            type="text"
+            name="comment"
+            placeholder="write your comment..."
+          />
+          <button type="submit" className="btn btn-primary">
+            comment
+          </button>
         </form>
       </div>
     );

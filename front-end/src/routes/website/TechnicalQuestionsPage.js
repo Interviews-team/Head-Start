@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Post from "../../components/Post";
+import TechnicalQuestionsImage from "../../images/Webp.net-resizeimage2.jpg";
 
 export default class TechnicalQuestionsPage extends Component {
   state = {
@@ -20,34 +21,60 @@ export default class TechnicalQuestionsPage extends Component {
   };
 
   deletePost = _id => {
-    axios.post('http://localhost:9000/delete-tech-post', {_id})
-    .then (res => this.setState({posts: res.data}))
+    axios
+      .post("http://localhost:9000/delete-tech-post", { _id })
+      .then(res => this.setState({ posts: res.data }));
   };
 
   render() {
+    const TechnicalQuestionsPage = {
+      backgroundImage: `url(${TechnicalQuestionsImage})`,
+      WebkitBackgroundSize: "cover",
+      MozBackgroundSize: "cover",
+      OBackgroundSize: "cover",
+      backgroundSize: 'cover',
+      height: "88vh",
+      backgroundRepeat: "no-repeat"
+    };
+
     let { role } = this.props.loggedInUser;
     return (
       <div>
-        <h1>Technical Question</h1>
-        {role === "techAdmin" ? <Link to="/AddPostPage">add post</Link> : null}
-        <br />
-        {this.state.posts.map(post => {
-          return (
-            <Post
-              key={post._id}
-              question={post.question}
-              answer={post.answer}
-              user_id={post.user_id}
-              field={post.field}
-              post_id={post._id}
-              loggedInUser={this.props.loggedInUser}
-              deletePost={this.deletePost}
-              page="TechnicalQuestionsPage"
-            />
-          );
-        })}
-        <br />
+        <div className="overflow-auto" style={TechnicalQuestionsPage}>
+          <div className="container mt-5 md-5 w-75">
+          <div className="row py-5 px-4">
+            {role === "techAdmin" ? (
+              <Link to="/AddPostPage">Add post</Link>
+            ) : null}
+            <br />
+            {this.state.posts.map(post => {
+              return (
+                <Post
+                  key={post._id}
+                  question={post.question}
+                  answer={post.answer}
+                  user_id={post.user_id}
+                  field={post.field}
+                  post_id={post._id}
+                  loggedInUser={this.props.loggedInUser}
+                  deletePost={this.deletePost}
+                  page="TechnicalQuestionsPage"
+                />
+              );
+            })}
+            <br />
+          </div>
+          </div>
+        </div>
       </div>
     );
   }
 }
+
+
+
+
+
+
+
+

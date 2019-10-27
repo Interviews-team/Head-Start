@@ -19,9 +19,17 @@ export default class AdminDashboardPage extends Component {
   };
 
   componentDidMount() {
-    this.getUsers();
-    this.getEvents();
-    this.getPendingAdmins();
+    if (this.props.loggedInUser.role === "owner") {
+      this.getUsers();
+      this.getEvents();
+      this.getPendingAdmins();
+    } else if (this.props.loggedInUser.role === "hrAdmin") {
+      this.getPendingHrQuestions();
+      this.getHrPosts();
+    } else {
+      this.getPendingTechQuestions();
+      this.getTechnicalPosts();
+    }
   }
 
   addField = event => {
@@ -84,17 +92,71 @@ export default class AdminDashboardPage extends Component {
 
   deletePost = _id => {
     let user_id = this.props.loggedInUser._id;
-    axios.post('http://localhost:9000/delete-user-post', {_id, user_id})
-    .then (res => this.setState({posts: res.data}))
+    axios
+      .post("http://localhost:9000/delete-user-post", { _id, user_id })
+      .then(res => this.setState({ posts: res.data }));
+  };
+
+  getHrPosts = () => {
+    axios
+      .get(`http://localhost:9000/get-hr-posts`)
+      .then(res => this.setState({ posts: res.data }))
+      .catch(err => console.log(err));
+  };
+
+  getTechnicalPosts = () => {
+    axios
+      .get(`http://localhost:9000/get-technical-posts`)
+      .then(res => this.setState({ posts: res.data }))
+      .catch(err => console.log(err));
+  };
+
+  getPendingHrQuestions() {
+    axios
+      .get("http://localhost:9000/get-hr-pendings")
+      .then(res => this.setState({ pendingQuestions: res.data }));
+  }
+
+  getPendingTechQuestions() {
+    axios
+      .get("http://localhost:9000/get-tech-pendings")
+      .then(res => this.setState({ pendingQuestions: res.data }));
+  }
+
+  answerPending = post => {
+    axios.post("http://localhost:9000/answer-pending", post).then(res => {
+      if (this.props.loggedInUser.role === "hrAdmin") {
+        this.getPendingHrQuestions();
+      } else {
+        this.getPendingTechQuestions();
+      }
+    });
+  };
+
+  acceptPending = admin => {
+    
+    axios
+      .post("http://localhost:9000/accept-pending", admin)
+      .then(res => this.getPendingAdmins());
+  };
+
+  deletePending = _id => {
+    axios.post("http://localhost:9000/delete-pending", { _id }).then(res => {
+      if (this.props.loggedInUser.role === "owner") {
+        this.getPendingAdmins();
+      } else if (this.props.loggedInUser.role === "hrAdmin") {
+        this.getPendingHrQuestions();
+      } else {
+        this.getPendingTechQuestions();
+      }
+    });
   };
 
   render() {
     let { role } = this.props.loggedInUser;
     let {
       users,
-      fields,
       posts,
-      comments,
       pendingAdmins,
       pendingQuestions,
       events
@@ -112,17 +174,29 @@ export default class AdminDashboardPage extends Component {
     ));
 
     let pendingAdminsToShow = pendingAdmins.map(pending => (
-      <PendingAdmin key={pending._id} {...pending} />
+      <PendingAdmin key={pending._id} {...pending} acceptPending={this.acceptPending} deletePending={this.deletePending}/>
     ));
 
     let usersToShow = users.map(user => <User key={user._id} {...user} />);
 
     let postsToShow = posts.map(post => (
-      <Post key={post._id} {...post} deletePost={this.deletePost} page="AdminDashboardPage" />
+      <Post
+        key={post._id}
+        {...post}
+        loggedInUser={this.props.loggedInUser}
+        deletePost={this.deletePost}
+        page="AdminDashboardPage"
+      />
     ));
 
     let pendingQuestionsToShow = pendingQuestions.map(pending => (
-      <PendingQuestion key={pending._id} {...pending} />
+      <PendingQuestion
+        key={pending._id}
+        {...pending}
+        page="AdminDashboardPage"
+        answerPending={this.answerPending}
+        deletePending={this.deletePending}
+      />
     ));
 
     return (
@@ -139,6 +213,7 @@ export default class AdminDashboardPage extends Component {
             <br />
             <br />
             <Link to="addEventPage">add event</Link>
+            {eventsToShow}
             <br />
             <br />
             <br />
@@ -180,10 +255,24 @@ export default class AdminDashboardPage extends Component {
             <br />
             <br />
             <br />
-            {eventsToShow}
             {pendingAdminsToShow}
+            <br />
+            <br />
+            <h3>Users</h3>
             {usersToShow}
           </div>
+        ) : role === "hrAdmin" ? (
+          <>
+            <Link to="addPostPage">add post</Link>
+            <br />
+            <br />
+            <h3>POSTS</h3>
+            {postsToShow}
+            <br />
+            <br />
+            <h3>Pending Q</h3>
+            {pendingQuestionsToShow}
+          </>
         ) : (
           <>
             <Link to="addPostPage">add post</Link>
@@ -196,8 +285,6 @@ export default class AdminDashboardPage extends Component {
             <h3>Pending Q</h3>
             {pendingQuestionsToShow}
           </>
-
-
         )}
       </div>
     );
