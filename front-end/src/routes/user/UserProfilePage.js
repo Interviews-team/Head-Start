@@ -60,9 +60,9 @@ export default class UserProfilePage extends Component {
 
     return (
       <body>
-        <div className="container ">
-          <div className="row">
-            <div className="w-100 mt-4">
+        <div className="container mt-5 ">
+          <div className="row mt-5">
+            <div className="w-100 mt-5">
               <main className="col-md-4" style={cardWidth}>
                 <div class=" card bg-light" style={cardColor}>
                   <div class="card-header text-center p-4">
