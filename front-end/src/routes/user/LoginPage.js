@@ -31,7 +31,7 @@ export default class LoginPage extends Component {
     if (!emailReg.test(email)) {
       this.setState({
         emailMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Email is Invalid!<li>should be like "test@test.test"</li>
           </ul>
         )
@@ -45,7 +45,7 @@ export default class LoginPage extends Component {
     if (!passwordReg.test(password)) {
       this.setState({
         passwordMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Password is Invalid! <li>should be 8 characters long or more</li>
             <li>should contain at least one digit</li>
             <li>should contain at least one lower case</li>
@@ -71,7 +71,11 @@ export default class LoginPage extends Component {
           this.props.history.goBack();
         } else {
           this.setState({
-            invalid: <p style={{ color: "red" }}>Invalid Email or Password</p>
+            invalid: (
+              <p style={{ color: "red", fontWeight: "bold" }}>
+                Invalid Email or Password
+              </p>
+            )
           });
         }
       })
@@ -80,10 +84,11 @@ export default class LoginPage extends Component {
 
   render() {
     return (
-      <div id="mainDiv" className="text-center">
-        <div class="login-page">
-          <form onSubmit={this.login} class="login-form">
-            <div class="form">
+      <div id="mainDiv" className="text-center" >
+        <div className="login-page">
+          <form onSubmit={this.login} className="login-form">
+            <div className="form">
+              Login
               <input name="email" type="text" placeholder="Email" />
               {this.state.emailMsg}
               <br />
@@ -93,15 +98,13 @@ export default class LoginPage extends Component {
               <br />
               <br />
               {this.state.invalid}
-              <button>Login</button>
+              <button className="mb-3">Login</button>
+              <p class="message">
+                Do not have an account?
+                <Link to="/RegisterPage">  Register</Link>
+              </p>
             </div>
           </form>
-
-          <Link to="/registerPage">
-            <h2 className="w-100">
-              if you do not have an account, create one...
-            </h2>
-          </Link>
         </div>
       </div>
     );

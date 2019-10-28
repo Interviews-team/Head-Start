@@ -35,7 +35,6 @@ export default class TechnicalQuestionsPage extends Component {
       backgroundSize: 'cover',
       height: "88vh",
       backgroundRepeat: "no-repeat",
-      
     };
 
     let { role } = this.props.loggedInUser;

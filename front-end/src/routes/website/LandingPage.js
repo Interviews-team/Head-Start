@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import Event from "../../components/Event";
 import Post from "../../components/Post";
 import LandingPageImage from "../../images/new.png";
-// import AboutUsPage from "./AboutUsPage";
+import { Link } from "react-router-dom";
 
 export default class LandingPage extends Component {
   render() {
     let { events, posts, loggedInUser } = this.props;
-    let randomEvents = events.slice(0, 5);
+    let randomEvents = events.slice(0, 3);
     let eventsToShow = randomEvents.map(event => (
       <Event
         key={event._id}
@@ -21,8 +21,9 @@ export default class LandingPage extends Component {
 
     let length = posts.length;
     let randomPosts = [];
+    let count = loggedInUser.role === null ? 7 : 5
     if (length > 1) {
-      for (let i = 0; i < 2; i++) {
+      for (let i = 0; i < count; i++) {
         let postToPush = posts[Math.floor(Math.random() * (length - 1))];
         if (randomPosts.indexOf(postToPush) > -1) {
           i--;
@@ -44,25 +45,45 @@ export default class LandingPage extends Component {
       />
     ));
 
-    //how to change image while scrolling
+    const LandingPage = {
+      backgroundImage: `url(${LandingPageImage})`,
+      WebkitBackgroundSize: "cover",
+      MozBackgroundSize: "cover",
+      OBackgroundSize: "cover",
+      backgroundSize: "cover",
+      height: "88vh",
+      backgroundRepeat: "no-repeat"
+    };
+
     return (
       <>
-        <img src={LandingPageImage} alt="img" className="w-100"></img>
-        {/* <h3 className="">
-          Want to increase your chances in getting the job? HEAD START is the
-          right choice ...
-        </h3> */}
-        {/* <AboutUsPage /> */}
-        <div className="container mb-5">
-          <div className="row">{eventsToShow}</div>
+        <div
+          style={LandingPage}
+          className="d-flex flex-column justify-content-center align-items-center"
+        >
+          <h1 className="text-white font-weight-bold">
+            Want to increase your chances in getting the job?
+          </h1>
+          <br />
+          <h1 className="text-white font-weight-bold">
+            HEAD START is the right choice ...
+          </h1>
         </div>
-        <div className="container">
-          <div className="row">{postsToShow}</div>
+
+        <div className="container-fluid">
+          <div className="row">
+            <div className="col-md-4">
+            <div className='row mt-5 ml-3 mb-3'>
+              <Link to='/EventsPage' className='text-dark'><h3 className=' font-weight-bold'>Events</h3></Link>
+            </div>
+            {eventsToShow}</div>
+            <div className="col-md-8">{postsToShow}</div>
+          </div>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
       </>
     );
   }
