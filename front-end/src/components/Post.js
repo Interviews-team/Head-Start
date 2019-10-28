@@ -35,7 +35,7 @@ export default class Post extends Component {
                     className="btn btn-danger float-right"
                     onClick={() => this.props.deletePost(post_id)}
                   >
-                    X
+                    Delete Post
                   </button>
                 ) : null}
                 {loggedInUser.role === "techAdmin" &&
@@ -45,7 +45,7 @@ export default class Post extends Component {
                     className="btn btn-danger float-right"
                     onClick={() => this.props.deletePost(post_id)}
                   >
-                    X
+                    Delete Post
                   </button>
                 ) : null}
                 {loggedInUser.role === "owner" && page !== "LandingPage" ? (
@@ -53,7 +53,7 @@ export default class Post extends Component {
                     className="btn btn-danger float-right"
                     onClick={() => this.props.deletePost(post_id)}
                   >
-                    X
+                   Delete Post
                   </button>
                 ) : null}
               </div>

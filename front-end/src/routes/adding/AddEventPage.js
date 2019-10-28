@@ -9,7 +9,7 @@ export default class AddEventPage extends Component {
     progress: 0
   };
 
-  addEvent = e => {
+  addNewEvent = e => {
     e.preventDefault();
     console.log(this.state.url);
     let event = {
@@ -64,7 +64,7 @@ export default class AddEventPage extends Component {
       marginLeft: "150px"
     };
     return (
-      <div className="container-fluied ">
+      <div className="container-fluid ">
         <div className="row ">
           <div className="w-100">
             {/* <img src={addEventImage} className="w-100" style={img}/> */}
