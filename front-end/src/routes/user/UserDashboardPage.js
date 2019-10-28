@@ -55,14 +55,22 @@ export default class UserDashboardPage extends Component {
 
   deletePost = _id => {
     let user_id = this.props.loggedInUser._id;
-    axios.post('http://localhost:9000/delete-user-post', {_id, user_id})
-    .then (res => this.setState({posts: res.data}))
+    axios
+      .post("http://localhost:9000/delete-user-post", { _id, user_id })
+      .then(res => this.setState({ posts: res.data }));
+  };
+
+  deletePending = _id => {
+    let user_id = this.props.loggedInUser._id;
+    axios
+      .post("http://localhost:9000/delete-pending", { _id, user_id })
+      .then(res => {
+        this.getPendings();
+      });
   };
 
   render() {
-    console.log(this.state.comments);
     let { posts, comments, pendings } = this.state;
-
     let postsToShow = posts.map(post => (
       <Post
         key={post._id}
@@ -73,7 +81,7 @@ export default class UserDashboardPage extends Component {
         post_id={post._id}
         loggedInUser={this.props.loggedInUser}
         deletePost={this.deletePost}
-        page="HrQuestionsPage"
+        page="UserDashboardPage"
       />
     ));
 
@@ -89,22 +97,42 @@ export default class UserDashboardPage extends Component {
     ));
 
     let pendingsToShow = pendings.map(pending => (
-      <PendingQuestion key={pending._id} {...pending} page='UserDashboardPage'/>
+      <PendingQuestion
+        key={pending._id}
+        {...pending}
+        page="UserDashboardPage"
+      />
     ));
 
     return (
-      <div>
-        <h1>User Dashboard</h1>
-        <h1>Posts</h1>
-        {postsToShow}
-        <br />
+      <div className="container-fluid">
+        <h3 className="mt-3 mb-3">User Dashboard</h3>
+        <div className="row bg-light">
+          <div className="col-md-4 mt-3">
+            <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
+              Posts
+            </h4>
+            {postsToShow}
+          </div>
 
-        <h1>Comments</h1>
-        {commentsToShow}
-        <br />
+          <div className="col-md-4 mt-3">
+            <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
+              Comments
+            </h4>
+            {commentsToShow}
+          </div>
 
-        <h1>Pending</h1>
-        {pendingsToShow}
+          <div className="col-md-4 mt-3">
+            <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
+              Pending
+            </h4>
+            {pendingsToShow}
+          </div>
+        </div>
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
