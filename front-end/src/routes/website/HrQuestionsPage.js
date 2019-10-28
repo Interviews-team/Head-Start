@@ -33,7 +33,7 @@ export default class HrQuestionsPage extends Component {
       MozBackgroundSize: "cover",
       OBackgroundSize: "cover",
       backgroundSize: "cover",
-      height: "88vh",
+      height: "87vh",
       backgroundRepeat: "no-repeat"
     };
 

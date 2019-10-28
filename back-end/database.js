@@ -138,11 +138,21 @@ const userLogout = (sendUser, _id) => {
 
 //REGISTER NEW USER
 const userRegister = (sendUser, newUser) => {
-  Users.create(newUser, (err, doc) => {
+  Users.findOne({ email: newUser.email }, (err, doc) => {
     if (err) {
       console.log(err);
     } else {
-      sendUser(doc);
+      if (doc !== null) {
+        sendUser(doc);
+      } else {
+        Users.create(newUser, (err, doc) => {
+          if (err) {
+            console.log(err);
+          } else {
+            sendUser(null);
+          }
+        });
+      }
     }
   });
 };
@@ -376,7 +386,7 @@ const acceptPending = (sendPending, { _id, user_id, role }) => {
     if (err) {
       console.log(err);
     } else {
-      Users.updateOne({ _id: user_id }, { $set: {role} }, err => {
+      Users.updateOne({ _id: user_id }, { $set: { role } }, err => {
         if (err) {
           console.log(err);
         } else {
@@ -387,15 +397,15 @@ const acceptPending = (sendPending, { _id, user_id, role }) => {
   });
 };
 
-const deletePending = (sendDeleted, {_id}) => {
-  Pendings.deleteOne({_id}, (err, doc) => {
-    if(err){
+const deletePending = (sendDeleted, { _id }) => {
+  Pendings.deleteOne({ _id }, (err, doc) => {
+    if (err) {
       console.log(err);
-    }else{
-      sendDeleted(doc)
+    } else {
+      sendDeleted(doc);
     }
-  })
-}
+  });
+};
 
 //GET ALL QUESTIONS PENDING FOR SPECIFIC USER
 const getUserPendings = (sendPendings, { _id }) => {
