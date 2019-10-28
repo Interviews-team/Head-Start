@@ -95,11 +95,15 @@ export default class AddEventPage extends Component {
                       >
                         Upload
                       </button>
+                      <div />
                       <br />
                       <br />
                       <div>
                         <img src={this.state.url} alt="Img"></img>
                       </div>
+                      <br />
+                      <br />
+
                       <label
                         className="custom-file-label"
                         htmlFor="validatedCustomFile"
