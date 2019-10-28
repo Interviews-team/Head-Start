@@ -58,7 +58,9 @@ export default class HrQuestionsPage extends Component {
           <div className="container mt-5 md-5 w-75">
             <div className="row py-5 px-4">
               {role === "hrAdmin" ? (
-                <Link to="/AddPostPage">Add post</Link>
+                <Link to="/AddPostPage">
+                  <h1 style={{ color: "black" }}>Add post</h1>
+                </Link>
               ) : null}
               <br />
               {hrPosts}

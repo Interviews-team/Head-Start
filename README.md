@@ -36,6 +36,7 @@ This repository holds A Website dedicated to HR and Technical Interviews' questi
 | header, footer & register pages design| ✔️            |		|
 | landing , events & posts pages design	| ✔️            |		|
 | techincal , Hr questions pages design	| ✔️            |		|
+| Edit the  design			| ✔️            |		|
 
 
 

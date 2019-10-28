@@ -9,24 +9,13 @@ export default class Header extends Component {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
           <Link
             className="p-2 navbar-brand"
-            to="/LandingPage"
+            to="/"
             style={{ textDecoration: "none", color: "white" }}
           >
             Head Start
           </Link>
-          {/* <button
-            class="navbar-toggler"
-            type="button"
-            data-toggle="collapse"
-            data-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button> */}
           <div
-            className="collapse navbar-collapse d-flex justify-content-end mr-4"
+            className="collapse navbar-collapse d-flex justify-content-end mr-5"
             id="navbarNavDropdown"
           >
             <ul className="navbar-nav">
@@ -71,7 +60,7 @@ export default class Header extends Component {
               ) : null}
 
               {role === null ? (
-                <li className="nav-item">
+                <li className="nav-item mr-5">
                   <Link
                     className="nav-link"
                     to="/RegisterPage"
@@ -83,10 +72,10 @@ export default class Header extends Component {
               ) : null}
 
               {role !== null ? (
-                <li className="nav-item dropdown">
+                <li className="nav-item dropdown mr-5">
                   <a
                     className="nav-link dropdown-toggle text-white"
-                    href="#"
+                    href="/"
                     id="navbarDropdownMenuLink"
                     role="button"
                     data-toggle="dropdown"

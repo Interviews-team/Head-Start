@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Event from "../../components/Event";
 import Post from "../../components/Post";
 import LandingPageImage from "../../images/new.png";
-import AboutUsPage from "./AboutUsPage";
+// import AboutUsPage from "./AboutUsPage";
 
 export default class LandingPage extends Component {
   render() {
@@ -47,18 +47,22 @@ export default class LandingPage extends Component {
     //how to change image while scrolling
     return (
       <>
-        <img src={LandingPageImage} alt="img" className="w-100  "></img>
+        <img src={LandingPageImage} alt="img" className="w-100"></img>
         {/* <h3 className="">
           Want to increase your chances in getting the job? HEAD START is the
           right choice ...
         </h3> */}
-        <AboutUsPage />
+        {/* <AboutUsPage /> */}
         <div className="container mb-5">
           <div className="row">{eventsToShow}</div>
         </div>
         <div className="container">
           <div className="row">{postsToShow}</div>
         </div>
+        <br/>
+        <br/>
+        <br/>
+        <br/>
       </>
     );
   }

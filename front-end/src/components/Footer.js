@@ -6,17 +6,62 @@ export default class Footer extends Component {
   render() {
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark d-flex justify-content-around ">
-          <a className="navbar-brand" href="/">
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+          <Link
+            className="p-2 navbar-brand"
+            to="/"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             Head Start
-          </a>
-          <Link to="/AboutUsPage">AboutUs</Link>
-          {this.props.loggedInUser.role === "user" ? (
-            <Link to="/JoinUsPage">Join Us</Link>
-          ) : null}
-          {this.props.loggedInUser.role === "user" ? (
-            <Link to="/AskQuestionPage">Ask a Question</Link>
-          ) : null}
+          </Link>
+          <div
+            className="collapse navbar-collapse d-flex justify-content-end mr-5"
+            id="navbarNavDropdown"
+          >
+            <ul className="navbar-nav">
+              <li className="nav-item active">
+                {this.props.loggedInUser.role !== "user" ? (
+                  <Link
+                    to="/AboutUsPage"
+                    className="nav-link mr-5"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    About Us
+                  </Link>
+                ) : (
+                  <Link
+                    to="/AboutUsPage"
+                    className="nav-link"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    About Us
+                  </Link>
+                )}
+              </li>
+              <li>
+                {this.props.loggedInUser.role === "user" ? (
+                  <Link
+                    to="/JoinUsPage"
+                    className="nav-link"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Join Us
+                  </Link>
+                ) : null}
+              </li>
+              <li>
+                {this.props.loggedInUser.role === "user" ? (
+                  <Link
+                    to="/AskQuestionPage"
+                    className="nav-link mr-5"
+                    style={{ textDecoration: "none", color: "white" }}
+                  >
+                    Ask a Question
+                  </Link>
+                ) : null}
+              </li>
+            </ul>
+          </div>
         </nav>
       </div>
     );

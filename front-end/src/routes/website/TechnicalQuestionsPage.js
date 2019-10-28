@@ -34,17 +34,18 @@ export default class TechnicalQuestionsPage extends Component {
       OBackgroundSize: "cover",
       backgroundSize: 'cover',
       height: "88vh",
-      backgroundRepeat: "no-repeat"
+      backgroundRepeat: "no-repeat",
+      
     };
 
     let { role } = this.props.loggedInUser;
     return (
-      <div>
+      <div >
         <div className="overflow-auto" style={TechnicalQuestionsPage}>
-          <div className="container mt-5 md-5 w-75">
+          <div className="container md-5 w-75">
           <div className="row py-5 px-4">
-            {role === "techAdmin" ? (
-              <Link to="/AddPostPage">Add post</Link>
+            {role === "tecAdmin" ? (
+              <Link to="/AddPostPage"> <h1 style={{color:"black"}}>Add post</h1></Link>
             ) : null}
             <br />
             {this.state.posts.map(post => {
