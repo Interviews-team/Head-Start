@@ -7,25 +7,22 @@ export default class Event extends Component {
     let { img, title, url, page, event_id } = this.props;
     return (
       <div className="col-md-12 mt-3">
-        <div className="card bg-dark text-white">
-          <img
-            className="card-img"
-            src={img}
-            alt="img"
-            style={{ objectFit: "cover", maxHeight: "250px" }}
-          />
-          <div className="card-img-overlay">
-            <h5>{title}</h5>
-            <p>{url}</p>
-            <Link
-              to={{
-                pathname: "/EventPage",
-                state: { event_id, img, title, url, page }
-              }}
-              style={{ textDecoration: "none" }}
-            >
-              Read more
-            </Link>
+        <div className="card mb-3">
+          <img style={{backgroundSize: 'cover', maxHeight: '150px'}} className="card-img-top" src={img} alt="Card image cap" />
+          <div className="card-body">
+            <h5 className="card-title">{title}</h5>
+            <a className="card-text" href={url}>{url}</a>
+            <p className="card-text">
+              <Link
+                to={{
+                  pathname: "/EventPage",
+                  state: { event_id, img, title, url, page }
+                }}
+                style={{ textDecoration: "none" }}
+              >
+                Read more
+              </Link>
+            </p>
           </div>
         </div>
       </div>

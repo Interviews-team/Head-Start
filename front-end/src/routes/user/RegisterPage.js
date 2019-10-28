@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import "../../CSS/RegisterPage.css";
 
 export default class RegisterPage extends Component {
@@ -67,7 +68,7 @@ export default class RegisterPage extends Component {
     if (!nameReg.test(name)) {
       this.setState({
         nameMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Name is Invalid!<li>should be like "Abcd efgh" or "abcd efgh"</li>
             <li>maximum length of 30 characters</li>
             <li>minimum length of 3 characters</li>
@@ -82,7 +83,7 @@ export default class RegisterPage extends Component {
     if (!emailReg.test(email)) {
       this.setState({
         emailMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Email is Invalid!<li>should be like "test@test.test"</li>
           </ul>
         )
@@ -95,7 +96,7 @@ export default class RegisterPage extends Component {
     if (!mobileNumberReg.test(mobileNumber)) {
       this.setState({
         mobileNumberMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Mobile Number is Invalid!<li>should be 10 digits long</li>
           </ul>
         )
@@ -108,7 +109,7 @@ export default class RegisterPage extends Component {
     if (!passwordReg.test(password)) {
       this.setState({
         passwordMsg: (
-          <ul style={{ color: "red" }}>
+          <ul style={{ color: "red", textAlign: "left" }}>
             Password is Invalid! <li>should be 8 characters long or more</li>
             <li>should contain at least one digit</li>
             <li>should contain at least one lower case</li>
@@ -131,7 +132,7 @@ export default class RegisterPage extends Component {
         if (res.data !== null) {
           this.setState({
             alreadyExists: (
-              <p style={{ color: "red" }}>
+              <p style={{ color: "red", fontWeight: "bold" }}>
                 This Email Address Already Has an Account!
               </p>
             )
@@ -176,21 +177,18 @@ export default class RegisterPage extends Component {
                 </option>
                 <option value="Civil Engineering"> Civil Engineering </option>
               </select>
-
-              <label>
+              <label className="mr-3">
                 <input name="gender" type="radio" value="Male" defaultChecked />
                 Male
               </label>
-              <label>
+              <label className="ml-3">
                 <input name="gender" type="radio" value="Female" />
                 Female
               </label>
               {this.state.alreadyExists}
               <button>Register</button>
               <p class="message">
-                <h4>
-                  Already registered? <a href="/LoginPage">Sign In</a>
-                </h4>
+                Already have an account? <Link to="/LoginPage">  Login</Link>
               </p>
             </form>
           </div>
