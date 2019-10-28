@@ -21,6 +21,7 @@ export default class RegisterPage extends Component {
     passwordMsg: null,
     alreadyExists: null
   };
+  
   isFormValid = async event => {
     event.preventDefault();
     let name = event.target["name"].value;
@@ -196,4 +197,4 @@ export default class RegisterPage extends Component {
     );
   }
 }
-//need to edit option based on DB
+

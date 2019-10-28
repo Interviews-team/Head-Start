@@ -134,7 +134,6 @@ export default class AdminDashboardPage extends Component {
   };
 
   acceptPending = admin => {
-    
     axios
       .post("http://localhost:9000/accept-pending", admin)
       .then(res => this.getPendingAdmins());
@@ -154,13 +153,7 @@ export default class AdminDashboardPage extends Component {
 
   render() {
     let { role } = this.props.loggedInUser;
-    let {
-      users,
-      posts,
-      pendingAdmins,
-      pendingQuestions,
-      events
-    } = this.state;
+    let { users, posts, pendingAdmins, pendingQuestions, events } = this.state;
 
     let eventsToShow = events.map(event => (
       <Event
@@ -174,7 +167,12 @@ export default class AdminDashboardPage extends Component {
     ));
 
     let pendingAdminsToShow = pendingAdmins.map(pending => (
-      <PendingAdmin key={pending._id} {...pending} acceptPending={this.acceptPending} deletePending={this.deletePending}/>
+      <PendingAdmin
+        key={pending._id}
+        {...pending}
+        acceptPending={this.acceptPending}
+        deletePending={this.deletePending}
+      />
     ));
 
     let usersToShow = users.map(user => <User key={user._id} {...user} />);
@@ -286,6 +284,10 @@ export default class AdminDashboardPage extends Component {
             {pendingQuestionsToShow}
           </>
         )}
+        <br />
+        <br />
+        <br />
+        <br />
       </div>
     );
   }
