@@ -16,6 +16,7 @@ export default class Event extends Component {
       event_id,
       loggedInUser
     } = this.props;
+    console.log(url);
     return (
       <div className="col-md-12 mt-3">
         <div id="row-card" className="card mb-3">
@@ -27,7 +28,7 @@ export default class Event extends Component {
           />
           <div className="card-body">
             <h5 id="event-card-event" className="card-title"><i class="far fa-calendar-alt"></i>  {title}</h5>
-            <a className="card-text" href={url}><i class="fas fa-link"></i>   {url}</a>
+            <a className="card-text" href={`http://${url}`} target='_blank' rel="noopener noreferrer"><i class="fas fa-link"></i>{url}</a>
             <p className="card-text">
               <Link
                 className="float-left"

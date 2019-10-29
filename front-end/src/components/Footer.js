@@ -20,18 +20,18 @@ export default class Footer extends Component {
         <ul className="social-media">
           <li>/ Follow Us</li>
           <li>
-            <a href="">
-              <i class="fab fa-facebook"></i>
+            <a href="http://facebook.com">
+              <i className="fab fa-facebook"></i>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fab fa-twitter"></i>
+            <a href="http://twitter.com">
+              <i className="fab fa-twitter"></i>
             </a>
           </li>
           <li>
-            <a href="#">
-              <i class="fab fa-linkedin-in"></i>
+            <a href="http://linkedin.com">
+              <i className="fab fa-linkedin-in"></i>
             </a>
           </li>
         </ul>

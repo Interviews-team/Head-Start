@@ -80,7 +80,6 @@ export default class JoinUsPage extends Component {
             className="alert alert-success w-50 mt-3"
             style={{
               textAlign: "center",
-              textAlign: "center",
               margin: "0 auto"
             }}
             role="alert"
