@@ -40,6 +40,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://www.facebook.com/ahmd.al.ghzawi"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-facebook"></i>
@@ -49,6 +50,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://github.com/ahmadghzawi"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-github"></i>
@@ -58,6 +60,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://www.linkedin.com/in/ahmad-ghzawi-827082139"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-linkedin-in"></i>
@@ -83,6 +86,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://www.facebook.com/ahmad.nsouu"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-facebook"></i>
@@ -92,6 +96,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://github.com/AhmadNsour"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-github"></i>
@@ -101,6 +106,7 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://www.linkedin.com/in/ahmad-alnsour-723672121"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-linkedin-in"></i>
@@ -123,7 +129,12 @@ export default class AboutUsPage extends Component {
                 </span>
                 <ul className="social mb-0 list-inline mt-3">
                   <li className="list-inline-item">
-                    <a href="#" target="_blank" className="social-link">
+                    <a
+                      href="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                    >
                       <i className="fab fa-facebook"></i>
                     </a>
                   </li>
@@ -131,13 +142,19 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://github.com/MohammadAlaaAldein"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-github"></i>
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a href="#" target="_blank" className="social-link">
+                    <a
+                      href="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                    >
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </li>
@@ -158,7 +175,12 @@ export default class AboutUsPage extends Component {
                 </span>
                 <ul className="social mb-0 list-inline mt-3">
                   <li className="list-inline-item">
-                    <a href="#" target="_blank" className="social-link">
+                    <a
+                      href="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                    >
                       <i className="fab fa-facebook"></i>
                     </a>
                   </li>
@@ -166,13 +188,19 @@ export default class AboutUsPage extends Component {
                     <a
                       href="https://github.com/HaniAboalinain"
                       target="_blank"
+                      rel="noopener noreferrer"
                       className="social-link"
                     >
                       <i className="fab fa-github"></i>
                     </a>
                   </li>
                   <li className="list-inline-item">
-                    <a href="#" target="_blank" className="social-link">
+                    <a
+                      href="/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="social-link"
+                    >
                       <i className="fab fa-linkedin-in"></i>
                     </a>
                   </li>

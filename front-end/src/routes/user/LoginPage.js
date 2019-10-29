@@ -99,7 +99,7 @@ export default class LoginPage extends Component {
               <br />
               {this.state.invalid}
               <button className="mb-3 btn btn-primary">Login</button>
-              <p class="message">
+              <p className="message">
                 Do not have an account?
                 <Link to="/RegisterPage">  Register</Link>
               </p>

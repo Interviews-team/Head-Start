@@ -76,14 +76,14 @@ export default class UserProfilePage extends Component {
             <div className="w-100 mt-5">
               <main className="col-md-4" style={cardWidth}>
                 
-                <div id="some-how" class="card bg-light" style={cardColor}>
-                  <div style={{backgroundColor: '#f9f9f9'}} class="card-header text-center p-4">
-                    <h1  className="text-dark"><i class="fas fa-edit"></i> Update Information</h1>
+                <div id="some-how" className="card bg-light" style={cardColor}>
+                  <div style={{backgroundColor: '#f9f9f9'}} className="card-header text-center p-4">
+                    <h1  className="text-dark"><i className="fas fa-edit"></i> Update Information</h1>
                   </div>
-                  <div class="card-body text-dark p-4 ">
+                  <div className="card-body text-dark p-4 ">
                     <form onSubmit={this.updateProfile}>
                       <div className="form-group">
-                        <h6><i class="fas fa-user"></i> Name:</h6>
+                        <h6><i className="fas fa-user"></i> Name:</h6>
                         <input
                           defaultValue={name}
                           name="name"
@@ -93,7 +93,7 @@ export default class UserProfilePage extends Component {
                           placeholder="Name"
                         />
                       </div>
-                      <h6><i class="fas fa-at"></i> E-mail:</h6>
+                      <h6><i className="fas fa-at"></i> E-mail:</h6>
                       <div className="form-group">
                         <input
                           defaultValue={email}
@@ -104,7 +104,7 @@ export default class UserProfilePage extends Component {
                           placeholder="Email"
                         />
                       </div>
-                      <h6><i class="fas fa-mobile-alt"></i> Mobile Number:</h6>
+                      <h6><i className="fas fa-mobile-alt"></i> Mobile Number:</h6>
                       <div className="form-group">
                         <input
                           defaultValue={mobileNumber}
@@ -115,7 +115,7 @@ export default class UserProfilePage extends Component {
                           placeholder="Mobile Number"
                         />
                       </div>
-                      <h6><i class="fab fa-cuttlefish"></i> Field:</h6>
+                      <h6><i className="fab fa-cuttlefish"></i> Field:</h6>
                       <div className="form-group">
                         <select
                           defaultValue="Default"
