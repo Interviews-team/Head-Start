@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Event from "../../components/Event";
 import PendingAdmin from "../../components/PendingAdmin";
 import PendingQuestion from "../../components/PendingQuestion";
 import User from "../../components/User";
@@ -15,6 +14,7 @@ export default class AdminDashboardPage extends Component {
     comments: [],
     pendingAdmins: [],
     pendingQuestions: [],
+    msg: null
   };
 
   componentDidMount() {
@@ -57,7 +57,13 @@ export default class AdminDashboardPage extends Component {
         gender,
         role
       })
-      .then(res => this.setState({ users: res.data }));
+      .then(res =>
+        this.setState({ users: res.data, msg: "User Added Successfully!" })
+      );
+
+    setTimeout(() => {
+      this.setState({ msg: null });
+    }, 5000);
   };
 
   getUsers() {
@@ -138,11 +144,11 @@ export default class AdminDashboardPage extends Component {
     axios
       .post("http://localhost:9000/delete-user", { _id })
       .then(res => this.setState({ users: res.data }));
-  }
+  };
 
   render() {
     let { role } = this.props.loggedInUser;
-    let { users, posts, pendingAdmins, pendingQuestions, events } = this.state;
+    let { users, posts, pendingAdmins, pendingQuestions } = this.state;
 
     let pendingAdminsToShow = pendingAdmins.map(pending => (
       <PendingAdmin
@@ -153,7 +159,9 @@ export default class AdminDashboardPage extends Component {
       />
     ));
 
-    let usersToShow = users.map(user => <User key={user._id} {...user} deleteUser={this.deleteUser} />);
+    let usersToShow = users.map(user => (
+      <User key={user._id} {...user} deleteUser={this.deleteUser} />
+    ));
 
     let postsToShow = posts.map(post => (
       <Post
@@ -179,16 +187,38 @@ export default class AdminDashboardPage extends Component {
       <div className="container-fluid">
         <div className="row mt-3 mb-3">
           <h3 className="mt-3 mb-3 col-md-2">Admin Dashboard</h3>
-          <div className="col-md-9"></div>
-          <button className="btn btn-success font-weight-bold">
-            <Link
-              to="/addEventPage"
-              className="col-md-1"
-              style={{ textDecoration: "none", color: "white", fontSize: 20 }}
+          <div className="col-md-9">
+            {this.state.msg === null ? null : 
+            <div
+              className="alert alert-success"
+              style={{ textAlign: "center" }}
+              role="alert"
             >
-              add event
-            </Link>
-          </button>
+              {this.state.msg}
+            </div>
+            }
+          </div>
+          {role === "owner" ? (
+            <button className="btn btn-success font-weight-bold">
+              <Link
+                to="/addEventPage"
+                className="col-md-1"
+                style={{ textDecoration: "none", color: "white", fontSize: 20 }}
+              >
+                Add Event
+              </Link>
+            </button>
+          ) : (
+            <button className="btn btn-success font-weight-bold">
+              <Link
+                to="/addPostPage"
+                className="col-md-1"
+                style={{ textDecoration: "none", color: "white", fontSize: 20 }}
+              >
+                Add Post
+              </Link>
+            </button>
+          )}
         </div>
         {role === "owner" ? (
           <div className="row bg-light">
@@ -302,10 +332,6 @@ export default class AdminDashboardPage extends Component {
                 </div>
               </form>
             </div>
-            <div className="col-md-2 mt-3">
-              <h3 className="font-weight-bold">Pending Requests</h3>
-              {pendingAdminsToShow}
-            </div>
 
             <div className="col-md-8 mt-3">
               <h3 className="font-weight-bold">Users</h3>
@@ -321,36 +347,38 @@ export default class AdminDashboardPage extends Component {
                     <th scope="col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
-                  {usersToShow}
-                </tbody>
+                <tbody>{usersToShow}</tbody>
               </table>
+            </div>
+            <div className="col-md-2 mt-3">
+              <h3 className="font-weight-bold">Pending Requests</h3>
+              {pendingAdminsToShow}
             </div>
           </div>
         ) : role === "hrAdmin" ? (
-          <>
-            <Link to="addPostPage">add post</Link>
-            <br />
-            <br />
-            <h3>POSTS</h3>
-            {postsToShow}
-            <br />
-            <br />
-            <h3>Pending Q</h3>
-            {pendingQuestionsToShow}
-          </>
+          <div className="row bg-light">
+            <div className="col-md-8 mt-3">
+              <h3 className="font-weight-bold">Posts</h3>
+              {postsToShow}
+            </div>
+
+            <div className="col-md-4 mt-3">
+              <h3 className="font-weight-bold">Pending Questions</h3>
+              {pendingQuestionsToShow}
+            </div>
+          </div>
         ) : (
-          <>
-            <Link to="addPostPage">add post</Link>
-            <br />
-            <br />
-            <h3>POSTS</h3>
-            {postsToShow}
-            <br />
-            <br />
-            <h3>Pending Q</h3>
-            {pendingQuestionsToShow}
-          </>
+          <div className="row bg-light">
+            <div className="col-md-8 mt-3">
+              <h3 className="font-weight-bold">Posts</h3>
+              {postsToShow}
+            </div>
+
+            <div className="col-md-4 mt-3">
+              <h3 className="font-weight-bold">Pending Questions</h3>
+              {pendingQuestionsToShow}
+            </div>
+          </div>
         )}
         <br />
         <br />

@@ -8,7 +8,8 @@ export default class UserProfilePage extends Component {
       email: null,
       mobileNumber: null,
       field: null
-    }
+    },
+    msg: null
   };
 
   componentDidMount() {
@@ -39,9 +40,19 @@ export default class UserProfilePage extends Component {
       field !== this.state.user.field
     ) {
       let user = { _id, name, email, mobileNumber, field };
-      axios.post(`http://localhost:9000/update-user`, user).then(res => {
-        this.props.getLoggedInUser();
-      });
+      axios
+        .post(`http://localhost:9000/update-user`, user)
+        .then(res => {
+          this.setState({
+            msg: "Profile Updated Successfully!"
+          });
+        })
+        .catch(err => console.log(err));
+
+      setTimeout(() => {
+        this.setState({ msg: null });
+        this.props.getLoggedInUser()
+      }, 5000);
     }
   };
 
@@ -121,8 +132,15 @@ export default class UserProfilePage extends Component {
                     </form>
                   </div>
                 </div>
-
-                <br />
+                {this.state.msg === null ? null : (
+                  <div
+                    className="alert alert-success mt-4"
+                    style={{ textAlign: "center" }}
+                    role="alert"
+                  >
+                    {this.state.msg}
+                  </div>
+                )}
               </main>
             </div>
           </div>

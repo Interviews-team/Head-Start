@@ -24,6 +24,7 @@ export default class PendingQuestion extends Component {
           {this.props.page === "UserDashboardPage" ? (
             <div className="card-body">
               <h5>{this.props.question}</h5>
+              <h6>{this.props.field}</h6>
               {this.props.status === "answered" ? (
                 <h5 className="badge badge-success float-left">
                   {this.props.status}
@@ -47,6 +48,7 @@ export default class PendingQuestion extends Component {
                 <h4>{this.props.question}</h4>
               </div>
               <div className="card-body">
+              <h6>{this.props.field}</h6>
                 <form onSubmit={this.answerPending}>
                   <div className="form-group">
                     <textarea
@@ -56,7 +58,7 @@ export default class PendingQuestion extends Component {
                       rows="3"
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn btn-primary float-left">
+                  <button type="submit" className="btn btn-success float-left">
                     Answer
                   </button>
                 </form>
@@ -64,7 +66,7 @@ export default class PendingQuestion extends Component {
                   className="btn btn-danger float-right"
                   onClick={this.deletePending}
                 >
-                  X
+                  DELETE
                 </button>
               </div>
             </>

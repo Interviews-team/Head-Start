@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import axios from "axios";
 
 export default class AddQuestionPage extends Component {
+  state = {
+    msg: null
+  };
+
   addPost = event => {
     event.preventDefault();
 
@@ -13,12 +17,23 @@ export default class AddQuestionPage extends Component {
     event.target["question"].value = "";
     event.target["answer"].value = "";
 
-    axios.post("http://localhost:9000/add-post", {
-      question,
-      answer,
-      field,
-      user_id
-    });
+    axios
+      .post("http://localhost:9000/add-post", {
+        question,
+        answer,
+        field,
+        user_id
+      })
+      .then(res =>
+        this.setState({
+          msg: "Post Added Successfully!"
+        })
+      )
+      .catch(err => console.log(err));
+
+    setTimeout(() => {
+      this.setState({ msg: null });
+    }, 5000);
   };
 
   render() {
@@ -65,6 +80,15 @@ export default class AddQuestionPage extends Component {
                 </div>
               </div>
             </div>
+            {this.state.msg === null ? null : (
+              <div
+                className="alert alert-success mt-4"
+                style={{ textAlign: "center" }}
+                role="alert"
+              >
+                {this.state.msg}
+              </div>
+            )}
           </main>
         </div>
       </div>

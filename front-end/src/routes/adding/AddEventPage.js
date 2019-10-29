@@ -6,12 +6,12 @@ export default class AddEventPage extends Component {
   state = {
     image: null,
     url: "",
-    progress: 0
+    progress: 0,
+    msg: null
   };
 
   addEvent = e => {
     e.preventDefault();
-    console.log(this.state.url);
     let event = {
       title: e.target["title"].value,
       img_path: this.state.url,
@@ -21,13 +21,21 @@ export default class AddEventPage extends Component {
 
     axios
       .post("http://localhost:9000/add-event", event)
+      .then(res =>
+        this.setState({
+          msg: "Event Added Successfully! Check It In Events Page"
+        })
+      )
       .catch(err => console.log(err));
 
-    this.props.history.goBack();
+      setTimeout(() => {
+        this.setState({ msg: null });
+      }, 5000);
+      
   };
 
   getImage = event => {
-    alert("Clicl Upload to Start uploading Your Event Image!");
+    alert("Click Upload To Start Uploading The Image!");
     const image = event.target.files[0];
     this.setState(() => ({ image }));
   };
@@ -56,7 +64,6 @@ export default class AddEventPage extends Component {
           });
       }
     );
-    console.log(this.state);
   };
 
   render() {
@@ -75,7 +82,7 @@ export default class AddEventPage extends Component {
                   <div className="card-header text-center centered">
                     <h1>Add Event</h1>
                   </div>
-                  <div class="card-body">
+                  <div className="card-body">
                     <div className="custom-file">
                       <input
                         type="file"
@@ -134,7 +141,7 @@ export default class AddEventPage extends Component {
                         <textarea
                           id="form22"
                           name="description"
-                          class="md-textarea form-control"
+                          className="md-textarea form-control"
                           rows="4"
                         ></textarea>
                       </div>
@@ -148,12 +155,20 @@ export default class AddEventPage extends Component {
                           ></img>
                         </div>
                       )}
-                      <button type="submit" className="btn btn-secondary">
-                        Submit
+                      <button type="submit" className="btn btn-primary">
+                        Add Event
                       </button>
                     </form>
                   </div>
-                  <br />
+                  {this.state.msg === null ? null : (
+                    <div
+                      className="alert alert-success"
+                      style={{ textAlign: "center" }}
+                      role="alert"
+                    >
+                      {this.state.msg}
+                    </div>
+                  )}
                   <br />
                   <br />
                   <br />
@@ -161,7 +176,6 @@ export default class AddEventPage extends Component {
                   <br />
                 </div>
               </div>
-              <br />
             </div>
           </div>
         </div>

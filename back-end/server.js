@@ -134,9 +134,9 @@ app.post("/accept-pending", (req, res) => {
   db.acceptPending(accepted => res.json(accepted), req.body);
 });
 
-app.post('/delete-pending', (req, res) => {
-  db.deletePending(deleted => res.json(deleted), req.body)
-})
+app.post("/delete-pending", (req, res) => {
+  db.deletePending(deleted => res.json(deleted), req.body);
+});
 
 //EVENTS FUNCTIONS
 //Please write your code below and only below your name
@@ -144,21 +144,23 @@ app.get(`/get-events`, (req, res) => {
   db.getEvents(events => res.json(events));
 });
 
-app.post(`/add-event`, req => {
-  db.addEvent(req.body);
+app.post(`/add-event`, (req, res) => {
+  db.addEvent(okay => res.json(okay),req.body);
 });
 
-app.post('/delete-event', (req, res) => {
-  db.deleteEvent(events => res.json(events), req.body)
-})
+app.post("/delete-event", (req, res) => {
+  db.deleteEvent(events => res.json(events), req.body);
+});
 
-app.post('/delete-user', (req, res) => {
-  db.deleteUser(users => res.json(users), req.body)
-})
+app.post("/delete-user", (req, res) => {
+  db.deleteUser(users => res.json(users), req.body);
+});
 
 //for ask question
 //askQuestion={this.askQuestion}
-app.post(`/ask-question`, req => db.askQuestion(req.body));
+app.post(`/ask-question`, (req, res) => {
+  db.askQuestion(okay => res.json(okay), req.body);
+});
 
 //USER DASHBOARD
 // GET POSTS
@@ -187,11 +189,13 @@ app.post("/delete-user-comment", (req, res) => {
   }, req.body);
 });
 
-app.post("/add-post", req => {
-  db.addPost(req.body);
+app.post("/add-post", (req, res) => {
+  db.addPost(okay => res.json(okay),req.body);
 });
 
-app.post("/application", req => db.application(req.body));
+app.post("/application", (req, res) =>
+  db.application(okay => res.json(okay), req.body)
+);
 
 const PORT = process.env.PORT || 9000;
 
