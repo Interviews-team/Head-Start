@@ -149,10 +149,10 @@ export default class RegisterPage extends Component {
   render() {
     return (
       <div id="mainDiv" className="text-center">
-        <div class="login-page">
-          <div class="form">
+        <div className="login-page">
+          <div className="form">
             Register
-            <form onSubmit={this.isFormValid} class="login-form">
+            <form onSubmit={this.isFormValid} className="login-form">
               <input name="name" type="text" placeholder="Name" />
               {this.state.nameMsg}
               <input name="email" type="text" placeholder="Email" />
@@ -185,7 +185,7 @@ export default class RegisterPage extends Component {
               </label>
               {this.state.alreadyExists}
               <button>Register</button>
-              <p class="message">
+              <p className="message">
                 Already have an account? <Link to="/LoginPage"> Login</Link>
               </p>
             </form>

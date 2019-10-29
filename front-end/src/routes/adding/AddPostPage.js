@@ -45,29 +45,29 @@ export default class AddQuestionPage extends Component {
         <div className="row">
           <div className="col-md-4"></div>
           <main className="col-md-4 mt-4">
-            <div class="card bg-light " style={cardShadow}>
+            <div className="card bg-light " style={cardShadow}>
               <div className="card-header text-center ">
-                <h1 class="text-dark">Add Post</h1>
+                <h1 className="text-dark">Add Post</h1>
               </div>
-              <div class="card-body text-dark p-4">
-                <div class="card-subtitle mb-2 text-dark">
+              <div className="card-body text-dark p-4">
+                <div className="card-subtitle mb-2 text-dark">
                   <form onSubmit={this.addPost}>
-                    <div class="form-group">
+                    <div className="form-group">
                       <br />
                       <h3 for="exampleFormControlInput1">Question:</h3>
                       <input
                         type="text"
                         name="question"
-                        class="form-control"
+                        className="form-control"
                         id="exampleFormControlInput1"
                         placeholder="write your question here ..."
                       />
                     </div>
                     <br />
-                    <div class="form-group">
+                    <div className="form-group">
                       <h3 for="exampleFormControlTextarea1">Answer:</h3>
                       <textarea
-                        class="form-control"
+                        className="form-control"
                         name="answer"
                         id="exampleFormControlTextarea1"
                         rows="4"

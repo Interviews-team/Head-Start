@@ -113,21 +113,21 @@ export default class UserDashboardPage extends Component {
         <div className="row bg-light">
           <div className="col-md-6 mt-3">
             <h4 style={{ fontWeight: "lighter", textDecoration: "none", fontSize: "27px" }}>
-            <i class="far fa-clone"></i> Posts
+            <i className="far fa-clone"></i> Posts
             </h4>
             {postsToShow}
           </div>
 
           <div className="col-md-3 mt-3">
             <h4 style={{ fontWeight: "lighter", textDecoration: "none", fontSize: "27px" }}>
-            <i class="far fa-comment-dots"></i> Comments
+            <i className="far fa-comment-dots"></i> Comments
             </h4>
             {commentsToShow}
           </div>
 
           <div className="col-md-3 mt-3">
             <h4 style={{ fontWeight: "lighter", textDecoration: "none", fontSize: "27px" }}>
-            <i class="far fa-clock"></i> Pending
+            <i className="far fa-clock"></i> Pending
             </h4>
             {pendingsToShow}
           </div>

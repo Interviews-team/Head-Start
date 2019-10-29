@@ -40,19 +40,19 @@ export default class JoinUsPage extends Component {
     return (
       <div className="p-5 mt-5" style={JoinUsPage}>
         <div className="col-md-12 ">
-          <div class="mt-5 card text-center w-50 m-auto">
-            <div class="card-header">
+          <div className="mt-5 card text-center w-50 m-auto">
+            <div className="card-header">
               <h1>
-                <i class="fas fa-users"></i> Join Us{" "}
+                <i className="fas fa-users"></i> Join Us{" "}
               </h1>
             </div>
-            <div class="card-body">
-              <h5 class="card-title">
+            <div className="card-body">
+              <h5 className="card-title">
                 Our members make a visible difference by serving as community
                 leaders using their experience to create positive, lasting
                 change in our communities.
               </h5>
-              <p class="card-text">
+              <p className="card-text">
                 WHY SHOULD YOU JOIN?
                 <li>Contribute valuable service to the community</li>
                 <li>
