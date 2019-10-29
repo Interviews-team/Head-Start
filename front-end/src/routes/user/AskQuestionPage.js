@@ -61,7 +61,7 @@ export default class AskQuestionPage extends Component {
                       <option value="IT"> Information Technology </option>
                     </select>
                     <br />
-                    <button className="btn btn-secondary">Ask Question</button>
+                    <button className="btn btn-primary">Ask Question</button>
                   </div>
                 </form>
               </div>

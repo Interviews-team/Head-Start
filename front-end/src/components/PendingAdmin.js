@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 
 export default class PendingAdmin extends Component {
-
-  acceptPending = event =>{
-    event.preventDefault()
+  acceptPending = event => {
+    event.preventDefault();
     let admin = {
       _id: this.props._id,
       user_id: this.props.user_id,
-      role: event.target['role'].value
-    }
-    
-    this.props.acceptPending(admin)
-  }
+      role: event.target["role"].value
+    };
 
-  deletePending =()=>{
-    this.props.deletePending(this.props._id)
-  }
+    this.props.acceptPending(admin);
+  };
+
+  deletePending = () => {
+    this.props.deletePending(this.props._id);
+  };
 
   render() {
-    let { name, email, mobileNumber, field} = this.props;
+    let { name, email, mobileNumber, field } = this.props;
     return (
       <div>
         <h3>Pending Admin</h3>
@@ -33,13 +32,14 @@ export default class PendingAdmin extends Component {
             <option value="techAdmin">TECH Admin</option>
             <option value="user">User</option>
           </select>
-          <button type="submit" className="btn btn-success">
+          <button type="submit" className="btn btn-primary">
             accept
           </button>
         </form>
 
-        <button className='btn btn-danger' onClick={this.deletePending}>X</button>
-        
+        <button className="btn btn-danger" onClick={this.deletePending}>
+          X
+        </button>
       </div>
     );
   }

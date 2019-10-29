@@ -48,21 +48,16 @@ export default class LandingPage extends Component {
     return (
       <>
         <img src={LandingPageImage} alt="img" className="w-100"></img>
-        {/* <h3 className="">
-          Want to increase your chances in getting the job? HEAD START is the
-          right choice ...
-        </h3> */}
-        {/* <AboutUsPage /> */}
         <div className="container mb-5">
           <div className="row">{eventsToShow}</div>
         </div>
         <div className="container">
           <div className="row">{postsToShow}</div>
         </div>
-        <br/>
-        <br/>
-        <br/>
-        <br/>
+        <br />
+        <br />
+        <br />
+        <br />
       </>
     );
   }

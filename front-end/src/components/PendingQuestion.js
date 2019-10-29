@@ -56,7 +56,7 @@ export default class PendingQuestion extends Component {
                       rows="3"
                     ></textarea>
                   </div>
-                  <button type="submit" className="btn btn-success float-left">
+                  <button type="submit" className="btn btn-primary float-left">
                     Answer
                   </button>
                 </form>
