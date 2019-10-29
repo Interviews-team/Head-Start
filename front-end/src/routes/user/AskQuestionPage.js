@@ -47,7 +47,7 @@ export default class AskQuestionPage extends Component {
             <div className="card bg-light mb-3 mt-5" style={cardStyle}>
               <div className="card-header text-center p-4">
                 <h1 className="text-dark">
-                  <b>Ask Question</b>
+                  <i class="fas fa-question"></i> Ask Question
                 </h1>
               </div>
               <div className="card-body text-dark p-4">

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Event from "../../components/Event";
-import EventsImage from "../../images/events.jpg";
+import EventsImage from "../../images/confrence.jpg";
 
 export default class EventsPage extends Component {
   state = {
@@ -31,7 +31,8 @@ export default class EventsPage extends Component {
       OBackgroundSize: "cover",
       backgroundSize: "cover",
       height: "87vh",
-      backgroundRepeat: "no-repeat"
+      backgroundRepeat: "no-repeat",
+      backgroundPositionX: "bottom"
     };
 
     return (

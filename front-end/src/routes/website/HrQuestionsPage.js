@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Post from "../../components/Post";
-import HrQuestionsImage from "../../images/hr.jpg";
+import HrQuestionsImage from "../../images/1146.jpg";
 
 export default class HrQuestionsPage extends Component {
   state = {

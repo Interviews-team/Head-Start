@@ -42,9 +42,9 @@ export default class JoinUsPage extends Component {
         <div className="col-md-12 ">
           <div class="mt-5 card text-center w-50 m-auto">
             <div class="card-header">
-              <h1> Join Us </h1>
+              <h1><i class="fas fa-users"></i> Join Us </h1>
             </div>
-            <div class="card-body">
+            <div class="card-body" >
               <h5 class="card-title">
                 Our members make a visible difference by serving as community
                 leaders using their experience to create positive, lasting

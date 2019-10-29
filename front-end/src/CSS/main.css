@@ -39,6 +39,11 @@
     rgba(58, 117, 140, 1) 100%
   );
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#62cdd9', endColorstr='#3a758c', GradientType=0 );
+
+  -webkit-box-shadow: 0px 6px 16px 0px rgba(122,122,122,1);
+-moz-box-shadow: 0px 6px 16px 0px rgba(122,122,122,1);
+box-shadow: 0px 6px 16px 0px rgba(122,122,122,1);
+
 }
 #nav-bar i {
   font-size: 55px;
@@ -56,4 +61,41 @@
   font-weight: lighter;
 }
 
+#row-card{
+  background-color: #f9f9f9;
+  border-radius: 6px;
+  padding: 7px;
+  -webkit-box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
+  -moz-box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
+  box-shadow: 7px 7px 0px 0px rgba(0,0,0,0.16);
+}
 
+#event-card-event{
+  font-size: 29px;
+}
+#close-identity{
+  font-size: 22px;
+}
+
+#footer-identity{
+  background-color: #3d7b92;
+}
+.social-media{
+  padding: 0;
+  margin: 0 auto;
+}
+.social-media li{
+  list-style: none;
+  display: inline;
+  font-size: 19px;
+  margin-right: 11px;
+  color: white;
+}
+.social-media li a{
+  color: white;
+}
+
+#some-how{
+  background-color: white !important;
+  box-shadow: none !important;
+}
