@@ -15,13 +15,11 @@ export default class AdminDashboardPage extends Component {
     comments: [],
     pendingAdmins: [],
     pendingQuestions: [],
-    events: []
   };
 
   componentDidMount() {
     if (this.props.loggedInUser.role === "owner") {
       this.getUsers();
-      this.getEvents();
       this.getPendingAdmins();
     } else if (this.props.loggedInUser.role === "hrAdmin") {
       this.getPendingHrQuestions();
@@ -31,16 +29,6 @@ export default class AdminDashboardPage extends Component {
       this.getTechnicalPosts();
     }
   }
-
-  addField = event => {
-    event.preventDefault();
-    let field = event.target["field"].value;
-    event.target["field"].value = "";
-
-    axios
-      .post("http://localhost:9000/add-field", { field })
-      .then(res => this.setState({ fields: res.data }));
-  };
 
   addAdmin = event => {
     event.preventDefault();
@@ -71,12 +59,6 @@ export default class AdminDashboardPage extends Component {
       })
       .then(res => this.setState({ users: res.data }));
   };
-
-  getEvents() {
-    axios.get("http://localhost:9000/get-events").then(response => {
-      this.setState({ events: response.data });
-    });
-  }
 
   getUsers() {
     axios.get("http://localhost:9000/get-users").then(response => {
@@ -151,28 +133,16 @@ export default class AdminDashboardPage extends Component {
     });
   };
 
-  deleteEvent = _id => {
+  deleteUser = _id => {
+    console.log(_id);
     axios
-      .post("http://localhost:9000/delete-event", { _id })
-      .then(res => this.setState({ events: res.data }));
+      .post("http://localhost:9000/delete-user", { _id })
+      .then(res => this.setState({ users: res.data }));
   }
 
   render() {
     let { role } = this.props.loggedInUser;
     let { users, posts, pendingAdmins, pendingQuestions, events } = this.state;
-
-    let eventsToShow = events.map(event => (
-      <Event
-        key={event._id}
-        event_id = {event._id}
-        title={event.title}
-        img={event.img_path}
-        description={event.description}
-        url={event.url}
-        deleteEvent={this.deleteEvent}
-        page="AdminDashboardPage"
-      />
-    ));
 
     let pendingAdminsToShow = pendingAdmins.map(pending => (
       <PendingAdmin
@@ -183,7 +153,7 @@ export default class AdminDashboardPage extends Component {
       />
     ));
 
-    let usersToShow = users.map(user => <User key={user._id} {...user} />);
+    let usersToShow = users.map(user => <User key={user._id} {...user} deleteUser={this.deleteUser} />);
 
     let postsToShow = posts.map(post => (
       <Post
@@ -206,70 +176,156 @@ export default class AdminDashboardPage extends Component {
     ));
 
     return (
-      <div>
+      <div className="container-fluid">
+        <div className="row mt-3 mb-3">
+          <h3 className="mt-3 mb-3 col-md-2">Admin Dashboard</h3>
+          <div className="col-md-9"></div>
+          <button className="btn btn-success font-weight-bold">
+            <Link
+              to="/addEventPage"
+              className="col-md-1"
+              style={{ textDecoration: "none", color: "white", fontSize: 20 }}
+            >
+              add event
+            </Link>
+          </button>
+        </div>
         {role === "owner" ? (
-          <div>
-            <form onSubmit={this.addField}>
-              <input type="text" name="field" placeholder="add new field" />
-              <button type="submit" className="btn btn-primary">
-                add field
-              </button>
-            </form>
-            <br />
-            <br />
-            <br />
-            <Link to="addEventPage">add event</Link>
-            {eventsToShow}
-            <br />
-            <br />
-            <br />
-            <form onSubmit={this.addAdmin}>
-              <input type="text" name="name" placeholder="name..." />
-              <input type="email" name="email" placeholder="email..." />
-              <input type="password" name="password" placeholder="password" />
-              <input
-                type="text"
-                name="mobileNumber"
-                placeholder="mobile number..."
-              />
-              <select defaultValue="Default" name="field">
-                <option disabled>Select Field</option>
-                <option value="HR"> Human Resources </option>
-                <option value="IT">Information Technology</option>
-              </select>
-              <div className="form-group">
-                <label>
+          <div className="row bg-light">
+            <div className="col-md-2 mt-3">
+              <h3 className="font-weight-bold">Add User</h3>
+              <form onSubmit={this.addAdmin}>
+                <div className="form-group">
+                  <label htmlFor="name">Name</label>
                   <input
-                    name="gender"
+                    type="text"
+                    className="form-control"
+                    id="name"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter full name..."
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="email">Email</label>
+                  <input
+                    type="email"
+                    className="form-control"
+                    id="email"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter email..."
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="password">Password</label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="password"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter password..."
+                  />
+                </div>
+
+                <div className="form-group">
+                  <label htmlFor="mobileNumber">Mobile Number</label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="mobileNumber"
+                    aria-describedby="emailHelp"
+                    placeholder="Enter mobile number..."
+                  />
+                </div>
+
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
                     type="radio"
+                    name="gender"
+                    id="male"
                     value="Male"
                     defaultChecked
                   />
-                  Male
-                </label>
-                <label>
-                  <input name="gender" type="radio" value="Female" />
-                  Female
-                </label>
-              </div>
-              <select name="role">
-                <option value="owner">Owner</option>
-                <option value="hrAdmin">Hr Admin</option>
-                <option value="techAdmin">TECH Admin</option>
-                <option value="user">User</option>
-              </select>
-              <button type="submit" className="btn btn-primary">
-                add admin
-              </button>
-            </form>
-            <br />
-            <br />
-            <br />
-            {pendingAdminsToShow}
-            <br />
-            <br />
-            <h3>Users</h3>
-            {usersToShow}
+                  <label className="form-check-label" htmlFor="male">
+                    Male
+                  </label>
+                </div>
+                <div className="form-check">
+                  <input
+                    className="form-check-input"
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="female"
+                  />
+                  <label className="form-check-label" htmlFor="female">
+                    Female
+                  </label>
+                </div>
+
+                <div className="form-group mt-2">
+                  <label htmlFor="field">Field</label>
+                  <select
+                    defaultValue="Default"
+                    name="field"
+                    className="custom-select custom-select-sm"
+                  >
+                    <option disabled>Select Field</option>
+                    <option value="HR"> Human Resources </option>
+                    <option value="IT">Information Technology</option>
+                  </select>
+                </div>
+
+                <div className="form-group mt-2">
+                  <label htmlFor="role">Role</label>
+                  <select
+                    defaultValue="Default"
+                    name="role"
+                    className="custom-select custom-select-sm"
+                  >
+                    <option value="owner">Owner</option>
+                    <option value="hrAdmin">Hr Admin</option>
+                    <option value="techAdmin">TECH Admin</option>
+                    <option value="user">User</option>
+                  </select>
+                </div>
+
+                <div className="form-group">
+                  <button
+                    type="submit"
+                    className="form-control btn btn-primary"
+                  >
+                    Add User
+                  </button>
+                </div>
+              </form>
+            </div>
+            <div className="col-md-2 mt-3">
+              <h3 className="font-weight-bold">Pending Requests</h3>
+              {pendingAdminsToShow}
+            </div>
+
+            <div className="col-md-8 mt-3">
+              <h3 className="font-weight-bold">Users</h3>
+
+              <table className="table table-hover mt-4 bg-white">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Mobile Number</th>
+                    <th scope="col">Field</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {usersToShow}
+                </tbody>
+              </table>
+            </div>
           </div>
         ) : role === "hrAdmin" ? (
           <>

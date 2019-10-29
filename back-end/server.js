@@ -152,6 +152,10 @@ app.post('/delete-event', (req, res) => {
   db.deleteEvent(events => res.json(events), req.body)
 })
 
+app.post('/delete-user', (req, res) => {
+  db.deleteUser(users => res.json(users), req.body)
+})
+
 //for ask question
 //askQuestion={this.askQuestion}
 app.post(`/ask-question`, req => db.askQuestion(req.body));

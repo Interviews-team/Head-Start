@@ -1,21 +1,24 @@
 import React, { Component } from "react";
 
 export default class User extends Component {
-  state = {};
+
+  deleteUser(){
+    this.props.deleteUser(this.props._id)
+  }
+
   render() {
-    let {name, email, mobileNumber, role} = this.props
+    let { name, email, mobileNumber, field, role } = this.props;
     return (
-      <>
-        <h3>{name}</h3>
-        <p>{email}</p>
-        <p>{mobileNumber}</p>
-        <p>{role}</p>
-        <br />
-      </>
+      <tr>
+        <td>{name}</td>
+        <td>{email}</td>
+        <td>{mobileNumber}</td>
+        <td>{field}</td>
+        <td>{role}</td>
+        <td>
+          <button className='btn btn-danger' onClick={()=>this.deleteUser()}>DELETE</button>
+        </td>
+      </tr>
     );
   }
 }
-
-
-
-

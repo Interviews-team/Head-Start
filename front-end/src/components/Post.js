@@ -19,14 +19,14 @@ export default class Post extends Component {
       <div className="col-md-12 mt-3">
         <div id="card-container" className="card">
           <div id="card-id" className="card-header">
-            <h3><i class="far fa-question-circle"></i> {question}</h3>
+            <h3><i className="far fa-question-circle"></i> {question}</h3>
           </div>
           <div className="card-body">
             {loggedInUser.role === null ? null : (
               <div>
                 <div className="ml-4">
-                  <h4><i class="fas fa-envelope-open-text"></i>  {answer}</h4>
-                  <p><i class="fab fa-cuttlefish"></i> {field}</p>
+                  <h4><i className="fas fa-envelope-open-text"></i>  {answer}</h4>
+                  <p><i className="fab fa-cuttlefish"></i> {field}</p>
                 </div>
                 {loggedInUser.role === "hrAdmin" &&
                 field === "HR" &&

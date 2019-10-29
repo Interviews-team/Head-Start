@@ -101,14 +101,17 @@ export default class UserDashboardPage extends Component {
         key={pending._id}
         {...pending}
         page="UserDashboardPage"
+        deletePending={this.deletePending}
       />
     ));
 
     return (
       <div className="container-fluid">
-        <h3 className="mt-3 mb-3">User Dashboard</h3>
+        <div className="row mt-3 mb-3">
+          <h3 className="mt-3 mb-3 col-md-2">User Dashboard</h3>
+        </div>
         <div className="row bg-light">
-          <div className="col-md-4 mt-3">
+          <div className="col-md-2 mt-3">
             <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
               Posts
             </h4>

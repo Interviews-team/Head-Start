@@ -44,7 +44,7 @@ export default class TechnicalQuestionsPage extends Component {
         <div className="overflow-auto" style={TechnicalQuestionsPage}>
           <div className="container md-5 w-75">
             <div className="row py-5 px-4">
-              {role === "tecAdmin" ? (
+              {role === "techAdmin" ? (
                 <Link to="/AddPostPage">
                   {" "}
                   <h1 style={{ color: "black" }}>Add post</h1>
