@@ -51,6 +51,11 @@ export default class App extends Component {
   };
 
   componentDidMount() {
+    fetch('/api/posts')
+    .then(res => res.json())
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+    
     this.getLoggedInUser();
     this.getEvents();
     this.getPosts();
