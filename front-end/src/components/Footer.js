@@ -9,7 +9,7 @@ export default class Footer extends Component {
         <Link
           className="p-2 navbar-brand"
           to="/"
-          style={{ textDecoration: "none", color: "white" }}
+          style={{ textDecoration: "none", color: "white", fontWeight: 'bold' }}
         >
           Head Start
         </Link>
