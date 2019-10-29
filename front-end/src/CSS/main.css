@@ -43,3 +43,17 @@
 #nav-bar i {
   font-size: 55px;
 }
+#card-id{
+  background-color: #428C3F;
+  color: white;
+  opacity: 0.9;
+}
+#card-container{
+  opacity: 0.9;
+}
+#card-id h3{
+  font-size: 36px;
+  font-weight: lighter;
+}
+
+
