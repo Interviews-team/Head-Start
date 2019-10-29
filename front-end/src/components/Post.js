@@ -17,21 +17,21 @@ export default class Post extends Component {
 
     return (
       <div className="col-md-12 mt-3">
-        <div className="card">
-          <div className="card-header">
-            <h3>{question}</h3>
+        <div id="card-container" className="card">
+          <div id="card-id" className="card-header">
+            <h3><i class="far fa-question-circle"></i> {question}</h3>
           </div>
           <div className="card-body">
             {loggedInUser.role === null ? null : (
               <div>
                 <div className="ml-4">
-                  <h4>{answer}</h4>
-                  <p>{field}</p>
+                  <h4><i class="fas fa-envelope-open-text"></i>  {answer}</h4>
+                  <p><i class="fab fa-cuttlefish"></i> {field}</p>
                 </div>
                 {loggedInUser.role === "hrAdmin" &&
                 field === "HR" &&
                 page !== "LandingPage" ? (
-                  <button
+                  <button 
                     className="btn btn-danger float-right"
                     onClick={() => this.props.deletePost(post_id)}
                   >

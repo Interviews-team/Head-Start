@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Post from "../../components/Post";
-import TechnicalQuestionsImage from "../../images/Webp.net-resizeimage2.jpg";
+import TechnicalQuestionsImage from "../../images/1.jpg";
 
 export default class TechnicalQuestionsPage extends Component {
   state = {
@@ -34,7 +34,8 @@ export default class TechnicalQuestionsPage extends Component {
       OBackgroundSize: "cover",
       backgroundSize: "cover",
       height: "88vh",
-      backgroundRepeat: "no-repeat"
+      backgroundRepeat: "no-repeat",
+      backgroundPositionY: 'bottom'
     };
 
     let { role } = this.props.loggedInUser;
