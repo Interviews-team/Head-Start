@@ -140,7 +140,7 @@ export default class RegisterPage extends Component {
         } else {
           this.setState({ alreadyExists: null });
           this.props.getLoggedInUser();
-          this.props.history.push('/');
+          this.props.history.push("/");
         }
       })
       .catch(error => console.log(error));
@@ -168,10 +168,8 @@ export default class RegisterPage extends Component {
               {this.state.passwordMsg}
               <select defaultValue="Default" name="field">
                 <option disabled>Select Field</option>
-                <option value="Pharmacy"> Pharmacy </option>
-                <option value="Software Engineering">
-                  Software Engineering
-                </option>
+                <option value="HR"> Human Resources </option>
+                <option value="IT">Information Technology</option>
                 <option value="Electrical Engineering">
                   Electrical Engineering
                 </option>
@@ -188,7 +186,7 @@ export default class RegisterPage extends Component {
               {this.state.alreadyExists}
               <button>Register</button>
               <p class="message">
-                Already have an account? <Link to="/LoginPage">  Login</Link>
+                Already have an account? <Link to="/LoginPage"> Login</Link>
               </p>
             </form>
           </div>
