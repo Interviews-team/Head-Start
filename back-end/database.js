@@ -249,9 +249,9 @@ const getUserPosts = (sendPosts, { _id }) => {
   });
 };
 
-const addPost = post => {
-  Posts.create(post, err => {
-    if (err) console.log(err);
+const addPost = (sendOkay, post) => {
+  Posts.create(post, (err, doc) => {
+    if (err) {console.log(err)} else {sendOkay(doc)}
   });
 };
 
@@ -475,7 +475,10 @@ const getPendingAdmins = sendPendings => {
 };
 
 //SUBMITTED APPLICATION
-const application = ({ _id, name, email, mobileNumber, field, role }) => {
+const application = (
+  sendOkay,
+  { _id, name, email, mobileNumber, field, role }
+) => {
   Pendings.create(
     {
       name,
@@ -486,8 +489,12 @@ const application = ({ _id, name, email, mobileNumber, field, role }) => {
       user_id: _id,
       status: "Pending..."
     },
-    err => {
-      if (err) console.log(err);
+    (err, doc) => {
+      if (err) {
+        console.log(err);
+      } else {
+        sendOkay(doc);
+      }
     }
   );
 };
@@ -505,31 +512,31 @@ const getEvents = sendEvents => {
 };
 
 //ADD NEW EVENT
-const addEvent = event => {
-  Events.create(event, err => {
-    if (err) console.log(err);
+const addEvent = (sendOkay, event) => {
+  Events.create(event, (err, doc) => {
+    if (err) {console.log(err)} else {sendOkay(doc)}
   });
 };
 
-const deleteEvent = (sendEvents, {_id}) => {
-  Events.deleteOne({_id}, err => {
+const deleteEvent = (sendEvents, { _id }) => {
+  Events.deleteOne({ _id }, err => {
     if (err) {
       console.log(err);
     } else {
-      getEvents(sendEvents)
+      getEvents(sendEvents);
     }
-  })
-}
+  });
+};
 
-const deleteUser = (sendUsers, {_id}) => {
-  Users.deleteOne({_id}, err => {
+const deleteUser = (sendUsers, { _id }) => {
+  Users.deleteOne({ _id }, err => {
     if (err) {
       console.log(err);
     } else {
-      getUsers(sendUsers)
+      getUsers(sendUsers);
     }
-  })
-}
+  });
+};
 
 //QUESTION FUNCTIONS
 const getQuestion = sendQuestion => {
@@ -541,10 +548,14 @@ const getQuestion = sendQuestion => {
     }
   });
 };
-const askQuestion = question => {
+const askQuestion = (sendOkay, question) => {
   console.log("QUESTION: ", question);
-  Pendings.create(question, err => {
-    if (err) console.log(err);
+  Pendings.create(question, (err, doc) => {
+    if (err) {
+      console.log(err);
+    } else {
+      sendOkay(doc);
+    }
   });
 };
 

@@ -140,7 +140,7 @@ export default class RegisterPage extends Component {
         } else {
           this.setState({ alreadyExists: null });
           this.props.getLoggedInUser();
-          this.props.history.goBack();
+          this.props.history.push('/');
         }
       })
       .catch(error => console.log(error));

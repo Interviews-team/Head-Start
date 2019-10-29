@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import Post from "../../components/Post";
-import HrQuestionsImage from "../../images/hr.png";
+import HrQuestionsImage from "../../images/hr.jpg";
 
 export default class HrQuestionsPage extends Component {
   state = {
@@ -55,13 +55,19 @@ export default class HrQuestionsPage extends Component {
     return (
       <div>
         <div className="overflow-auto" style={HrQuestionsPage}>
-          <div className="container mt-5 md-5 w-75">
+          {role === "hrAdmin" ? (
+            <button className="btn btn-success font-weight-bold float-right mt-5 mr-5">
+              <Link
+                to="/AddPostPage"
+                className="col-md-1"
+                style={{ textDecoration: "none", color: "white", fontSize: 20 }}
+              >
+                Add Post
+              </Link>
+            </button>
+          ) : null}
+          <div className="container md-5 w-75">
             <div className="row py-5 px-4">
-              {role === "HR" ? (
-                <Link to="/AddPostPage">
-                  <h1 style={{ color: "black" }}>Add post</h1>
-                </Link>
-              ) : null}
               <br />
               {hrPosts}
             </div>

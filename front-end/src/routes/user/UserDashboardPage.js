@@ -111,21 +111,21 @@ export default class UserDashboardPage extends Component {
           <h3 className="mt-3 mb-3 col-md-2">User Dashboard</h3>
         </div>
         <div className="row bg-light">
-          <div className="col-md-2 mt-3">
+          <div className="col-md-6 mt-3">
             <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
               Posts
             </h4>
             {postsToShow}
           </div>
 
-          <div className="col-md-4 mt-3">
+          <div className="col-md-3 mt-3">
             <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
               Comments
             </h4>
             {commentsToShow}
           </div>
 
-          <div className="col-md-4 mt-3">
+          <div className="col-md-3 mt-3">
             <h4 style={{ fontWeight: "bold", textDecoration: "underline" }}>
               Pending
             </h4>
