@@ -17,6 +17,12 @@ export default class EventsPage extends Component {
     });
   }
 
+  deleteEvent = _id => {
+    axios
+      .post("http://localhost:9000/delete-event", { _id })
+      .then(res => this.setState({ events: res.data }));
+  };
+
   render() {
     const EventsPage = {
       backgroundImage: `url(${EventsImage})`,
@@ -29,25 +35,25 @@ export default class EventsPage extends Component {
     };
 
     return (
-      <div>
-        <div className="overflow-auto" style={EventsPage}>
-          <div className="container mt-5 md-5 w-75">
-            <div className="row py-5 px-4">
-              {this.state.events.map(event => {
-                return (
-                  <div className="col-md-4">
-                    <Event
-                      key={event._id}
-                      title={event.title}
-                      img={event.img_path}
-                      description={event.description}
-                      url={event.url}
-                      page="EventsPage"
-                    />
-                  </div>
-                );
-              })}
-            </div>
+      <div className="overflow-auto" style={EventsPage}>
+        <div className="container mt-5 md-5 w-75">
+          <div className="row py-5 px-4">
+            {this.state.events.map(event => {
+              return (
+                <div className="col-md-4" key={event._id}>
+                  <Event
+                    key={event._id}
+                    event_id = {event._id}
+                    title={event.title}
+                    img={event.img_path}
+                    description={event.description}
+                    url={event.url}
+                    deleteEvent={this.deleteEvent}
+                    page="EventsPage"
+                  />
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

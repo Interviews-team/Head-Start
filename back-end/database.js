@@ -511,6 +511,16 @@ const addEvent = event => {
   });
 };
 
+const deleteEvent = (sendEvents, {_id}) => {
+  Events.deleteOne({_id}, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getEvents(sendEvents)
+    }
+  })
+}
+
 //QUESTION FUNCTIONS
 const getQuestion = sendQuestion => {
   Pendings.find({}, (err, docs) => {
@@ -564,6 +574,7 @@ module.exports = {
 
   getFields,
   addEvent,
+  deleteEvent,
   getQuestion,
   askQuestion,
 

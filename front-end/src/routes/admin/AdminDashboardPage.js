@@ -151,6 +151,12 @@ export default class AdminDashboardPage extends Component {
     });
   };
 
+  deleteEvent = _id => {
+    axios
+      .post("http://localhost:9000/delete-event", { _id })
+      .then(res => this.setState({ events: res.data }));
+  }
+
   render() {
     let { role } = this.props.loggedInUser;
     let { users, posts, pendingAdmins, pendingQuestions, events } = this.state;
@@ -158,10 +164,12 @@ export default class AdminDashboardPage extends Component {
     let eventsToShow = events.map(event => (
       <Event
         key={event._id}
+        event_id = {event._id}
         title={event.title}
         img={event.img_path}
         description={event.description}
         url={event.url}
+        deleteEvent={this.deleteEvent}
         page="AdminDashboardPage"
       />
     ));
@@ -224,7 +232,11 @@ export default class AdminDashboardPage extends Component {
                 name="mobileNumber"
                 placeholder="mobile number..."
               />
-              <input type="text" name="field" placeholder="field..." />
+              <select defaultValue="Default" name="field">
+                <option disabled>Select Field</option>
+                <option value="HR"> Human Resources </option>
+                <option value="IT">Information Technology</option>
+              </select>
               <div className="form-group">
                 <label>
                   <input
