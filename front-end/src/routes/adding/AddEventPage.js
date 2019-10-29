@@ -90,13 +90,13 @@ export default class AddEventPage extends Component {
                         max="100"
                       />
                       <button
-                        className="btn btn-danger ml-5 mt-2 w-25"
+                        className="btn btn-primary ml-5 mt-2 w-25"
                         onClick={this.fileUpload}
                       >
                         Upload
                       </button>
-                      <br/>
-                      <br/>
+                      <br />
+                      <br />
                       <div>
                         <img src={this.state.url} alt="Img"></img>
                       </div>
@@ -141,7 +141,7 @@ export default class AddEventPage extends Component {
                         ></textarea>
                       </div>
                       <br />
-                      <button type="submit" className="btn btn-secondary">
+                      <button type="submit" className="btn btn-primary">
                         Submit
                       </button>
                     </form>

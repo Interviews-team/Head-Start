@@ -115,7 +115,7 @@ export default class UserProfilePage extends Component {
                           <option value="IT"> Information Technology </option>
                         </select>
                       </div>
-                      <button type="submit" className="btn btn-dark">
+                      <button type="submit" className="btn btn-primary">
                         Edit Profile
                       </button>
                     </form>

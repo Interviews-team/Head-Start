@@ -21,7 +21,7 @@ export default class RegisterPage extends Component {
     passwordMsg: null,
     alreadyExists: null
   };
-  
+
   isFormValid = async event => {
     event.preventDefault();
     let name = event.target["name"].value;
@@ -188,7 +188,9 @@ export default class RegisterPage extends Component {
               {this.state.alreadyExists}
               <button>Register</button>
               <p class="message">
-                Already registered? <a href="/LoginPage">Sign In</a>
+                <h4>
+                  Already registered? <a href="/LoginPage">Sign In</a>
+                </h4>
               </p>
             </form>
           </div>
@@ -197,4 +199,3 @@ export default class RegisterPage extends Component {
     );
   }
 }
-

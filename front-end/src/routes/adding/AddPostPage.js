@@ -59,7 +59,7 @@ export default class AddQuestionPage extends Component {
                         placeholder="write your answer here ..."
                       ></textarea>
                       <br />
-                      <button className="btn btn-secondary">Create Post</button>
+                      <button className="btn btn-primary">Create Post</button>
                     </div>
                   </form>
                 </div>
