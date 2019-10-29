@@ -3,6 +3,17 @@ const mongoose = require("mongoose");
 mongoose.connect("mongodb://localhost/headStart", {
   useNewUrlParser: true
 });
+
+//____________________________________ATLAS
+
+// mongoose.connect('mongodb+srv://ghzawi:9941005586@head-start-sgs5q.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser:true})
+// .then( () => {
+//    console.log('Connection to the Atlas Cluster is successful!')
+//  })
+//  .catch( (err) => console.error(err));
+
+
+ //_____________________________________________END ATLAS_______________________________________________________
 const db = mongoose.connection;
 
 db.on("error", function() {
