@@ -30,6 +30,8 @@ import JoinUsPage from "./routes/website/JoinUsPage";
 import LandingPage from "./routes/website/LandingPage";
 import PostPage from "./routes/website/PostPage";
 import TechnicalQuestionsPage from "./routes/website/TechnicalQuestionsPage";
+import './CSS/main.css';
+
 
 export default class App extends Component {
   state = {

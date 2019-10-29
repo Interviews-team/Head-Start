@@ -6,13 +6,14 @@ export default class Header extends Component {
     let { role, name } = this.props.loggedInUser;
     return (
       <div>
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav id="nav-bar" className="navbar navbar-expand-lg navbar-dark" >
+        <i class="fas fa-running"></i>
           <Link
             className="p-2 navbar-brand"
             to="/"
-            style={{ textDecoration: "none", color: "white" }}
+            style={{ textDecoration: "none", color: "white", fontSize: '36px' }}
           >
-            Head Start
+            HeadStart
           </Link>
           <div
             className="collapse navbar-collapse d-flex justify-content-end mr-5"
