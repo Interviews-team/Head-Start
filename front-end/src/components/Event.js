@@ -27,8 +27,8 @@ export default class Event extends Component {
             alt="Card img cap"
           />
           <div className="card-body">
-            <h5 id="event-card-event" className="card-title"><i class="far fa-calendar-alt"></i>  {title}</h5>
-            <a className="card-text" href={`http://${url}`} target='_blank' rel="noopener noreferrer"><i class="fas fa-link"></i>{url}</a>
+            <h5 id="event-card-event" className="card-title"><i className="far fa-calendar-alt"></i>  {title}</h5>
+            <a className="card-text" href={`http://${url}`} target='_blank' rel="noopener noreferrer"><i className="fas fa-link"></i>{url}</a>
             <p className="card-text">
               <Link
                 className="float-left"
@@ -46,7 +46,7 @@ export default class Event extends Component {
                 }}
                 style={{ textDecoration: "none", marginTop: '11px', }}
               >
-                <i class="fas fa-angle-double-right"></i> Read more
+                <i className="fas fa-angle-double-right"></i> Read more
               </Link>
               {this.props.page !== "LandingPage" &&
               this.props.loggedInUser.role === "owner" ? (
@@ -54,7 +54,7 @@ export default class Event extends Component {
                   className="btn btn-danger float-right"
                   onClick={() => this.deleteEvent()}>
 
-                  <i class="far fa-times-circle"></i>
+                  <i className="far fa-times-circle"></i>
 
                 </button>
               ) : null}
