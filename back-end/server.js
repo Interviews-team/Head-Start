@@ -148,6 +148,10 @@ app.post(`/add-event`, req => {
   db.addEvent(req.body);
 });
 
+app.post('/delete-event', (req, res) => {
+  db.deleteEvent(events => res.json(events), req.body)
+})
+
 //for ask question
 //askQuestion={this.askQuestion}
 app.post(`/ask-question`, req => db.askQuestion(req.body));
