@@ -119,7 +119,7 @@ app.get("/get-pending-admins", (req, res) =>
 );
 
 app.get("/get-hr-pendings", (req, res) =>
-  db.getHrPosts(questions => res.json(questions))
+  db.getHrPendings(questions => res.json(questions))
 );
 
 app.get("/get-tech-pendings", (req, res) =>
