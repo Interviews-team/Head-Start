@@ -7,7 +7,7 @@ export default class Header extends Component {
     return (
       <div>
         <nav id="nav-bar" className="navbar navbar-expand-lg navbar-dark" >
-        <i class="fas fa-running"></i>
+        <i className="fas fa-running"></i>
           <Link
             className="p-2 navbar-brand"
             to="/"

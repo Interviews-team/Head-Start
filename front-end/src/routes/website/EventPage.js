@@ -9,7 +9,14 @@ export default class EventPage extends Component {
   };
 
   render() {
-    let { img, title, url, event_id, description } = this.props.location.state;
+    let {
+      img,
+      title,
+      url,
+      event_id,
+      description,
+      role
+    } = this.props.location.state;
     return (
       <div>
         <div className="container mt-5">
@@ -25,12 +32,14 @@ export default class EventPage extends Component {
                   <p className="card-text">{description}</p>
                 </div>
               </div>
-              <button
-                className="btn btn-danger float-right"
-                onClick={() => this.deleteEvent(event_id)}
-              >
-                Delete Event
-              </button>
+              {role === "owner" ? (
+                <button
+                  className="btn btn-danger float-right"
+                  onClick={() => this.deleteEvent(event_id)}
+                >
+                  Delete Event
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

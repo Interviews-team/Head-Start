@@ -521,6 +521,16 @@ const deleteEvent = (sendEvents, {_id}) => {
   })
 }
 
+const deleteUser = (sendUsers, {_id}) => {
+  Users.deleteOne({_id}, err => {
+    if (err) {
+      console.log(err);
+    } else {
+      getUsers(sendUsers)
+    }
+  })
+}
+
 //QUESTION FUNCTIONS
 const getQuestion = sendQuestion => {
   Pendings.find({}, (err, docs) => {
@@ -556,6 +566,7 @@ module.exports = {
   deleteHrPost,
   deleteTechPost,
   deletePost,
+  deleteUser,
 
   getEvents,
 

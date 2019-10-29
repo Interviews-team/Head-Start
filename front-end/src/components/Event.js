@@ -2,13 +2,20 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 export default class Event extends Component {
-
   deleteEvent() {
-    this.props.deleteEvent(this.props.event_id)
+    this.props.deleteEvent(this.props.event_id);
   }
 
   render() {
-    let { img, title, description, url, page, event_id } = this.props;
+    let {
+      img,
+      title,
+      description,
+      url,
+      page,
+      event_id,
+      loggedInUser
+    } = this.props;
     return (
       <div className="col-md-12 mt-3">
         <div className="card mb-3">
@@ -28,13 +35,22 @@ export default class Event extends Component {
                 className="float-left"
                 to={{
                   pathname: "/EventPage",
-                  state: { event_id, img, title, url, page, description }
+                  state: {
+                    event_id,
+                    img,
+                    title,
+                    url,
+                    page,
+                    description,
+                    role: loggedInUser.role
+                  }
                 }}
                 style={{ textDecoration: "none" }}
               >
                 Read more
               </Link>
-              {this.props.page !== "LandingPage" ? (
+              {this.props.page !== "LandingPage" &&
+              this.props.loggedInUser.role === "owner" ? (
                 <button
                   className="btn btn-danger float-right"
                   onClick={() => this.deleteEvent()}

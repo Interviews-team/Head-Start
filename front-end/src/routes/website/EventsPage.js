@@ -43,13 +43,14 @@ export default class EventsPage extends Component {
                 <div className="col-md-4" key={event._id}>
                   <Event
                     key={event._id}
-                    event_id = {event._id}
+                    event_id={event._id}
                     title={event.title}
                     img={event.img_path}
                     description={event.description}
                     url={event.url}
                     deleteEvent={this.deleteEvent}
                     page="EventsPage"
+                    loggedInUser={this.props.loggedInUser}
                   />
                 </div>
               );

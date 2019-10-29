@@ -9,7 +9,7 @@ export default class AddEventPage extends Component {
     progress: 0
   };
 
-  addNewEvent = e => {
+  addEvent = e => {
     e.preventDefault();
     console.log(this.state.url);
     let event = {
@@ -27,11 +27,13 @@ export default class AddEventPage extends Component {
   };
 
   getImage = event => {
+    alert("Clicl Upload to Start uploading Your Event Image!");
     const image = event.target.files[0];
     this.setState(() => ({ image }));
   };
 
   fileUpload = () => {
+    
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(
@@ -70,8 +72,8 @@ export default class AddEventPage extends Component {
           <div className="w-100">
             <div className=" w-50 m-auto">
               <div className="container">
-                <div class="card bg-light mt-4 " style={cardWidth}>
-                  <div class="card-header text-center centered">
+                <div className="card bg-light mt-4 " style={cardWidth}>
+                  <div className="card-header text-center centered">
                     <h1>Add Event</h1>
                   </div>
                   <div class="card-body">
@@ -97,9 +99,6 @@ export default class AddEventPage extends Component {
                       </button>
                       <br />
                       <br />
-                      <div>
-                        <img src={this.state.url} alt="Img"></img>
-                      </div>
                       <label
                         className="custom-file-label"
                         htmlFor="validatedCustomFile"

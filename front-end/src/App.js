@@ -211,7 +211,7 @@ export default class App extends Component {
           ></Route>
           <Route
             path="/PostPage"
-            component={routerProps => <PostPage {...routerProps} />}
+            component={routerProps => <PostPage {...routerProps} loggedInUser={loggedInUser}/>}
           ></Route>
           <Route
             path="/TechnicalQuestionsPage"

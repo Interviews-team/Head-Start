@@ -16,6 +16,7 @@ export default class LandingPage extends Component {
         title={event.title}
         url={event.url}
         page="LandingPage"
+        loggedInUser={loggedInUser}
       />
     ));
 
