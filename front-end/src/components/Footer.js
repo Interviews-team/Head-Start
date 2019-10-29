@@ -82,7 +82,6 @@ export default class Footer extends Component {
                 </Link>
               ) : null}
             </li>
-            {/* <li>Follow Us</li> */}
           </ul>
         </div>
       </nav>
