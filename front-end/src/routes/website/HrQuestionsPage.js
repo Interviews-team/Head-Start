@@ -57,7 +57,7 @@ export default class HrQuestionsPage extends Component {
         <div className="overflow-auto" style={HrQuestionsPage}>
           <div className="container mt-5 md-5 w-75">
             <div className="row py-5 px-4">
-              {role === "hrAdmin" ? (
+              {role === "HR" ? (
                 <Link to="/AddPostPage">
                   <h1 style={{ color: "black" }}>Add post</h1>
                 </Link>

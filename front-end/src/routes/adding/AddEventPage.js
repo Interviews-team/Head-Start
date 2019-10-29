@@ -33,7 +33,6 @@ export default class AddEventPage extends Component {
   };
 
   fileUpload = () => {
-    
     const { image } = this.state;
     const uploadTask = storage.ref(`images/${image.name}`).put(image);
     uploadTask.on(

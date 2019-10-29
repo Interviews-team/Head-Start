@@ -22,7 +22,7 @@ export default class LandingPage extends Component {
 
     let length = posts.length;
     let randomPosts = [];
-    let count = loggedInUser.role === null ? 7 : 5
+    let count = loggedInUser.role === null ? 7 : 5;
     if (length > 1) {
       for (let i = 0; i < count; i++) {
         let postToPush = posts[Math.floor(Math.random() * (length - 1))];
@@ -74,10 +74,13 @@ export default class LandingPage extends Component {
         <div className="container-fluid">
           <div className="row">
             <div className="col-md-4">
-            <div className='row mt-5 ml-3 mb-3'>
-              <Link to='/EventsPage' className='text-dark'><h3 className=' font-weight-bold'>Events</h3></Link>
+              <div className="row mt-5 ml-3 mb-3">
+                <Link to="/EventsPage" className="text-dark">
+                  <h3 className=" font-weight-bold">Events</h3>
+                </Link>
+              </div>
+              {eventsToShow}
             </div>
-            {eventsToShow}</div>
             <div className="col-md-8">{postsToShow}</div>
           </div>
         </div>
