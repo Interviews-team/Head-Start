@@ -18,7 +18,7 @@ export default class Event extends Component {
     } = this.props;
     return (
       <div className="col-md-12 mt-3">
-        <div className="card mb-3">
+        <div id="row-card" className="card mb-3">
           <img
             style={{ backgroundSize: "cover", height: "150px" }}
             className="card-img-top"
@@ -26,10 +26,8 @@ export default class Event extends Component {
             alt="Card img cap"
           />
           <div className="card-body">
-            <h5 className="card-title">{title}</h5>
-            <a className="card-text" href={url}>
-              {url}
-            </a>
+            <h5 id="event-card-event" className="card-title"><i class="far fa-calendar-alt"></i>  {title}</h5>
+            <a className="card-text" href={url}><i class="fas fa-link"></i>   {url}</a>
             <p className="card-text">
               <Link
                 className="float-left"
@@ -45,17 +43,18 @@ export default class Event extends Component {
                     role: loggedInUser.role
                   }
                 }}
-                style={{ textDecoration: "none" }}
+                style={{ textDecoration: "none", marginTop: '11px', }}
               >
-                Read more
+                <i class="fas fa-angle-double-right"></i> Read more
               </Link>
               {this.props.page !== "LandingPage" &&
               this.props.loggedInUser.role === "owner" ? (
-                <button
+                <button id="close-identity"
                   className="btn btn-danger float-right"
-                  onClick={() => this.deleteEvent()}
-                >
-                  X
+                  onClick={() => this.deleteEvent()}>
+
+                  <i class="far fa-times-circle"></i>
+
                 </button>
               ) : null}
             </p>

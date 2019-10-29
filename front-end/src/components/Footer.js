@@ -5,14 +5,37 @@ export default class Footer extends Component {
   state = {};
   render() {
     return (
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark fixed-bottom">
+      <nav
+        id="footer-identity"
+        className="navbar navbar-expand-lg fixed-bottom"
+      >
         <Link
           className="p-2 navbar-brand"
           to="/"
-          style={{ textDecoration: "none", color: "white", fontWeight: 'bold' }}
+          style={{ textDecoration: "none", color: "white", fontWeight: "bold" }}
         >
-          Head Start
+          <i className="fas fa-running"></i> HeadStart
         </Link>
+
+        <ul className="social-media">
+          <li>/ Follow Us</li>
+          <li>
+            <a href="">
+              <i class="fab fa-facebook"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <i class="fab fa-linkedin-in"></i>
+            </a>
+          </li>
+        </ul>
+
         <div
           className="collapse navbar-collapse d-flex justify-content-end mr-5"
           id="navbarNavDropdown"
@@ -59,6 +82,7 @@ export default class Footer extends Component {
                 </Link>
               ) : null}
             </li>
+            {/* <li>Follow Us</li> */}
           </ul>
         </div>
       </nav>
