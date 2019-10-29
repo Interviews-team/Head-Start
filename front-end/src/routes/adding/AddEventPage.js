@@ -95,15 +95,11 @@ export default class AddEventPage extends Component {
                       >
                         Upload
                       </button>
-                      <div />
                       <br />
                       <br />
                       <div>
                         <img src={this.state.url} alt="Img"></img>
                       </div>
-                      <br />
-                      <br />
-
                       <label
                         className="custom-file-label"
                         htmlFor="validatedCustomFile"
@@ -145,7 +141,6 @@ export default class AddEventPage extends Component {
                         ></textarea>
                       </div>
                       <br />
-                      <button type="submit" className="btn btn-primary">
                       {this.state.url === "" ? null : (
                         <div>
                           <img
@@ -155,6 +150,7 @@ export default class AddEventPage extends Component {
                           ></img>
                         </div>
                       )}
+                      <button type="submit" className="btn btn-secondary">
                         Submit
                       </button>
                     </form>
